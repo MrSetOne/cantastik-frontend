@@ -2,13 +2,16 @@ import { Button,  Form, Input } from 'antd';
 import {MailOutlined,LockOutlined,UserOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux';
 import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
-
+import { signup } from "../../../features/auth/authSlice"
 
 
 
 const SignUp = () => {
+  const dispatch = useDispatch()
+
 
   const onFinish = (values) => {
+    dispatch(signup(values))
     console.log('Success:', values);
   };
 
@@ -16,17 +19,22 @@ const SignUp = () => {
     console.log('Failed:', errorInfo);
   };
 
-  const dispatch = useDispatch()
   return (
     <article className='SignUp' style={{width:'min(500px,100%)', padding:'30px', backgroundColor:"#D4D4D4"}}>
         <Form
         name='signup'
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        labelCol={{
+          span: 24,
+        }}
+        wrapperCol={{
+          span: 24,
+        }}
         >
           <Form.Item
           label="Username"
-          name="Username"
+          name="username"
           rules={[
             {
               required: true,

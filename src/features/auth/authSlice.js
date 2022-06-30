@@ -23,25 +23,26 @@ export const login = createAsyncThunk("auth/login", async(user, thunkAPI) => {
     }
 });
 
-
-export const logout = createAsyncThunk("auth/logout", async() => {
+export const signup = createAsyncThunk("auth/register", async(user, thunkAPI) => {
     try {
-        return await authService.logout();
+        // console.log(user)
+        return await authService.signup(user);
     } catch (error) {
-        console.error(error);
+        console.log(error.response.data);
+        // const message = error.response.data;
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
-
-// export const register = createAsyncThunk("auth/register", async (user,thunkAPI) => {
-//   try {
-//     return await authService.register(user);
-//   } catch (error) {
-//     console.log(error.response.data);
-//     const message = error.response.data;
-//     return thunkAPI.rejectWithValue(message);
-//   }
+// export const logout = createAsyncThunk("auth/logout", async() => {
+//     try {
+//         return await authService.logout();
+//     } catch (error) {
+//         console.error(error);
+//     }
 // });
+
+
 
 export const authSlice = createSlice({
     name: "auth",
@@ -59,9 +60,7 @@ export const authSlice = createSlice({
             .addCase(login.pending, (state, action) => {
                 state.isLoading = true
             })
-
-
-        .addCase(login.fulfilled, (state, action) => {
+            .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload.loggedUser;
                 state.token = action.payload.token
                 state.isLoading = false;
