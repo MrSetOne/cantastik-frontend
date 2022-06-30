@@ -6,11 +6,9 @@ const API_URL = "http://localhost:8080"
 const login = async(user) => {
     const res = await axios.put(API_URL + '/users/login', user)
     if (res.data) {
-        console.log(res.data)
         localStorage.setItem('user', JSON.stringify(res.data.loggedUser))
         localStorage.setItem('token', JSON.stringify(res.data.token))
     }
-    console.log(res.data)
     return res.data
 }
 

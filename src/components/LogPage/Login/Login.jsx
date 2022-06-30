@@ -1,6 +1,9 @@
 import { Button,  Form, Input } from 'antd';
 import {useDispatch} from 'react-redux'
 import { login } from '../../../features/auth/authSlice'
+import {MailOutlined,LockOutlined } from '@ant-design/icons'
+import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
+
 
 
 const Login = () => {
@@ -18,39 +21,38 @@ const Login = () => {
       };
   
   return (
-    <div className='Login' style={{width:'min(500px,100%)', padding:'30px'}}>
+    <div className='Login' style={{width:'min(500px,100%)', padding:'30px', backgroundColor:"#D4D4D4"}}>
             <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      initialValues={{ remember: true }}
+      name="login"
+      className="login-form"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
         name="email"
         rules={[{ required: true, message: 'Please input your username!' }]}
-        labelCol={{span: 0, offset: 0}}
         style={{display:'flex',justifyContent:'center'}}
       >
-        <Input />
+        <Input prefix={<MailOutlined className="site-form-item-icon" style={{color:"gray"}} />} placeholder="Tu email"/>
       </Form.Item>
 
       <Form.Item
-        label="Password"
         name="password"
         rules={[{ required: true, message: 'Please input your password!' }]}
-        labelCol={{span: 0, offset: 0}}
         style={{display:'flex',justifyContent:'center'}}
       >
-        <Input.Password />
+        <Input.Password prefix={<LockOutlined  className="site-form-item-icon" style={{color:"gray"}}/>} placeholder="Tu contraseña"/>
       </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Submit
+      <Form.Item >
+      <Button style={{width:"100%"}} type="primary" htmlType="submit" className="login-form-button">
+          Iniciar sesión
+        </Button>
+      </Form.Item>
+      <Form.Item >
+      <Button style={{width:"100%"}} type="default" className="login-form-button" onClick={()=>dispatch(changeNeedSignUp())}>
+          Crear cuenta
         </Button>
       </Form.Item>
     </Form>

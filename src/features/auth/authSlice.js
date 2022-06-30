@@ -62,7 +62,6 @@ export const authSlice = createSlice({
 
 
         .addCase(login.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.user = action.payload.loggedUser;
                 state.token = action.payload.token
                 state.isLoading = false;

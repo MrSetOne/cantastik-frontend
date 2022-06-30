@@ -17,7 +17,6 @@ const NavBar = () => {
 
 
 
-
   return (
     <nav className="NavBar">
         {user?<Avatar>{user.username.substring(0,1)}</Avatar>:null}
