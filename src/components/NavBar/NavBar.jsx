@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
+import { logout } from '../../features/auth/authSlice'
 
 
 
 const NavBar = () => {
 
-    const { user } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
 
 
 
@@ -20,7 +22,7 @@ const NavBar = () => {
   return (
     <nav className="NavBar">
         {user?<Avatar>{user.username.substring(0,1)}</Avatar>:null}
-        {user?<LogoutOutlined onClick={()=>console.log("holi")}/>:null}
+        {user?<LogoutOutlined onClick={()=> dispatch(logout())}/>:null}
     </nav>
   )
 }

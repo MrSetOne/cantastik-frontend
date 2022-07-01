@@ -34,15 +34,13 @@ export const signup = createAsyncThunk("auth/register", async(user, thunkAPI) =>
     }
 });
 
-// export const logout = createAsyncThunk("auth/logout", async() => {
-//     try {
-//         return await authService.logout();
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
-
-
+export const logout = createAsyncThunk("auth/logout", async() => {
+    try {
+        return await authService.logout();
+    } catch (error) {
+        console.error(error);
+    }
+});
 
 export const authSlice = createSlice({
     name: "auth",
@@ -72,9 +70,10 @@ export const authSlice = createSlice({
                 // state.isError = true;
                 // state.message = action.payload;
             })
-            //   .addCase(logout.fulfilled, (state) => {
-            //     state.user = null;
-            //   })
+            .addCase(logout.fulfilled, (state) => {
+                state.user = null;
+                state.token = null;
+            })
             //   .addCase(register.fulfilled, (state, action) => {
             //     state.isSuccess = true;
             //     state.message = action.payload.message;
