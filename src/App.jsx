@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <div className='spinner__container' style={{display:isLoading?"flex":"none"}}>
-        <div class="spinner">
+        <div className="spinner">
           <div></div>
           <div></div>
           <div></div>
@@ -36,7 +36,6 @@ function App() {
           <LogPage/>
         </>
       }
-      
     </div>
   );
 }
