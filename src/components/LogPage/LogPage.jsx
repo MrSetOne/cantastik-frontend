@@ -16,7 +16,7 @@ const LogPage = () => {
 
   return (
     <section className="LogPage">
-      {needSignUp?<Login/>:<SignUp/>}
+      {needSignUp?<SignUp/>:<Login/>}
         
         
     </section>

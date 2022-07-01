@@ -20,7 +20,8 @@ const NavBar = () => {
 
 
   return (
-    <nav className="NavBar">
+    <nav className="NavBar" style={{display:"flex"}}>
+        <h2>Cantastik</h2>
         {user?<Avatar>{user.username.substring(0,1)}</Avatar>:null}
         {user?<LogoutOutlined onClick={()=> dispatch(logout())}/>:null}
     </nav>
