@@ -5,18 +5,37 @@ import LogPage from './components/LogPage/LogPage';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 
 
 function App() {
+  const { user, isLoading } = useSelector((state) => state.auth)
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <NavBar/>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/logpage" element={<LogPage/>}/>
-        </Routes>
-      </BrowserRouter>
+      <div className='spinner__container' style={{display:isLoading?"flex":"none"}}>
+        <div class="spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      {user
+        ?<BrowserRouter>
+          <NavBar/>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/holi" element={<Home/>}/>
+          </Routes>
+        </BrowserRouter>
+        :<>
+          <NavBar/>
+          <LogPage/>
+        </>
+      }
       
     </div>
   );

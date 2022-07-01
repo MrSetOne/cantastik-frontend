@@ -5,14 +5,8 @@ import SignUp from "./SignUp/SignUp"
 
 
 const LogPage = () => {
-  
-  
+    
   const { needSignUp } = useSelector((state) => state.interfaces)
-
-
-
-
-
 
   return (
     <section className="LogPage">
