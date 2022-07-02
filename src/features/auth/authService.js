@@ -11,6 +11,20 @@ const login = async(user) => {
     return res.data
 }
 
+const newInfo = async() => {
+    // console.log('entra')
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.get(`${API_URL}/users/session`, {
+        headers: {
+            authorization: token ? token : null
+        },
+    })
+    if (res.data) {
+        localStorage.setItem('user', JSON.stringify(res.data.sessionUser))
+    }
+    return res.data.sessionUser
+}
+
 const signup = async(user) => {
     const res = await axios.post(API_URL + '/users', user)
     return res.data
@@ -33,6 +47,7 @@ const logout = async() => {
 
 const authService = {
     login,
+    newInfo,
     signup,
     logout
 }

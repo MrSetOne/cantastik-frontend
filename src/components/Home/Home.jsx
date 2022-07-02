@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { getPosts } from '../../features/posts/postsSlice'
 import {useDispatch , useSelector} from 'react-redux'
+import Posts from './Posts/Posts'
 
 
 
 const Home = () => {
 
-  const {isLoading} = useSelector((state)=>state.posts)
+  const {isLoading, posts} = useSelector((state)=>state.posts)
 
   const dispatch = useDispatch()
   // const { user } = useSelector((state) => state.auth)
@@ -14,6 +15,8 @@ const Home = () => {
   useEffect(()=>{
     dispatch(getPosts())
   },[])
+
+
 
 
   return (
@@ -27,7 +30,8 @@ const Home = () => {
           <div></div>
         </div>
       </div>
-        <h1>Holi, soy el home</h1>
+      {posts?<Posts/>:null}
+      
     </div>
   )
 }

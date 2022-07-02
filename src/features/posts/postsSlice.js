@@ -14,6 +14,14 @@ export const getPosts = createAsyncThunk("post/GetPosts", async(token, thunkAPI)
     }
 });
 
+export const like = createAsyncThunk("post/Like", async(post, thunkAPI) => {
+    try {
+        return await postsService.doALike(post)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 
 export const postsSlice = createSlice({
     name: "posts",

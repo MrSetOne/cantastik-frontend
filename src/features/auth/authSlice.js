@@ -23,6 +23,15 @@ export const login = createAsyncThunk("auth/login", async(user, thunkAPI) => {
     }
 });
 
+export const newInfo = createAsyncThunk('auth/newInfo', async(thunkAPI) => {
+    try {
+        // console.log('entra')
+        return await authService.newInfo()
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 export const signup = createAsyncThunk("auth/register", async(user, thunkAPI) => {
     try {
         // console.log(user)
@@ -45,14 +54,7 @@ export const logout = createAsyncThunk("auth/logout", async() => {
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {
-        // reset: (state) => {
-        //     //   state.isError = false;
-        //     //   state.isSuccess = false;
-        //     //   state.message = "";
-        //     state.isLoading = false
-        // },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state, action) => {
@@ -78,6 +80,10 @@ export const authSlice = createSlice({
                 state.token = null;
                 state.isLoading = false;
             })
+            .addCase(newInfo.fulfilled, (state, action) => {
+                // console.log(action.payload)
+                state.user = action.payload
+            })
             //   .addCase(register.fulfilled, (state, action) => {
             //     state.isSuccess = true;
             //     state.message = action.payload.message;
@@ -88,6 +94,6 @@ export const authSlice = createSlice({
             //   })
     },
 });
-// export const { reset } = authSlice.actions;
+// export const { addLike } = authSlice.actions;
 
 export default authSlice.reducer;
