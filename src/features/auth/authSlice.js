@@ -55,8 +55,11 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        addLike: (state, postId) => {
-            state.user.likedPosts.push(postId.payload)
+        addLike: (state, action) => {
+            state.user.likedPosts.push(action.payload)
+        },
+        removeLike: (state, action) => {
+            state.user.likedPosts = state.user.likedPosts.filter(post => post != action.payload)
         }
     },
     extraReducers: (builder) => {
@@ -97,6 +100,6 @@ export const authSlice = createSlice({
             //   })
     },
 });
-export const { addLike } = authSlice.actions;
+export const { addLike, removeLike } = authSlice.actions;
 
 export default authSlice.reducer;

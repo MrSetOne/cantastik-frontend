@@ -1,6 +1,6 @@
 import React from 'react'
 import {like} from '../../../../features/posts/postsSlice'
-import { addLike } from '../../../../features/auth/authSlice'
+import { addLike , removeLike } from '../../../../features/auth/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import {HeartOutlined, HeartFilled } from '@ant-design/icons'
 import {Avatar} from 'antd'
@@ -18,6 +18,10 @@ const Post = ({item}) => {
       await dispatch(addLike(item._id))
     }
 
+    const doAnUnlike = async()=>{
+      await dispatch(removeLike(item._id));
+    }
+
   return (
     <article className='Post'>
         {item.userId.img?<Avatar src={`http://localhost:8080/porfile/${item.userId.img}`}/>:<Avatar>{item.userId.username.substring(0,1)}</Avatar>}
@@ -25,7 +29,7 @@ const Post = ({item}) => {
         {item.img?<img src={`http://localhost:8080/postsImgs/${item.img}`}/>:null}
         <h3>{item.title}</h3>
         <p>{item.body}</p>
-        {user.likedPosts.includes(item._id)?<HeartFilled/>:<HeartOutlined onClick={()=>doALike()}/>}
+        {user.likedPosts.includes(item._id)?<HeartFilled onClick={()=>doAnUnlike()} />:<HeartOutlined onClick={()=>doALike()}/>}
         
     </article>
   )
