@@ -1,13 +1,13 @@
 import React from 'react'
 import {like} from '../../../../features/posts/postsSlice'
-import {newInfo} from '../../../../features/auth/authSlice'
+import { addLike } from '../../../../features/auth/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import {HeartOutlined, HeartFilled } from '@ant-design/icons'
 import {Avatar} from 'antd'
 
 const Post = ({item}) => {
-    const { user, token } = useSelector((state) => state.auth)
-    const { posts} = useSelector((state)=>state.posts)
+    const { user } = useSelector((state) => state.auth)
+    const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
     const dispatch = useDispatch()
     console.log(user);
     console.log(item)
@@ -15,7 +15,7 @@ const Post = ({item}) => {
 
     const doALike = async()=>{
       await dispatch(like(item._id))
-      await dispatch(newInfo())
+      await dispatch(addLike(item._id))
     }
 
   return (

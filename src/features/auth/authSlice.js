@@ -54,7 +54,11 @@ export const logout = createAsyncThunk("auth/logout", async() => {
 export const authSlice = createSlice({
     name: "auth",
     initialState,
-    reducers: {},
+    reducers: {
+        addLike: (state, postId) => {
+            state.user.likedPosts.push(postId.payload)
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state, action) => {
@@ -81,7 +85,6 @@ export const authSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(newInfo.fulfilled, (state, action) => {
-                // console.log(action.payload)
                 state.user = action.payload
             })
             //   .addCase(register.fulfilled, (state, action) => {
@@ -94,6 +97,6 @@ export const authSlice = createSlice({
             //   })
     },
 });
-// export const { addLike } = authSlice.actions;
+export const { addLike } = authSlice.actions;
 
 export default authSlice.reducer;
