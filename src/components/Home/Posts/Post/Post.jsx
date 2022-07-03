@@ -56,11 +56,16 @@ const Post = ({item}) => {
         {item.img?<img src={`http://localhost:8080/postsImgs/${item.img}`}/>:null}
         <h3>{item.title}</h3>
         <p>{item.body}</p>
-        <div>
-          {user.likedPosts.includes(item._id)?<HeartFilled onClick={()=>doAnUnlike()} />:<HeartOutlined onClick={()=>doALike()}/>}
-          <p>{item.likes.length}</p>
+        <div style={{display:'flex', gap:'20px'}}>
+          <div>
+            {user.likedPosts.includes(item._id)?<HeartFilled onClick={()=>doAnUnlike()} />:<HeartOutlined onClick={()=>doALike()}/>}
+            <p>{item.likes.length}</p>
+          </div>
+          <div>
+            <MessageOutlined onClick={()=>showModal()}/>
+            <p>{item.comments.length}</p>
+          </div>
         </div>
-        <MessageOutlined onClick={()=>showModal()}/>
         <Modal
         title="Basic Modal"
         visible={isModalVisible} 
