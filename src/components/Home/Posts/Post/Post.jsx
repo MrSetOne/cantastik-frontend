@@ -3,7 +3,7 @@ import { like , unlike, addComment } from '../../../../features/posts/postsSlice
 import { addLike , removeLike } from '../../../../features/auth/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import {HeartOutlined, HeartFilled, MessageOutlined, DoubleLeftOutlined, SendOutlined  } from '@ant-design/icons'
-import {Avatar, Modal, Button, Input } from 'antd'
+import {Avatar, Modal, Button, Input, Empty } from 'antd'
 
 const Post = ({item}) => {
     const { user } = useSelector((state) => state.auth)
@@ -39,7 +39,7 @@ const Post = ({item}) => {
 
       const comments = item.comments.map(element => {
         return (
-          <div key={element._id} style={{display:'flex',gap:'20px', alignItems:'center', marginBottom:'10px'}}>
+          <div onClick={()=>{console.log(element._id)}} key={element._id} style={{display:'flex',gap:'20px', alignItems:'center', marginBottom:'10px'}}>
             {element.author.img?<Avatar src={`http://localhost:8080/porfile/${element.author.img}`}/>:<Avatar>{element.author.username.substring(0,1)}</Avatar>}
             <h3>{element.author.username}</h3>
             <p>{element.comment}</p>
@@ -73,7 +73,8 @@ const Post = ({item}) => {
           </Button>
         ]}
         >
-          {comments}
+          {item.comments.length !== 0?comments:<Empty description={<span>Nadie ha comentado aun en este post, <br></br> <b>¡Se el primero en hacerlo!</b></span>}/>}
+          
           <form style={{display:'flex'}} onSubmit={(e)=>sendComment(e)}>
             <Input 
             placeholder="Escribe tu comentario" 
