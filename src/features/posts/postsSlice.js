@@ -57,7 +57,6 @@ export const postsSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(addComment.fulfilled, (state, action) => {
-                console.log(action)
                 action.payload.newComment.author = action.payload.author
                 state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
             })

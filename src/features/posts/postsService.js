@@ -19,7 +19,6 @@ const doALike = async(postId) => {
             authorization: token ? token : null
         },
     })
-    console.log(res.data)
     return res.data
 }
 
@@ -30,7 +29,6 @@ const doAnUnlike = async(postId) => {
             authorization: token ? token : null
         },
     })
-    console.log(res.data)
     return res.data
 }
 

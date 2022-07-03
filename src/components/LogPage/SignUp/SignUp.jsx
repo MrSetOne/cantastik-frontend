@@ -12,7 +12,6 @@ const SignUp = () => {
 
   const onFinish = (values) => {
     dispatch(signup(values))
-    console.log('Success:', values);
   };
 
   const onFinishFailed = (errorInfo) => {

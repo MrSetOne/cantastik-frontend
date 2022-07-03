@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { like , unlike, addComment } from '../../../../features/posts/postsSlice'
 import { addLike , removeLike } from '../../../../features/auth/authSlice'
 import { useSelector, useDispatch } from "react-redux";
-import {HeartOutlined, HeartFilled, MessageOutlined, DoubleLeftOutlined, DoubleRightOutlined  } from '@ant-design/icons'
+import {HeartOutlined, HeartFilled, MessageOutlined, DoubleLeftOutlined, SendOutlined  } from '@ant-design/icons'
 import {Avatar, Modal, Button, Input } from 'antd'
 
 const Post = ({item}) => {
@@ -20,10 +20,6 @@ const Post = ({item}) => {
       setIsModalVisible(false);
     };
   
-
-    console.log(user);
-    console.log(item)
-
     const doALike = async()=>{
       await dispatch(like(item._id))
       await dispatch(addLike(item._id))
@@ -35,7 +31,10 @@ const Post = ({item}) => {
     }
 
     const sendComment = async(e) =>{
-      await dispatch(addComment({i:item.i,postId:item._id,value:e.target.value}))
+      console.log(e);
+      await e.preventDefault()
+      await dispatch(addComment({i:item.i,postId:item._id,value:e.target[0].value}))
+      e.target[0].value = ""
     }
 
       const comments = item.comments.map(element => {
@@ -48,7 +47,6 @@ const Post = ({item}) => {
       })
 
 
-      console.log(item.comments);
 
   return (
     <article className='Post' key={item._id}>
@@ -76,14 +74,15 @@ const Post = ({item}) => {
         ]}
         >
           {comments}
-          <div style={{display:'flex'}}>
+          <form style={{display:'flex'}} onSubmit={(e)=>sendComment(e)}>
             <Input 
             placeholder="Escribe tu comentario" 
             bordered={false} 
+            name="comment"
             prefix={<MessageOutlined/>}
-            onPressEnter={sendComment}
             />
-          </div>
+            <Button type="primary" icon={<SendOutlined />} htmlType="submit"/>
+          </form>
       </Modal>
         
     </article>

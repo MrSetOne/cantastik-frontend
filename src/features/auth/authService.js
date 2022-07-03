@@ -12,7 +12,6 @@ const login = async(user) => {
 }
 
 const newInfo = async() => {
-    // console.log('entra')
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.get(`${API_URL}/users/session`, {
         headers: {
