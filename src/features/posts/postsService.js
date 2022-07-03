@@ -12,7 +12,7 @@ const getPosts = async() => {
     return res.data
 }
 
-const doALike = async(postId) => {
+const doALike = async({ postId }) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.put(`${API_URL}/posts/like/id/${postId}`, {}, {
         headers: {
@@ -22,7 +22,7 @@ const doALike = async(postId) => {
     return res.data
 }
 
-const doAnUnlike = async(postId) => {
+const doAnUnlike = async({ postId }) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.put(`${API_URL}/posts/unlike/id/${postId}`, {}, {
         headers: {

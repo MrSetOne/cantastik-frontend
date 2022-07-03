@@ -10,6 +10,8 @@ const Post = ({item}) => {
     const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
     const dispatch = useDispatch()
 
+    console.log(item)
+
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -21,17 +23,16 @@ const Post = ({item}) => {
     };
   
     const doALike = async()=>{
-      await dispatch(like(item._id))
+      await dispatch(like({postId:item._id, i:item.i}))
       await dispatch(addLike(item._id))
     }
 
     const doAnUnlike = async()=>{
-      await dispatch(unlike(item._id))
+      await dispatch(unlike({postId:item._id, i:item.i}))
       await dispatch(removeLike(item._id));
     }
 
     const sendComment = async(e) =>{
-      console.log(e);
       await e.preventDefault()
       await dispatch(addComment({i:item.i,postId:item._id,value:e.target[0].value}))
       e.target[0].value = ""
@@ -55,7 +56,10 @@ const Post = ({item}) => {
         {item.img?<img src={`http://localhost:8080/postsImgs/${item.img}`}/>:null}
         <h3>{item.title}</h3>
         <p>{item.body}</p>
-        {user.likedPosts.includes(item._id)?<HeartFilled onClick={()=>doAnUnlike()} />:<HeartOutlined onClick={()=>doALike()}/>}
+        <div>
+          {user.likedPosts.includes(item._id)?<HeartFilled onClick={()=>doAnUnlike()} />:<HeartOutlined onClick={()=>doALike()}/>}
+          <p>{item.likes.length}</p>
+        </div>
         <MessageOutlined onClick={()=>showModal()}/>
         <Modal
         title="Basic Modal"
