@@ -30,6 +30,14 @@ export const unlike = createAsyncThunk("post/unlikek", async(post, thunkAPI) => 
     }
 })
 
+export const addComment = createAsyncThunk("post/addComment", async(input, thunkAPI) => {
+    try {
+        return await postsService.addComment(input)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 
 export const postsSlice = createSlice({
     name: "posts",
@@ -47,6 +55,11 @@ export const postsSlice = createSlice({
             .addCase(getPosts.fulfilled, (state, action) => {
                 state.posts = action.payload
                 state.isLoading = false;
+            })
+            .addCase(addComment.fulfilled, (state, action) => {
+                console.log(action)
+                action.payload.newComment.author = action.payload.author
+                state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
             })
             // .addCase(register.rejected, (state, action) => {
             //     state.isError = true;

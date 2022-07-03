@@ -34,10 +34,21 @@ const doAnUnlike = async(postId) => {
     return res.data
 }
 
+const addComment = async(info) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.post(`${API_URL}/comments/id/${info.postId}`, { comment: info.value }, {
+        headers: {
+            authorization: token ? token : null
+        }
+    })
+    return res.data
+}
+
 const postsService = {
     getPosts,
     doALike,
-    doAnUnlike
+    doAnUnlike,
+    addComment
 }
 
 export default postsService

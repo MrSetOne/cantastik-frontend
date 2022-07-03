@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { like , unlike } from '../../../../features/posts/postsSlice'
+import { like , unlike, addComment } from '../../../../features/posts/postsSlice'
 import { addLike , removeLike } from '../../../../features/auth/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import {HeartOutlined, HeartFilled, MessageOutlined, DoubleLeftOutlined, DoubleRightOutlined  } from '@ant-design/icons'
@@ -35,9 +35,7 @@ const Post = ({item}) => {
     }
 
     const sendComment = async(e) =>{
-      console.log(item.i);
-      console.log(item._id);
-      console.log(e.target.value);
+      await dispatch(addComment({i:item.i,postId:item._id,value:e.target.value}))
     }
 
       const comments = item.comments.map(element => {
