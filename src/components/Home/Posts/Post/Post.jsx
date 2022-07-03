@@ -1,5 +1,5 @@
 import React from 'react'
-import {like} from '../../../../features/posts/postsSlice'
+import { like , unlike } from '../../../../features/posts/postsSlice'
 import { addLike , removeLike } from '../../../../features/auth/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import {HeartOutlined, HeartFilled } from '@ant-design/icons'
@@ -12,13 +12,13 @@ const Post = ({item}) => {
     console.log(user);
     console.log(item)
 
-
     const doALike = async()=>{
       await dispatch(like(item._id))
       await dispatch(addLike(item._id))
     }
 
     const doAnUnlike = async()=>{
+      await dispatch(unlike(item._id))
       await dispatch(removeLike(item._id));
     }
 

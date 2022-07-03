@@ -59,7 +59,7 @@ export const authSlice = createSlice({
             state.user.likedPosts.push(action.payload)
         },
         removeLike: (state, action) => {
-            state.user.likedPosts = state.user.likedPosts.filter(post => post != action.payload)
+            state.user.likedPosts = state.user.likedPosts.filter(post => post !== action.payload)
         }
     },
     extraReducers: (builder) => {
