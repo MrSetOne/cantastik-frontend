@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Segmented } from 'antd';
 import PhotoPosts from './PhotoPosts/PhotoPosts';
+import TextPosts from './TextPosts/TextPosts';
 
 
 const ProfilePosts = ({posts}) => {
@@ -18,7 +19,7 @@ const ProfilePosts = ({posts}) => {
         options={['Fotos', 'Texto']}
         value={value}
         onChange={setValue} />
-        {value==="Fotos"?<PhotoPosts posts={photoPosts} />:null}
+        {value==="Fotos"?<PhotoPosts posts={photoPosts} />:<TextPosts posts={textPosts}/>}
     </section>
   )
 }

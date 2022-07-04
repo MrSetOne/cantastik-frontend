@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const PhotoPost = ({post}) => {
-    console.log(post);
     const { user } = useSelector((state) => state.auth)
   return (
     <div className='PhotoPost' key={post._id} style={{backgroundImage:`url("http://localhost:8080/postsImgs/${post.img}")`, width:'200px', height:'200px',backgroundSize:'cover', justifySelf:'center',display:'flex',justifyContent:'center',alignItems:'center'}}>
