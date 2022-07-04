@@ -13,6 +13,7 @@ const Post = ({item}) => {
     const [isModalVisibleComments, setIsModalVisibleComments] = useState(false);
     const [isModalVisibleLikes, setIsModalVisibleLikes] = useState(false)
 
+
     const showModal = (type) => {
       if(type==="comments"){
         setIsModalVisibleComments(true);
@@ -126,8 +127,7 @@ const Post = ({item}) => {
         >Volver</Button>
       ]}
       >
-        {item.comments.length !== 0?likes:<Empty description={<span>Nadie ha dado me gusta aun en este post, <br></br> <b>¡Se el primero en hacerlo!</b></span>}/>}
-
+        {item.likes.length !== 0?likes:<Empty description={<span>Nadie ha dado me gusta aun en este post, <br></br> <b>¡Se el primero en hacerlo!</b></span>}/>}
       </Modal>
         
     </article>

@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import { getById } from '../../features/users/usersSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import ProfileCard from './ProfileCard/ProfileCard'
+import ProfilePosts from './ProfilePosts/ProfilePosts'
 
 
 const Profile = () => {
@@ -28,6 +29,7 @@ const Profile = () => {
       return (
         <section className='Profile'>
             <ProfileCard target={target}/>
+            <ProfilePosts posts={target.postIds}/>
         </section>
       )
     } else {
