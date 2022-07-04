@@ -1,7 +1,6 @@
 import { Avatar } from 'antd'
 
 const ProfileInfo = ({info}) => {
-    console.log(info);
   return (
     <section className="ProfileInfo">
         {info.img?<Avatar src={`http://localhost:8080/porfile/${info.img}`}/>:<Avatar>{info.username.substring(0,1)}</Avatar>}

@@ -17,11 +17,10 @@ const Profile = () => {
       dispatch(getById(id))
     },[])
 
-    console.log(target);
-
   return (
     <section className='Profile'>
         <ProfileCard target={target}/>
+
     </section>
   )
 }

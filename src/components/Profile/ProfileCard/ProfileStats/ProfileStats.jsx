@@ -1,5 +1,4 @@
 const ProfileStats = ({stats}) => {
-    console.log(stats);
   return (
     <section className='ProfileStats' style={{display:'flex',gap:"20px"}}>
         <div>

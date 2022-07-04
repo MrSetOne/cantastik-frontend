@@ -10,8 +10,6 @@ const Post = ({item}) => {
     const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
     const dispatch = useDispatch()
 
-    console.log(item)
-
     const [isModalVisibleComments, setIsModalVisibleComments] = useState(false);
     const [isModalVisibleLikes, setIsModalVisibleLikes] = useState(false)
 
