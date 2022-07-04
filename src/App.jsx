@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { newInfo } from './features/auth/authSlice'
+import Profile from './components/Profile/Profile';
 
 
 
@@ -35,7 +36,7 @@ function App() {
           <NavBar/>
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/holi" element={<Home/>}/>
+            <Route path="/profile/:id" element={<Profile/>}/>
           </Routes>
         </BrowserRouter>
         :<>

@@ -61,7 +61,6 @@ export const postsSlice = createSlice({
 
             })
             .addCase(unlike.fulfilled, (state, action) => {
-                console.log(action)
                 state.posts[action.meta.arg.i].likes = state.posts[action.meta.arg.i].likes.filter(id => id !== action.payload.user)
             })
             .addCase(addComment.fulfilled, (state, action) => {
