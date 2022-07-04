@@ -12,14 +12,23 @@ const Post = ({item}) => {
 
     console.log(item)
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisibleComments, setIsModalVisibleComments] = useState(false);
+    const [isModalVisibleLikes, setIsModalVisibleLikes] = useState(false)
 
-    const showModal = () => {
-      setIsModalVisible(true);
+    const showModal = (type) => {
+      if(type==="comments"){
+        setIsModalVisibleComments(true);
+      } else if("likes"){
+        setIsModalVisibleLikes(true)
+      }
     };
   
-    const handleClose = () => {
-      setIsModalVisible(false);
+    const handleClose = (type) => {
+      if(type === "comments"){
+        setIsModalVisibleComments(false);
+      } else if(type === "likes"){
+        setIsModalVisibleLikes(false)
+      }
     };
   
     const doALike = async()=>{
@@ -40,14 +49,27 @@ const Post = ({item}) => {
 
       const comments = item.comments.map(element => {
         return (
-          <div onClick={()=>{console.log(element._id)}} key={element._id} style={{display:'flex',gap:'20px', alignItems:'center', marginBottom:'10px'}}>
+          <div key={element._id} style={{display:'flex',gap:'20px', alignItems:'center', marginBottom:'10px'}}>
             {element.author.img?<Avatar src={`http://localhost:8080/porfile/${element.author.img}`}/>:<Avatar>{element.author.username.substring(0,1)}</Avatar>}
             <h3>{element.author.username}</h3>
             <p>{element.comment}</p>
           </div>)
       })
 
-
+      const likes = item.likes.map(element => {
+        return (
+          <div style={{display:'flex', gap:'10px'}}>
+            {element.img?<Avatar src={`http://localhost:8080/porfile/${element.img}`}/>:<Avatar>{element.username.substring(0,1)}</Avatar>}
+            <h3>{element.username}</h3>
+            <Button 
+            key="back" 
+            onClick={handleClose}
+            type="primary"
+            size='small'
+            >Follow(NotWorking)</Button>
+          </div>
+        )
+      })
 
   return (
     <article className='Post' key={item._id}>
@@ -59,24 +81,23 @@ const Post = ({item}) => {
         <div style={{display:'flex', gap:'20px'}}>
           <div>
             {user.likedPosts.includes(item._id)?<HeartFilled onClick={()=>doAnUnlike()} />:<HeartOutlined onClick={()=>doALike()}/>}
-            <p>{item.likes.length}</p>
+            <p onClick={()=>showModal("likes")} style={{cursor:"pointer"}}>{item.likes.length}</p>
           </div>
           <div>
-            <MessageOutlined onClick={()=>showModal()}/>
-            <p>{item.comments.length}</p>
+            <MessageOutlined onClick={()=>showModal("comments")}/>
+            <p onClick={()=>showModal("comments")} style={{cursor:"pointer"}}>{item.comments.length}</p>
           </div>
         </div>
         <Modal
         title="Basic Modal"
-        visible={isModalVisible} 
-        onCancel={handleClose}
+        visible={isModalVisibleComments} 
+        onCancel={()=>handleClose("comments")}
         footer={[
           <Button 
           key="back" 
-          onClick={handleClose}
+          onClick={()=>handleClose("comments")}
           type="primary"
           icon={<DoubleLeftOutlined />}
-          className="paco"
           >
             Volver
           </Button>
@@ -93,6 +114,22 @@ const Post = ({item}) => {
             />
             <Button type="primary" icon={<SendOutlined />} htmlType="submit"/>
           </form>
+      </Modal>
+      <Modal
+      title="Likes"
+      visible={isModalVisibleLikes}
+      onCancel={()=>handleClose("likes")}
+      footer={[
+        <Button 
+        key="back" 
+        onClick={()=>handleClose("likes")}
+        type="primary"
+        icon={<DoubleLeftOutlined />}
+        >Volver</Button>
+      ]}
+      >
+        {item.comments.length !== 0?likes:<Empty description={<span>Nadie ha dado me gusta aun en este post, <br></br> <b>¡Se el primero en hacerlo!</b></span>}/>}
+
       </Modal>
         
     </article>
