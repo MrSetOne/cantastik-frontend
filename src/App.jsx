@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    dispatch(newInfo())
+      dispatch(newInfo())
   },[])
 
   return (

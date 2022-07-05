@@ -49,3 +49,7 @@
         transform: perspective(44.8px) rotateY(0deg);
     }
 }
+
+.App {
+    background-color: #e7f7ff;
+}
