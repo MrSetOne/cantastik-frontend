@@ -3,7 +3,7 @@ import {MailOutlined,LockOutlined,UserOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux';
 import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
 import { signup } from "../../../features/auth/authSlice"
-
+import './SignUp.scss'
 
 
 const SignUp = () => {
@@ -19,7 +19,8 @@ const SignUp = () => {
   };
 
   return (
-    <article className='SignUp' style={{width:'min(500px,100%)', padding:'30px', backgroundColor:"#D4D4D4"}}>
+    <article className='SignUp'>
+        <h2>Registrarse</h2>
         <Form
         name='signup'
         onFinish={onFinish}
@@ -127,7 +128,7 @@ const SignUp = () => {
                 Crear cuenta
               </Button>
             </Form.Item>
-            <Form.Item >
+            <Form.Item className='signup-form--lastItem'>
             <Button style={{width:"100%"}} type="default" className="login-form-button" onClick={()=>dispatch(changeNeedSignUp())}>
                 Iniciar sesion
               </Button>

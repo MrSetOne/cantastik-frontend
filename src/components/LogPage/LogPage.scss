@@ -1,0 +1,33 @@
+.LogPage {
+    background-color: black;
+    min-height: 100vh;
+    display: flex;
+    .LogPage__Image {
+        flex: 1;
+        background-image: url('../../assets/logImage.jpg');
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem;
+        box-shadow: inset 0px 0px 250px 42px #000000;
+        h2 {
+            font-family: 'Splash', cursive;
+            color: white;
+            font-size: 10vw;
+            line-height: .8;
+        }
+    }
+    .LogPage__Forms {
+        width: 50rem;
+        height: 100vh;
+        padding: 3rem;
+        background-color: #e7f7ff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

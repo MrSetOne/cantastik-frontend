@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux"
 import Login from "./Login/Login"
 import SignUp from "./SignUp/SignUp"
+import './LogPage.scss'
 
 
 
@@ -10,9 +11,13 @@ const LogPage = () => {
 
   return (
     <section className="LogPage">
-      {needSignUp?<SignUp/>:<Login/>}
-        
-        
+      <div className="LogPage__Image">
+        <h2>Vive</h2>
+        <h2>tu momento!</h2>
+      </div>
+      <div className="LogPage__Forms">
+        {needSignUp?<SignUp/>:<Login/>}
+      </div>
     </section>
   )
 }

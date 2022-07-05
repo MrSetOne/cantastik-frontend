@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 import { login } from '../../../features/auth/authSlice'
 import {MailOutlined,LockOutlined } from '@ant-design/icons'
 import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
-
+import './Login.scss'
 
 
 const Login = () => {
@@ -19,7 +19,8 @@ const Login = () => {
       };
   
   return (
-    <div className='Login' style={{width:'min(500px,100%)', padding:'30px', backgroundColor:"#D4D4D4"}}>
+    <div className='Login' >
+      <h2>Iniciar sesión</h2>
             <Form
       name="login"
       className="login-form"
@@ -48,8 +49,8 @@ const Login = () => {
           Iniciar sesión
         </Button>
       </Form.Item>
-      <Form.Item >
-      <Button style={{width:"100%"}} type="default" className="login-form-button" onClick={()=>dispatch(changeNeedSignUp())}>
+      <Form.Item className='login-form--lastItem' >
+      <Button style={{width:"100%", marginBottom:0}} type="default" className="login-form-button" onClick={()=>dispatch(changeNeedSignUp())}>
           Crear cuenta
         </Button>
       </Form.Item>
