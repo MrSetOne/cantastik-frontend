@@ -2,6 +2,7 @@
     background-color: black;
     min-height: calc(100vh - 5rem);
     display: flex;
+    background-image: url('../../assets/logBackground.jpg');
     .LogPage__Image {
         flex: 1;
         background-image: url('../../assets/logImage.jpg');
@@ -9,10 +10,11 @@
         background-size: cover;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
-        padding: 3rem;
+        padding: 8rem;
         box-shadow: inset 0px 0px 250px 42px #000000;
+        clip-path: polygon(52.4% 0%, 100% 100%, 0% 100%);
         h2 {
             font-family: 'Splash', cursive;
             color: white;
