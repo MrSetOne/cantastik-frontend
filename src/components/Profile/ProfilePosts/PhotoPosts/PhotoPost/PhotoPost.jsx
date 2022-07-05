@@ -36,15 +36,12 @@ const PhotoPost = ({post}) => {
       await dispatch(removeLike(post._id));
     }
 
-
     const sendComment = async(e) =>{
       await e.preventDefault()
       const comment = commentValue
       await setCommentValue("")
       await dispatch(addComment({i:post.i, postId:post._id, value:comment}))
     }
-
-    console.log(post)
 
     const [value, setValue] = useState("comments")
 

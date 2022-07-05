@@ -9,6 +9,7 @@ const getById = async(id) => {
             authorization: token ? token : null
         },
     });
+    console.log(res)
     return res.data
 }
 
