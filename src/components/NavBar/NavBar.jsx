@@ -12,7 +12,7 @@ const NavBar = () => {
 
   return (
     <nav className="NavBar">
-      <div className="NavBar__bar">
+      <div className="NavBar__bar" style={{width:user?"min(95vw, 130rem)":"95vw"}}>
         {user?
           <Link to={'/'}>
             <h2>Cantastik</h2>
