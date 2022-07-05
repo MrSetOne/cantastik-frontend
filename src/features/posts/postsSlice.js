@@ -38,6 +38,13 @@ export const addComment = createAsyncThunk("post/addComment", async(input, thunk
     }
 })
 
+export const getPostsByAuthor = createAsyncThunk('post/getByAuthor', async(id, thunkAPI) => {
+    try {
+        return await postsService.getPostsByAuthor(id)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
 
 export const postsSlice = createSlice({
     name: "posts",
@@ -66,10 +73,9 @@ export const postsSlice = createSlice({
                 action.payload.newComment.author = action.payload.author
                 state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
             })
-            // .addCase(register.rejected, (state, action) => {
-            //     state.isError = true;
-            //     state.message = action.payload;
-            // })
+            .addCase(getPostsByAuthor.fulfilled, (state, action) => {
+                state.posts = action.payload
+            })
     },
 });
 // export const { reset } = authSlice.actions;

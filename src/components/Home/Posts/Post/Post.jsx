@@ -7,7 +7,7 @@ import {Avatar, Modal, Button, Input, Empty } from 'antd'
 
 const Post = ({item}) => {
     const { user } = useSelector((state) => state.auth)
-    const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
+    // const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
     const dispatch = useDispatch()
 
     const [isModalVisibleComments, setIsModalVisibleComments] = useState(false);

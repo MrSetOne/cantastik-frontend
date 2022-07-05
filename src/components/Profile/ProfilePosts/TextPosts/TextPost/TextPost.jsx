@@ -4,7 +4,6 @@ import { HeartFilled , HeartOutlined , MessageOutlined } from '@ant-design/icons
 
 const TextPost = ({post}) => {
     const { user } = useSelector((state) => state.auth)
-    console.log(post);
   return (
     <article className="TextPost">
         <div>

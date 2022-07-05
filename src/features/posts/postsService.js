@@ -42,11 +42,22 @@ const addComment = async(info) => {
     return res.data
 }
 
+const getPostsByAuthor = async(id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.get(`${API_URL}/posts/author/${id}`, {
+        headers: {
+            authorization: token ? token : null
+        }
+    })
+    return res.data
+}
+
 const postsService = {
     getPosts,
     doALike,
     doAnUnlike,
-    addComment
+    addComment,
+    getPostsByAuthor
 }
 
 export default postsService

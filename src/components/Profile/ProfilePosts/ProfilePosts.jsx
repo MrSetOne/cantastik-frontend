@@ -10,7 +10,8 @@ const ProfilePosts = ({posts}) => {
     let photoPosts = []
     let textPosts = []
 
-    posts.forEach(post => post.img?photoPosts.push(post):textPosts.push(post));
+
+    posts.forEach((post,i) => post.img?photoPosts.push({...post,i}):textPosts.push({...post,i}));
 
 
     return (
