@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { newInfo } from './features/auth/authSlice'
 import Profile from './components/Profile/Profile';
+import NotFound from './components/NotFound/NotFound';
 
 
 
@@ -31,15 +32,17 @@ function App() {
           <div></div>
         </div>
       </div>
-      {user
-        ?<BrowserRouter>
+      {user?
+        <BrowserRouter>
           <NavBar/>
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/profile/:id" element={<Profile/>}/>
+            <Route path='*' element={<NotFound/>} />
           </Routes>
         </BrowserRouter>
-        :<>
+        :
+        <>
           <NavBar/>
           <LogPage/>
         </>
