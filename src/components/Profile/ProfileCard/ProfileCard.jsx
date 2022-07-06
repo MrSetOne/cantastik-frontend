@@ -1,5 +1,4 @@
 import React from 'react'
-import {Avatar} from 'antd'
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfileStats from './ProfileStats/ProfileStats';
 

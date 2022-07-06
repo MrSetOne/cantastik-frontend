@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import ProfileCard from './ProfileCard/ProfileCard'
 import ProfilePosts from './ProfilePosts/ProfilePosts'
 import { Button , Result } from 'antd'
-import { newInfo } from '../../features/auth/authSlice'
-
 
 const Profile = () => {
   
@@ -16,30 +14,22 @@ const Profile = () => {
   const { userDisplayed:target} = useSelector((state)=>state.users)
   const { posts } = useSelector((state)=>state.posts)
   const [load, setLoad] = useState(false)
-  const [fail, setFail] = useState(false)
-    
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
     
     const loadInfo = async() =>{
       await dispatch(getById(id))
       await dispatch(getPostsByAuthor(id))
-      if(!target.username){
-        dispatch(getPosts())
-      }
+      // if(!target.username){
+      //   dispatch(getPosts())
+      // }
+      // * DE MOMENTO SE QUEDA AQUÍ, NO ENTIENDO PORQUÉ LO PUSE
       await setLoad(true)
     }
 
     useEffect(()=>{
         loadInfo()
-      },[])
-
-      useEffect(() => {
-        console.log(`Fail ha cambiado, su estado actual es: ${fail}`);
-      }, [fail])
-
-      console.log(`El estado de fail es:${fail}`);
-      
+      },[])      
       
       if(load){
         if(!target.username){

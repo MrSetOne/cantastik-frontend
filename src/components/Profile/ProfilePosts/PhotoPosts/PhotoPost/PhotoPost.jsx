@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {HeartOutlined, HeartFilled, MessageOutlined, DoubleLeftOutlined, SendOutlined  } from '@ant-design/icons'
+import {HeartOutlined, HeartFilled, MessageOutlined, SendOutlined  } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { Modal , Segmented, Comment, Avatar , Divider , Input , Button} from 'antd'
 import { addComment, like , unlike } from '../../../../../features/posts/postsSlice'

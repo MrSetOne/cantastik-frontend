@@ -1,11 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { Button } from "antd";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
+import CreatePost from "./CreatePost/CreatePost";
 import './NavBar.scss'
 import NavBarMenu from "./NavBarMenu/NavBarMenu";
 
 const NavBar = () => {
-  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+
+  const [createPostVisible, setCreatePostVisible] = useState(false);
+
 
   return (
     <nav className="NavBar">
@@ -18,7 +23,12 @@ const NavBar = () => {
           <h2>Cantastik</h2>
         }
         {user
-        ?<NavBarMenu/>
+        ?<>
+          <Button type="primary" onClick={()=>setCreatePostVisible(true)}>
+            Crear Post
+          </Button>
+          <NavBarMenu/>
+          <CreatePost visible={createPostVisible} setCreatePostVisible={setCreatePostVisible}/></>
         :null}
       </div>
     </nav>

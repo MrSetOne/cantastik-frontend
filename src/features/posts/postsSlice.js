@@ -46,6 +46,14 @@ export const getPostsByAuthor = createAsyncThunk('post/getByAuthor', async(id, t
     }
 })
 
+export const createPost = createAsyncThunk('post/createPost', async(data, thunkAPI) => {
+    try {
+        return await postsService.createPost(data)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 export const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -76,6 +84,9 @@ export const postsSlice = createSlice({
             })
             .addCase(getPostsByAuthor.fulfilled, (state, action) => {
                 state.posts = action.payload
+            })
+            .addCase(createPost.fulfilled, (state, action) => {
+                state.posts = [...state.posts, action.payload.newPost]
             })
     },
 });

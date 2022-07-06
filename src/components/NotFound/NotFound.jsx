@@ -1,7 +1,6 @@
 
 import { Button , Result } from 'antd'
-import { useEffect, useState } from 'react'
-import { useNavigate , Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const NotFound = () => {
 

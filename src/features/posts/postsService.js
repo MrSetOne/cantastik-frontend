@@ -52,12 +52,23 @@ const getPostsByAuthor = async(id) => {
     return res.data
 }
 
+const createPost = async(data) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.post(`${API_URL}/posts/`, data, {
+        headers: {
+            authorization: token ? token : null
+        }
+    })
+    return res.data
+}
+
 const postsService = {
     getPosts,
     doALike,
     doAnUnlike,
     addComment,
-    getPostsByAuthor
+    getPostsByAuthor,
+    createPost
 }
 
 export default postsService
