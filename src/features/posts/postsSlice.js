@@ -63,6 +63,14 @@ export const getPostById = createAsyncThunk('post/getPostById', async(id, thunkA
     }
 })
 
+export const findByTitle = createAsyncThunk('post/findByTitle', async(search, thunkAPI) => {
+    try {
+        return await postsService.findByTitle(search)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 export const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -82,14 +90,14 @@ export const postsSlice = createSlice({
             })
             .addCase(like.fulfilled, (state, action) => {
                 console.log(action.payload)
-                if (action.meta.arg.i) {
+                if (action.meta.arg.i !== "") {
                     state.posts[action.meta.arg.i].likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
                 } else {
                     state.post.likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
                 }
             })
             .addCase(unlike.fulfilled, (state, action) => {
-                if (action.meta.arg.i) {
+                if (action.meta.arg.i !== "") {
                     state.posts[action.meta.arg.i].likes = state.posts[action.meta.arg.i].likes.filter(item => item._id !== action.payload.user)
                 } else {
                     state.post.likes = state.post.likes.filter(item => item._id !== action.payload.user)
@@ -97,7 +105,7 @@ export const postsSlice = createSlice({
             })
             .addCase(addComment.fulfilled, (state, action) => {
                 action.payload.newComment.author = action.payload.author
-                if (action.meta.arg.i) {
+                if (action.meta.arg.i !== "") {
                     state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
                 } else {
                     state.post.comments.push(action.payload.newComment)
@@ -111,6 +119,10 @@ export const postsSlice = createSlice({
             })
             .addCase(getPostById.fulfilled, (state, action) => {
                 state.post = action.payload
+            })
+            .addCase(findByTitle.fulfilled, (state, action) => {
+                console.log(action)
+                state.posts = action.payload
             })
     },
 });
