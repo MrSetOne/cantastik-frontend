@@ -57,13 +57,15 @@ const Post = ({item}) => {
 
       const likes = item.likes.map(element => {
         return (
-          <div style={{display:'flex', gap:'10px'}}>
-            <Link to={`/profile/${element._id}`}>
-              {element.img?<Avatar src={`http://localhost:8080/porfile/${element.img}`}/>:<Avatar>{element.username.substring(0,1)}</Avatar>}
-            </Link>
-            <Link to={`/profile/${element._id}`}>
-              <h3>{element.username}</h3>
-            </Link>
+          <div className='Likes__item'>
+            <div className='Likes__item--info'>
+              <Link to={`/profile/${element._id}`}>
+                {element.img?<Avatar src={`http://localhost:8080/porfile/${element.img}`}/>:<Avatar>{element.username.substring(0,1)}</Avatar>}
+              </Link>
+              <Link to={`/profile/${element._id}`}>
+                <h3>{element.username}</h3>
+              </Link>
+            </div>
             <Button 
             key="back" 
             onClick={handleClose}
@@ -128,7 +130,7 @@ const Post = ({item}) => {
               show==='comments'?    
                 <div className='Post__ModalItem--comments'>        
                   {item.comments.length !== 0?
-                    <div>
+                    <div className='Comments__Container'>
                       {comments}
                     </div>
                   :
@@ -153,8 +155,8 @@ const Post = ({item}) => {
                   </form>
                 </div>
               :
-                <div style={{position:'relative',width:'100%',minHeight:'30vh'}}>
-                  {item.likes.length !== 0?likes:<Empty description={<span>Nadie ha dado me gusta aun en este post, <br></br> <b>¡Se el primero en hacerlo!</b></span>}/>}       
+                <div className='Post__ModalItem--likes'>
+                  {item.likes.length !== 0?<div className='Likes__Container'>{likes}</div>:<Empty description={<span>Nadie ha dado me gusta aun en este post, <br></br> <b>¡Se el primero en hacerlo!</b></span>}/>}       
                   {user.likedPosts.includes(item._id)
                     ?
                       <Button

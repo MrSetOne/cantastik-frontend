@@ -60,7 +60,7 @@
     .Post__ModalItem--comments {
         width: 100%;
         margin-top: 2rem;
-        >div {
+        .Comments__Container {
             height: calc(100vh - 30rem);
             overflow: auto;
             >div {
@@ -79,8 +79,29 @@
                 }
             }
         }
+        >div {
+            height: calc(100vh - 30rem);
+        }
         form {
             margin-top: 1rem;
+        }
+    }
+    .Post__ModalItem--likes {
+        margin-top: 2rem;
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 25.8rem);
+        .Likes__Container {
+            height: calc(100vh - 28rem);
+            overflow: auto;
+            .Likes__item {
+                display: flex;
+                justify-content: space-between;
+                .Likes__item--info {
+                    display: flex;
+                    gap: 1rem;
+                }
+            }
         }
     }
 }
