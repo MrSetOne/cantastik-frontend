@@ -73,7 +73,6 @@ const Post = ({item}) => {
           </div>
         )
       })
-      console.log(item.createdAt);
 
   return (
     <article className='Post' key={item._id}>

@@ -3,8 +3,7 @@ import {message,Upload} from 'antd'
 import {PlusOutlined} from '@ant-design/icons'
 
 
-const PostFormImg = ({setImage}) => {
-  const [imageUrl, setImageUrl] = useState();
+const PostFormImg = ({setImage, image, imageUrl, setImageUrl}) => {
   
   const getBase64 = (img, callback) => {
       const reader = new FileReader();
@@ -51,7 +50,10 @@ const PostFormImg = ({setImage}) => {
 
     return (
         <Upload
+        maxCount={1}
+        fileList={image}
         name="avatar"
+        defaultFileList={[]}
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}

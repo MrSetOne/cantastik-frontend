@@ -18,7 +18,6 @@ const TextPost = ({post}) => {
 
 
 
-    console.log(post)
 
 
 

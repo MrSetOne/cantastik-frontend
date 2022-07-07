@@ -7,19 +7,23 @@ import { createPost } from '../../../../features/posts/postsSlice'
 
 const CreatePostForm = () => {
     const dispatch = useDispatch()
+    const [form] = Form.useForm();
 
     const [image, setImage] = useState([])
+    const [imageUrl, setImageUrl] = useState();
 
-    const onFinish = (values) => {
-        console.log(values);
-        console.log(image);
+
+    const onFinish = async(values) => {
         let formData = new FormData();
         formData.append("title", values.title)
         formData.append("body", values.body)
         if(image[0]){
           formData.append("img", image[0])
         }
-        dispatch(createPost(formData))
+        await dispatch(createPost(formData))
+        await setImage([])
+        setImageUrl('')
+        await form.resetFields()
       };
     
       const onFinishFailed = (errorInfo) => {
@@ -29,13 +33,14 @@ const CreatePostForm = () => {
 
   return (
     <Form
+    form={form}
     name="createPost"
     className="createPost-form"
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
     autoComplete="off"
   >
-    <PostFormImg setImage={setImage}/>
+    <PostFormImg setImage={setImage} image={image} imageUrl={imageUrl} setImageUrl={setImageUrl}/>
     <Form.Item
       name="title"
       rules={[{ required: true, message: 'Introduce un titulo' }]}

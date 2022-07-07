@@ -3,8 +3,6 @@ import CreatePostForm from "./CreatePostForm/CreatePostForm";
 
 const CreatePost = ({visible, setCreatePostVisible}) => {
 
-    console.log(visible)
-
     const handleCancel = () => {
         setCreatePostVisible(false);
       };

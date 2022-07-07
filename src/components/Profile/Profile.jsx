@@ -50,7 +50,6 @@ const Profile = () => {
           />
           )
         }
-        console.log(`Load es: ${load}, se ejecuta todo`);
         return (
           <section className='Profile'>
             <ProfileCard target={target}/>
@@ -58,7 +57,6 @@ const Profile = () => {
         </section>
       )
     } else {
-      console.log(`Load es: ${load}, no se ejecuta nada`);
       return <h1>cargando...</h1>
     }
   }
