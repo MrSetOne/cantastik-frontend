@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { getPosts } from '../../features/posts/postsSlice'
 import {useDispatch , useSelector} from 'react-redux'
 import Posts from './Posts/Posts'
+import './Home.scss'
 
 
 

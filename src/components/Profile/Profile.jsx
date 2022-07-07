@@ -18,6 +18,7 @@ const Profile = () => {
   const navigate = useNavigate()
     
     const loadInfo = async() =>{
+      setLoad(false)
       await dispatch(getById(id))
       await dispatch(getPostsByAuthor(id))
       // if(!target.username){
@@ -28,8 +29,12 @@ const Profile = () => {
     }
 
     useEffect(()=>{
+      loadInfo()
+    },[]) 
+
+    useEffect(()=>{
         loadInfo()
-      },[])      
+      },[id])      
       
       if(load){
         if(!target.username){

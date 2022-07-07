@@ -2,9 +2,10 @@ import { Button } from "antd";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
+import NavBarMenu from "./NavBarMenu/NavBarMenu";
 import CreatePost from "./CreatePost/CreatePost";
 import './NavBar.scss'
-import NavBarMenu from "./NavBarMenu/NavBarMenu";
+import Cantastik from '../../assets/Cantastik.png'
 
 const NavBar = () => {
   const { user } = useSelector((state) => state.auth)
@@ -17,10 +18,10 @@ const NavBar = () => {
       <div className="NavBar__bar" style={{width:user?"min(95vw, 130rem)":"95vw"}}>
         {user?
           <Link to={'/'}>
-            <h2>Cantastik</h2>
+            <img src={Cantastik} alt="Cantastik" style={{height:'4rem',width:"9rem"}}/>
           </Link>
           :
-          <h2>Cantastik</h2>
+          <img src={Cantastik} alt="Cantastik" style={{height:'4rem',width:"9rem"}}/>
         }
         {user
         ?<>

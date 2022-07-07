@@ -1,5 +1,6 @@
 import { useSelector} from 'react-redux'
 import Post from './Post/Post'
+import './Posts.scss'
 
 
 const Posts = () => {
@@ -10,7 +11,6 @@ const Posts = () => {
 
   return (
     <section className='Posts'>
-        <h1>holi</h1>
         {allPosts}
     </section>
   )
