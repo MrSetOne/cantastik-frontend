@@ -81,14 +81,27 @@ export const postsSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(like.fulfilled, (state, action) => {
-                state.posts[action.meta.arg.i].likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
+                console.log(action.payload)
+                if (action.meta.arg.i) {
+                    state.posts[action.meta.arg.i].likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
+                } else {
+                    state.post.likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
+                }
             })
             .addCase(unlike.fulfilled, (state, action) => {
-                state.posts[action.meta.arg.i].likes = state.posts[action.meta.arg.i].likes.filter(item => item._id !== action.payload.user)
+                if (action.meta.arg.i) {
+                    state.posts[action.meta.arg.i].likes = state.posts[action.meta.arg.i].likes.filter(item => item._id !== action.payload.user)
+                } else {
+                    state.post.likes = state.post.likes.filter(item => item._id !== action.payload.user)
+                }
             })
             .addCase(addComment.fulfilled, (state, action) => {
                 action.payload.newComment.author = action.payload.author
-                state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
+                if (action.meta.arg.i) {
+                    state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
+                } else {
+                    state.post.comments.push(action.payload.newComment)
+                }
             })
             .addCase(getPostsByAuthor.fulfilled, (state, action) => {
                 state.posts = action.payload
@@ -97,7 +110,6 @@ export const postsSlice = createSlice({
                 state.posts = [action.payload.newPost, ...state.posts]
             })
             .addCase(getPostById.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.post = action.payload
             })
     },
