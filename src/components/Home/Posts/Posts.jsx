@@ -7,7 +7,7 @@ const Posts = () => {
 
     const { posts} = useSelector((state)=>state.posts)
 
-    const allPosts = posts.map((element, i) => <Post item={{...element,i}}/>)
+    const allPosts = posts?.map((element, i) => <Post item={{...element,i}}/>)
 
   return (
     <section className='Posts'>

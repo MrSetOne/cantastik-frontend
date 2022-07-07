@@ -3,7 +3,8 @@ import postsService from "./postsService";
 
 const initialState = {
     posts: [],
-    isLoading: false
+    isLoading: false,
+    post: {}
 };
 
 export const getPosts = createAsyncThunk("post/GetPosts", async(token, thunkAPI) => {
@@ -54,6 +55,14 @@ export const createPost = createAsyncThunk('post/createPost', async(data, thunkA
     }
 })
 
+export const getPostById = createAsyncThunk('post/getPostById', async(id, thunkAPI) => {
+    try {
+        return await postsService.getPostById(id)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 export const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -86,6 +95,10 @@ export const postsSlice = createSlice({
             })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.posts = [action.payload.newPost, ...state.posts]
+            })
+            .addCase(getPostById.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.post = action.payload
             })
     },
 });

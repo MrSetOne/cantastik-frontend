@@ -17,7 +17,8 @@ const Home = () => {
     dispatch(getPosts())
   },[])
 
-
+  console.log('AQUIIIII!!!');
+  console.log(posts);
 
 
   return (

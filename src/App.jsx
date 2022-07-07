@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import LogPage from './components/LogPage/LogPage';
 import NavBar from './components/NavBar/NavBar';
 import Home from './components/Home/Home';
+import PostDetail from './components/PostDetail/PostDetail'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { newInfo } from './features/auth/authSlice'
@@ -38,6 +39,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/profile/:id" element={<Profile/>}/>
+            <Route path="post/:id" element={<PostDetail/>}/>
             <Route path='*' element={<NotFound/>} />
           </Routes>
         </BrowserRouter>
