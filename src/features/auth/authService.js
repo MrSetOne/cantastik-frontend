@@ -43,12 +43,23 @@ const logout = async() => {
     return res.data;
 };
 
+const updateUser = async(data) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.put(`${API_URL}/users/modify`, data, {
+        headers: {
+            authorization: token ? token : null
+        },
+    });
+    return (res.data)
+}
+
 
 const authService = {
     login,
     newInfo,
     signup,
-    logout
+    logout,
+    updateUser
 }
 
 export default authService

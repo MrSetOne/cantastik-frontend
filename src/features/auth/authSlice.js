@@ -48,6 +48,14 @@ export const logout = createAsyncThunk("auth/logout", async() => {
     }
 });
 
+export const updateUser = createAsyncThunk("auth/update", async(data) => {
+    try {
+        return await authService.updateUser(data)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -86,6 +94,10 @@ export const authSlice = createSlice({
             })
             .addCase(newInfo.fulfilled, (state, action) => {
                 state.user = action.payload
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.user.username = action.payload.updatedUser.username;
+                state.user.img = action.payload.updatedUser.img;
             })
             //   .addCase(register.fulfilled, (state, action) => {
             //     state.isSuccess = true;

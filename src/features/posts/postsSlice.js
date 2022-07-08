@@ -89,7 +89,6 @@ export const postsSlice = createSlice({
                 state.isLoading = false;
             })
             .addCase(like.fulfilled, (state, action) => {
-                console.log(action.payload)
                 if (action.meta.arg.i !== "") {
                     state.posts[action.meta.arg.i].likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
                 } else {
@@ -121,7 +120,6 @@ export const postsSlice = createSlice({
                 state.post = action.payload
             })
             .addCase(findByTitle.fulfilled, (state, action) => {
-                console.log(action)
                 state.posts = action.payload
             })
     },

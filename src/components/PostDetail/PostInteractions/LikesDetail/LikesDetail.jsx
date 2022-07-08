@@ -10,8 +10,6 @@ const LikesDetail = ({ likes, postId }) => {
 
   const dispatch = useDispatch();
 
-  console.log(postId);
-
   const doALike = async () => {
     await dispatch(like({ postId }));
     await dispatch(addLike(postId));
