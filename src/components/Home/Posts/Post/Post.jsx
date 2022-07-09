@@ -15,12 +15,13 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Modal, Button, Input, Empty, Segmented } from "antd";
 import "./Post.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Post = ({ item }) => {
   const { user } = useSelector((state) => state.auth);
   // const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [show, setShow] = useState("comments");
@@ -108,10 +109,19 @@ const Post = ({ item }) => {
           )}
           <h2>{item.userId.username}</h2>
         </Link>
-        <Button type="primary" size="small">
-          Follow(NW)
-        </Button>
-        {/* HACER UNA VEZ IMPLEMENTADO EL SISTEMA DE FOLLOWS */}
+        {user._id === item.userId._id ? (
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => navigate(`/post/${item._id}`)}
+          >
+            Editar
+          </Button>
+        ) : (
+          <Button type="primary" size="small">
+            Follow(NW)
+          </Button>
+        )}
       </div>
       {item.img ? (
         <img

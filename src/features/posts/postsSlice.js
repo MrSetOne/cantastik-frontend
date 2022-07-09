@@ -71,6 +71,14 @@ export const findByTitle = createAsyncThunk('post/findByTitle', async(search, th
     }
 })
 
+export const updatePost = createAsyncThunk('post/updatePost', async(info, thunkAPI) => {
+    try {
+        return await postsService.updatePost(info)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 export const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -121,6 +129,9 @@ export const postsSlice = createSlice({
             })
             .addCase(findByTitle.fulfilled, (state, action) => {
                 state.posts = action.payload
+            })
+            .addCase(updatePost.fulfilled, (state, action) => {
+                state.post = action.payload.updatedPost
             })
     },
 });

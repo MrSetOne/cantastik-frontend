@@ -82,6 +82,16 @@ const findByTitle = async(title) => {
     return (res.data)
 }
 
+const updatePost = async(info) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.put(`${API_URL}/posts/id/${info._id}`, {...info.data }, {
+        headers: {
+            authorization: token ? token : null
+        }
+    })
+    return (res.data)
+}
+
 const postsService = {
     getPosts,
     doALike,
@@ -90,7 +100,8 @@ const postsService = {
     getPostsByAuthor,
     createPost,
     getPostById,
-    findByTitle
+    findByTitle,
+    updatePost
 }
 
 export default postsService

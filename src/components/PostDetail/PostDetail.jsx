@@ -3,18 +3,20 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getById } from "../../features/users/usersSlice";
 import { getPostsByAuthor, getPostById } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
-// import ProfileCard from './ProfileCard/ProfileCard'
-// import ProfilePosts from './ProfilePosts/ProfilePosts'
 import { Button, Result } from "antd";
 import PostWithImage from "./PostWithImage/PostWithImage";
 import PostJustText from "./PostJustText/PostJustText";
 import PostInteractions from "./PostInteractions/PostInteractions";
+import EditPostDetail from "./EditPostDetail/EditPostDetail";
 
 const Profile = () => {
   const { id } = useParams();
 
   const { post } = useSelector((state) => state.posts);
+  const { user } = useSelector((state) => state.auth);
+
   const [load, setLoad] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,12 +58,30 @@ const Profile = () => {
     }
     return (
       <section className="Profile">
-        {post.img ? <PostWithImage /> : <PostJustText />}
-        <PostInteractions
-          likes={post.likes}
-          comments={post.comments}
-          postId={post._id}
-        />
+        {edit ? (
+          <EditPostDetail
+            title={post.title}
+            body={post.body}
+            _id={post._id}
+            setEdit={setEdit}
+          />
+        ) : post.userId._id === user._id ? (
+          <Button type="primary" size="small" onClick={() => setEdit(true)}>
+            Editar
+          </Button>
+        ) : (
+          <Button type="primary" size="small">
+            Follow(NW)
+          </Button>
+        )}
+        {edit ? null : post.img ? <PostWithImage /> : <PostJustText />}
+        {edit ? null : (
+          <PostInteractions
+            likes={post.likes}
+            comments={post.comments}
+            postId={post._id}
+          />
+        )}
       </section>
     );
   } else {
