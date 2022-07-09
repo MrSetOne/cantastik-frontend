@@ -92,6 +92,16 @@ const updatePost = async(info) => {
     return (res.data)
 }
 
+const deletePost = async(_id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.delete(`${API_URL}/posts/id/${_id}`, {
+        headers: {
+            authorization: token ? token : null
+        }
+    })
+    console.log(res.data)
+}
+
 const postsService = {
     getPosts,
     doALike,
@@ -101,7 +111,8 @@ const postsService = {
     createPost,
     getPostById,
     findByTitle,
-    updatePost
+    updatePost,
+    deletePost
 }
 
 export default postsService

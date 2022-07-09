@@ -79,6 +79,14 @@ export const updatePost = createAsyncThunk('post/updatePost', async(info, thunkA
     }
 })
 
+export const deletePost = createAsyncThunk('post/deletePost', async(_id, thunkAPI) => {
+    try {
+        return await postsService.deletePost(_id)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 export const postsSlice = createSlice({
     name: "posts",
     initialState,
@@ -132,6 +140,9 @@ export const postsSlice = createSlice({
             })
             .addCase(updatePost.fulfilled, (state, action) => {
                 state.post = action.payload.updatedPost
+            })
+            .addCase(deletePost.fulfilled, (state) => {
+                state.post = {}
             })
     },
 });

@@ -1,10 +1,14 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Space } from "antd";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updatePost } from "../../../features/posts/postsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { updatePost, deletePost } from "../../../features/posts/postsSlice";
 
 const EditPostDetail = ({ title, body, _id, setEdit }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.auth);
 
   const { TextArea } = Input;
   const [value, setValue] = useState("");
@@ -16,6 +20,11 @@ const EditPostDetail = ({ title, body, _id, setEdit }) => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const deleteThisPost = async () => {
+    await dispatch(deletePost(_id));
+    navigate(`/profile/${user._id}`);
   };
 
   return (
@@ -36,9 +45,14 @@ const EditPostDetail = ({ title, body, _id, setEdit }) => {
           <TextArea autoSize={{ minRows: 3, maxRows: 6 }} />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
+          <Space>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+            <Button type="danger" onClick={() => deleteThisPost()}>
+              Eliminar Post
+            </Button>
+          </Space>
         </Form.Item>
       </Form>
     </div>
