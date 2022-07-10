@@ -40,19 +40,34 @@ export const signup = createAsyncThunk("auth/register", async(user, thunkAPI) =>
     }
 });
 
-export const logout = createAsyncThunk("auth/logout", async() => {
+export const logout = createAsyncThunk("auth/logout", async(thunkAPI) => {
     try {
         return await authService.logout();
     } catch (error) {
-        console.error(error);
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
-export const updateUser = createAsyncThunk("auth/update", async(data) => {
+export const updateUser = createAsyncThunk("auth/update", async(data, thunkAPI) => {
     try {
         return await authService.updateUser(data)
     } catch (error) {
-        console.log(error)
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+export const doAFollow = createAsyncThunk('atuth/doAFollow', async(target, thunkAPI) => {
+    try {
+        return await authService.doAFollow(target)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
+export const doAnUnfollow = createAsyncThunk('auth/doAnUnfollow', async(target, thunkAPI) => {
+    try {
+        return await authService.doAnUnfollow(target)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 })
 
@@ -98,6 +113,12 @@ export const authSlice = createSlice({
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.user.username = action.payload.updatedUser.username;
                 state.user.img = action.payload.updatedUser.img;
+            })
+            .addCase(doAFollow.fulfilled, (state, action) => {
+                state.user.following = action.payload.follower.following
+            })
+            .addCase(doAnUnfollow.fulfilled, (state, action) => {
+                state.user.following = action.payload.unfollower.following
             })
             //   .addCase(register.fulfilled, (state, action) => {
             //     state.isSuccess = true;

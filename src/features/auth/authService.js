@@ -53,13 +53,35 @@ const updateUser = async(data) => {
     return (res.data)
 }
 
+const doAFollow = async(target) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.put(`${API_URL}/users/follow/${target}`, {}, {
+        headers: {
+            authorization: token ? token : null
+        },
+    });
+    return (res.data)
+}
+
+const doAnUnfollow = async(target) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.put(`${API_URL}/users/unfollow/${target}`, {}, {
+        headers: {
+            authorization: token ? token : null
+        },
+    });
+    return (res.data)
+}
+
 
 const authService = {
     login,
     newInfo,
     signup,
     logout,
-    updateUser
+    updateUser,
+    doAFollow,
+    doAnUnfollow
 }
 
 export default authService

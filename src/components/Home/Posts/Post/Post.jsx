@@ -4,7 +4,12 @@ import {
   unlike,
   addComment,
 } from "../../../../features/posts/postsSlice";
-import { addLike, removeLike } from "../../../../features/auth/authSlice";
+import {
+  addLike,
+  removeLike,
+  doAFollow,
+  doAnUnfollow,
+} from "../../../../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {
   HeartOutlined,
@@ -117,9 +122,24 @@ const Post = ({ item }) => {
           >
             Editar
           </Button>
+        ) : user.following.some(
+            (element) => element._id === item.userId._id
+          ) ? (
+          <Button
+            size="small"
+            onClick={() => dispatch(doAnUnfollow(item.userId._id))}
+          >
+            Dejar se seguir
+          </Button>
         ) : (
-          <Button type="primary" size="small">
-            Follow(NW)
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => {
+              dispatch(doAFollow(item.userId._id));
+            }}
+          >
+            Seguir
           </Button>
         )}
       </div>
