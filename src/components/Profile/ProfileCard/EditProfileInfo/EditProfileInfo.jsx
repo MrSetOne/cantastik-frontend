@@ -4,11 +4,14 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux/es/exports";
 import PostFormImg from "../../../NavBar/CreatePost/CreatePostForm/PostFormImg/PostFormImg";
 import { updateUser } from "../../../../features/auth/authSlice";
+import { DoubleLeftOutlined, UploadOutlined } from "@ant-design/icons";
 
 const EditProfileInfo = ({ setEdit }) => {
   const { user } = useSelector((state) => state.auth);
 
   const [form] = Form.useForm();
+
+  const { TextArea } = Input;
 
   const dispatch = useDispatch();
 
@@ -37,8 +40,9 @@ const EditProfileInfo = ({ setEdit }) => {
     <section className="EditProfileInfo" style={{ backgroundColor: "white" }}>
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
+        labelCol={{ span: 3 }}
+        wrapperCol={{ span: 24 }}
+        labelWrap={true}
         initialValues={{ remember: true }}
         requiredMark={false}
         onFinish={onFinish}
@@ -46,12 +50,20 @@ const EditProfileInfo = ({ setEdit }) => {
         autoComplete="off"
         form={form}
       >
-        <PostFormImg
-          setImage={setImage}
-          image={image}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-        />
+        <Form.Item
+          label=" "
+          labelAlign="left"
+          style={{ alignItems: "center" }}
+          colon={false}
+          labelCol={{ span: 10 }}
+        >
+          <PostFormImg
+            setImage={setImage}
+            image={image}
+            imageUrl={imageUrl}
+            setImageUrl={setImageUrl}
+          />
+        </Form.Item>
         <Form.Item
           label="Username"
           name="username"
@@ -61,17 +73,28 @@ const EditProfileInfo = ({ setEdit }) => {
           initialValue={user.username}
         >
           <Input placeholder={user.username} />
+        </Form.Item>{" "}
+        <Form.Item
+          label="Bio"
+          name="bio"
+          rules={[
+            { required: true, message: "Siempre tienes que tener un username" },
+          ]}
+          initialValue={user.username}
+        >
+          <TextArea placeholder={user.username} />
         </Form.Item>
-
-        <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
-          <Space style={{ justifyContent: "flex-end" }}>
-            <Button type="primary" onClick={() => setEdit(false)}>
-              Back
-            </Button>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Space>
+        <Form.Item noStyle={false} className={"EditProfileInfo--Btns"}>
+          <Button
+            type="danger"
+            onClick={() => setEdit(false)}
+            icon={<DoubleLeftOutlined />}
+          >
+            Back
+          </Button>
+          <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     </section>

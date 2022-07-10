@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard/ProfileCard";
 import ProfilePosts from "./ProfilePosts/ProfilePosts";
 import { Button, Result } from "antd";
+import "./Profile.scss";
 
 const Profile = () => {
   const { id } = useParams();

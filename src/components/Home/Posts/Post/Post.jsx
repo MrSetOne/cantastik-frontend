@@ -113,7 +113,7 @@ const Post = ({ item }) => {
           <Button
             type="primary"
             size="small"
-            onClick={() => navigate(`/post/${item._id}`)}
+            onClick={() => navigate(`/post/${item._id} `)}
           >
             Editar
           </Button>
@@ -123,16 +123,18 @@ const Post = ({ item }) => {
           </Button>
         )}
       </div>
-      {item.img ? (
-        <img
-          src={`http://localhost:8080/postsImgs/${item.img}`}
-          className="Post__Img"
-        />
-      ) : null}
-      <div className="Post__Text">
-        <h3>{item.title}</h3>
-        <p>{item.body}</p>
-      </div>
+      <Link to={`/post/${item._id}`} style={{ color: "black" }}>
+        {item.img ? (
+          <img
+            src={`http://localhost:8080/postsImgs/${item.img}`}
+            className="Post__Img"
+          />
+        ) : null}
+        <div className="Post__Text">
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+        </div>
+      </Link>
       <div className="Post__Interactions">
         <div className="Post__Interactions--Icons">
           {user.likedPosts.includes(item._id) ? (

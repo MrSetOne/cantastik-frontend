@@ -24,6 +24,7 @@ const PostWithImage = () => {
       <img
         src={`http://localhost:8080/postsImgs/${post.img}`}
         className="Post__Img"
+        style={{ width: "100%" }}
       />
       <h2>{post.title}</h2>
       <p>{post.body}</p>
