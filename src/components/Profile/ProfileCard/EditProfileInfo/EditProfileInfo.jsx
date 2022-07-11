@@ -5,9 +5,12 @@ import { useDispatch } from "react-redux/es/exports";
 import PostFormImg from "../../../NavBar/CreatePost/CreatePostForm/PostFormImg/PostFormImg";
 import { updateUser } from "../../../../features/auth/authSlice";
 import { DoubleLeftOutlined, UploadOutlined } from "@ant-design/icons";
+import { getById } from "../../../../features/users/usersSlice";
+import { useParams } from "react-router-dom";
 
 const EditProfileInfo = ({ setEdit }) => {
   const { user } = useSelector((state) => state.auth);
+  const { id } = useParams();
 
   const [form] = Form.useForm();
 
@@ -27,6 +30,7 @@ const EditProfileInfo = ({ setEdit }) => {
     }
     await dispatch(updateUser(formData));
     await setImage([]);
+    await dispatch(getById(id));
     setImageUrl("");
     await form.resetFields();
     await setEdit(false);

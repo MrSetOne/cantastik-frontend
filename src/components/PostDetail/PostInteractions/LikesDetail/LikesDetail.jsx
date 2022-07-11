@@ -34,6 +34,7 @@ const LikesDetail = ({ likes, postId }) => {
           width: "100%",
           alignItems: "center",
           gap: "1rem",
+          marginBottom: "1rem",
         }}
       >
         <Link to={`/profile/${like._id}`}>

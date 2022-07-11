@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getById } from "../../features/users/usersSlice";
 import { getPostsByAuthor, getPostById } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, Button, Result } from "antd";
@@ -8,6 +7,7 @@ import PostWithImage from "./PostWithImage/PostWithImage";
 import PostJustText from "./PostJustText/PostJustText";
 import PostInteractions from "./PostInteractions/PostInteractions";
 import EditPostDetail from "./EditPostDetail/EditPostDetail";
+import { doAFollow, doAnUnfollow } from "../../features/auth/authSlice";
 
 const Profile = () => {
   const { id } = useParams();
@@ -91,9 +91,24 @@ const Profile = () => {
               >
                 {edit ? "Volver" : "Editar"}
               </Button>
+            ) : user.following.some(
+                (objetive) => objetive._id === post.userId._id
+              ) ? (
+              <Button
+                size="small"
+                onClick={() => dispatch(doAnUnfollow(post.userId._id))}
+              >
+                Dejar se seguir
+              </Button>
             ) : (
-              <Button type="primary" size="small">
-                Follow(NW)
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => {
+                  dispatch(doAFollow(post.userId._id));
+                }}
+              >
+                Seguir
               </Button>
             )}
           </div>
