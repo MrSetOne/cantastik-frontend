@@ -4,12 +4,16 @@ import postsService from "./postsService";
 const initialState = {
     posts: [],
     isLoading: false,
-    post: {}
+    post: {},
+    countTotalPosts: 0,
 };
 
-export const getPosts = createAsyncThunk("post/GetPosts", async(token, thunkAPI) => {
+export const getPosts = createAsyncThunk("post/GetPosts", async(page, thunkAPI) => {
     try {
-        return await postsService.getPosts(token)
+        if (!page) {
+            page = 1
+        }
+        return await postsService.getPosts(page)
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -101,7 +105,10 @@ export const postsSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(getPosts.fulfilled, (state, action) => {
-                state.posts = action.payload
+                console.log(action.payload)
+                state.posts = [...state.posts, ...action.payload.allPosts]
+                state.countTotalPosts = action.payload.count
+                state.currentPage = state.currentPage + 1
                 state.isLoading = false;
             })
             .addCase(like.fulfilled, (state, action) => {

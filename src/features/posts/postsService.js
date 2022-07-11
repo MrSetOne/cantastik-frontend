@@ -2,9 +2,9 @@ import axios from 'axios'
 
 const API_URL = "http://localhost:8080"
 
-const getPosts = async() => {
+const getPosts = async(page) => {
     const token = JSON.parse(localStorage.getItem("token"));
-    const res = await axios.get(API_URL + "/posts/?page=1", {
+    const res = await axios.get(`${API_URL}/posts/?page=${page}`, {
         headers: {
             authorization: token ? token : null
         },
