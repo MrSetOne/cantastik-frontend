@@ -74,6 +74,11 @@ const doAnUnfollow = async(target) => {
     return (res.data)
 }
 
+const verify = async(token) => {
+    const res = await axios.get(`${API_URL}/users/confirm/${token}`)
+    console.log(res.data)
+    return res.data
+}
 
 const authService = {
     login,
@@ -82,7 +87,8 @@ const authService = {
     logout,
     updateUser,
     doAFollow,
-    doAnUnfollow
+    doAnUnfollow,
+    verify
 }
 
 export default authService

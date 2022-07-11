@@ -8,9 +8,10 @@ const initialState = {
     user: user ? user : null,
     token: token ? token : null,
     isLoading: false,
-    //   isError: false,
-    //   isSuccess: false,
-    //   message: "",
+    isConfirmed: false
+        //   isError: false,
+        //   isSuccess: false,
+        //   message: "",
 };
 
 
@@ -71,6 +72,14 @@ export const doAnUnfollow = createAsyncThunk('auth/doAnUnfollow', async(target, 
     }
 })
 
+export const verify = createAsyncThunk('auth/verify', async(token, thunkAPI) => {
+    try {
+        return await authService.verify(token)
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -121,14 +130,10 @@ export const authSlice = createSlice({
             .addCase(doAnUnfollow.fulfilled, (state, action) => {
                 state.user.following = action.payload.unfollower.following
             })
-            //   .addCase(register.fulfilled, (state, action) => {
-            //     state.isSuccess = true;
-            //     state.message = action.payload.message;
-            //   })
-            //   .addCase(register.rejected, (state, action) => {
-            //     state.isError = true;
-            //     state.message = action.payload;
-            //   })
+            .addCase(verify.fulfilled, (state) => {
+                state.isConfirmed = true
+            })
+
     },
 });
 export const { addLike, removeLike } = authSlice.actions;

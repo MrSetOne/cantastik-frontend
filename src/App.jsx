@@ -11,6 +11,7 @@ import { newInfo } from "./features/auth/authSlice";
 import Profile from "./components/Profile/Profile";
 import NotFound from "./components/NotFound/NotFound";
 import Footer from "./components/Footer/Footer";
+import Verify from "./components/Verify/Verify";
 
 function App() {
   const { user, isLoading } = useSelector((state) => state.auth);
@@ -51,7 +52,10 @@ function App() {
       ) : (
         <>
           <NavBar />
-          <LogPage />
+          <Routes>
+            <Route path="/confirm/:token" element={<Verify />} />
+            <Route path="*" element={<LogPage />} />
+          </Routes>
           <Footer />
         </>
       )}
