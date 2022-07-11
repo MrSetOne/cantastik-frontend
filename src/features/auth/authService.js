@@ -44,6 +44,7 @@ const logout = async() => {
 };
 
 const updateUser = async(data) => {
+    console.log(data)
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.put(`${API_URL}/users/modify`, data, {
         headers: {

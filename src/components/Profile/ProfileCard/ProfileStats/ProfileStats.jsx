@@ -1,12 +1,15 @@
-import { Modal } from "antd";
+import { Avatar, Button, Empty, Modal } from "antd";
 import { useState } from "react";
 
 import "./ProfileStats.scss";
 
 const ProfileStats = ({ stats }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showable, setShowable] = useState("followers");
 
-  const showModal = () => {
+  const showModal = async (content) => {
+    await setShowable(content);
+    console.log(`mostramos ${showable}`);
     setIsModalVisible(true);
   };
 
@@ -17,9 +20,33 @@ const ProfileStats = ({ stats }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  const allFollowers = stats.followers.map((element) => {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        {element.img ? (
+          <Avatar src={`http://localhost:8080/porfile/${element.img}`} />
+        ) : (
+          <Avatar>{element.username.substring(0, 1)}</Avatar>
+        )}
+        <h1 style={{ flex: 1 }}>{element.username}</h1>
+        <Button type="primary">FollowSys</Button>
+      </div>
+    );
+  });
 
-  //Peleate con el mapeo de los followers/following (No se poque pollas no funciona òÓ)
-
+  const allFollowing = stats.following.map((element) => {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        {element.img ? (
+          <Avatar src={`http://localhost:8080/porfile/${element.img}`} />
+        ) : (
+          <Avatar>{element.username.substring(0, 1)}</Avatar>
+        )}
+        <h1 style={{ flex: 1 }}>{element.username}</h1>
+        <Button type="primary">FollowSys</Button>
+      </div>
+    );
+  });
   return (
     <>
       <section className="ProfileStats">
@@ -27,7 +54,7 @@ const ProfileStats = ({ stats }) => {
           <h3>Followers</h3>
           <h4>{stats.followers.length}</h4>
         </div>
-        <div>
+        <div onClick={() => showModal("following")}>
           <h3>Following</h3>
           <h4>{stats.following.length}</h4>
         </div>
@@ -41,8 +68,23 @@ const ProfileStats = ({ stats }) => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        footer={[
+          <Button key="back" type="primary" onClick={handleCancel}>
+            Return
+          </Button>,
+        ]}
       >
-        {/* {allFollowers} */}
+        {showable === "followers" ? (
+          stats.followers.length !== 0 ? (
+            allFollowers
+          ) : (
+            <Empty />
+          )
+        ) : stats.following.length !== 0 ? (
+          allFollowing
+        ) : (
+          <Empty />
+        )}
       </Modal>
     </>
   );

@@ -12,7 +12,12 @@ const ProfileCard = ({ target }) => {
         <EditProfileInfo setEdit={setEdit} />
       ) : (
         <ProfileInfo
-          info={{ username: target.username, img: target.img, _id: target._id }}
+          info={{
+            username: target.username,
+            img: target.img,
+            _id: target._id,
+            bio: target.bio,
+          }}
           setEdit={setEdit}
         />
       )}

@@ -113,6 +113,7 @@ export const authSlice = createSlice({
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.user.username = action.payload.updatedUser.username;
                 state.user.img = action.payload.updatedUser.img;
+                state.user.bio = action.payload.updatedUser.bio;
             })
             .addCase(doAFollow.fulfilled, (state, action) => {
                 state.user.following = action.payload.follower.following

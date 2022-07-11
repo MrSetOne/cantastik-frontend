@@ -21,7 +21,7 @@ const EditProfileInfo = ({ setEdit }) => {
   const onFinish = async (values) => {
     let formData = new FormData();
     formData.append("username", values.username);
-    // formData.append("body", values.body);
+    formData.append("bio", values.bio);
     if (image[0]) {
       formData.append("img", image[0]);
     }
@@ -77,12 +77,9 @@ const EditProfileInfo = ({ setEdit }) => {
         <Form.Item
           label="Bio"
           name="bio"
-          rules={[
-            { required: true, message: "Siempre tienes que tener un username" },
-          ]}
-          initialValue={user.username}
+          initialValue={user.bio ? user.bio : null}
         >
-          <TextArea placeholder={user.username} />
+          <TextArea placeholder={user.bio ? user.bio : "Añade una bio"} />
         </Form.Item>
         <Form.Item noStyle={false} className={"EditProfileInfo--Btns"}>
           <Button

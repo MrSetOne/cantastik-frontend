@@ -5,6 +5,8 @@ import "./ProfileInfo.scss";
 const ProfileInfo = ({ info, setEdit }) => {
   const { user } = useSelector((state) => state.auth);
 
+  console.log(info);
+
   return (
     <section className="ProfileInfo">
       <div className="ProfileInfo__Top">
@@ -25,10 +27,7 @@ const ProfileInfo = ({ info, setEdit }) => {
           <Button type="primary">Follow(NW)</Button> //*AQUI VA UN BOOLEANO CON EL SISTEMA DE FOLLOW
         )}
       </div>
-      <p>
-        Aquí iría la descripcion que quisiera poner el usuario, esta
-        funcionalidad un no está disponible en el backEnd
-      </p>
+      <p>{info.bio}</p>
     </section>
   );
 };
