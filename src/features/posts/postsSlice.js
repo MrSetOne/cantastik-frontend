@@ -3,6 +3,7 @@ import postsService from "./postsService";
 
 const initialState = {
     posts: [],
+    authorPosts: [],
     isLoading: false,
     post: {},
     countTotalPosts: 0,
@@ -127,14 +128,14 @@ export const postsSlice = createSlice({
             })
             .addCase(addComment.fulfilled, (state, action) => {
                 action.payload.newComment.author = action.payload.author
-                if (!action.meta.arg.i) {
+                if (!action.meta.arg.i && action.meta.arg.i !== 0) {
                     state.post.comments.push(action.payload.newComment)
                 } else {
                     state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
                 }
             })
             .addCase(getPostsByAuthor.fulfilled, (state, action) => {
-                state.posts = action.payload
+                state.authorPosts = action.payload
             })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.posts = [action.payload.newPost, ...state.posts]

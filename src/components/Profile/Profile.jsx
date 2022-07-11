@@ -12,30 +12,22 @@ const Profile = () => {
   const { id } = useParams();
 
   const { userDisplayed } = useSelector((state) => state.users);
-  const { posts } = useSelector((state) => state.posts);
-  const { user } = useSelector((state) => state.auth);
+  const { authorPosts } = useSelector((state) => state.posts);
   const [load, setLoad] = useState(false);
   const [target, setTarget] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loadInfo = async () => {
-    if (user._id === id) {
-      setTarget(user);
-      await dispatch(getPostsByAuthor(id));
-      setLoad(true);
-    } else {
-      setLoad(false);
-      await dispatch(getById(id));
-      await dispatch(getPostsByAuthor(id));
-      setTarget(userDisplayed);
-      setLoad(true);
-    }
+    setLoad(false);
+    await dispatch(getById(id));
+    await dispatch(getPostsByAuthor(id));
+    setLoad(true);
   };
 
   useEffect(() => {
-    setTarget(user);
-  }, [user]);
+    setTarget(userDisplayed);
+  }, [userDisplayed]);
 
   useEffect(() => {
     setLoad(false);
@@ -70,7 +62,7 @@ const Profile = () => {
     return (
       <section className="Profile">
         <ProfileCard target={target} />
-        <ProfilePosts posts={posts} />
+        <ProfilePosts posts={authorPosts} />
       </section>
     );
   } else {
