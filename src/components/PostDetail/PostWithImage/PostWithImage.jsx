@@ -7,27 +7,22 @@ const PostWithImage = () => {
   const { post } = useSelector((state) => state.posts);
 
   return (
-    <div className="PostWithImage">
-      <Link to={`/profile/${post.userId._id}`}>
-        {post.userId.img ? (
-          <div>
-            <Avatar src={`http://localhost:8080/porfile/${post.userId.img}`} />
-            <h2>{post.userId.username}</h2>
-          </div>
-        ) : (
-          <div>
-            <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
-            <h2>{post.userId.username}</h2>
-          </div>
-        )}
-      </Link>
+    <div
+      className="PostWithImage"
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
       <img
         src={`http://localhost:8080/postsImgs/${post.img}`}
         className="Post__Img"
         style={{ width: "100%" }}
       />
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
+      <h2 style={{ fontSize: "3.5rem" }}>{post.title}</h2>
+      <p style={{ fontSize: "2rem" }}>{post.body}</p>
     </div>
   );
 };

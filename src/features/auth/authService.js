@@ -44,7 +44,6 @@ const logout = async() => {
 };
 
 const updateUser = async(data) => {
-    console.log(data)
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.put(`${API_URL}/users/modify`, data, {
         headers: {
@@ -76,7 +75,6 @@ const doAnUnfollow = async(target) => {
 
 const verify = async(token) => {
     const res = await axios.get(`${API_URL}/users/confirm/${token}`)
-    console.log(res.data)
     return res.data
 }
 

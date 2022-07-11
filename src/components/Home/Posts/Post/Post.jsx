@@ -70,17 +70,23 @@ const Post = ({ item }) => {
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}
         </Link>
-        <Link to={`/profile/${element.author._id}`}>
-          <h3>{element.author.username}</h3>
-        </Link>
-        <p>{element.comment}</p>
+
+        <p>
+          <Link
+            style={{ color: "black", fontWeight: 700 }}
+            to={`/profile/${element.author._id}`}
+          >
+            {element.author.username}
+          </Link>{" "}
+          {element.comment}
+        </p>
       </div>
     );
   });
 
   const likes = item.likes.map((element) => {
     return (
-      <div className="Likes__item">
+      <div className="Likes__item" style={{ marginBottom: "1rem" }}>
         <div className="Likes__item--info">
           <Link to={`/profile/${element._id}`}>
             {element.img ? (
@@ -93,15 +99,32 @@ const Post = ({ item }) => {
             <h3>{element.username}</h3>
           </Link>
         </div>
-        <Button key="back" onClick={handleClose} type="primary" size="small">
-          Follow(NotWorking)
-        </Button>
+        {user._id === element._id ? null : user.following.some(
+            (objetive) => objetive._id === element._id
+          ) ? (
+          <Button
+            size="small"
+            onClick={() => dispatch(doAnUnfollow(element._id))}
+          >
+            Dejar se seguir
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => {
+              dispatch(doAFollow(element._id));
+            }}
+          >
+            Seguir
+          </Button>
+        )}
       </div>
     );
   });
 
   return (
-    <article className="Post" key={item._id}>
+    <article className="Post" key={item._id} style={{ marginBottom: "2rem" }}>
       <div className="Post__Author">
         <Link
           to={`/profile/${item.userId._id}`}

@@ -5,8 +5,6 @@ import "./ProfileInfo.scss";
 const ProfileInfo = ({ info, setEdit }) => {
   const { user } = useSelector((state) => state.auth);
 
-  console.log(info);
-
   return (
     <section className="ProfileInfo">
       <div className="ProfileInfo__Top">

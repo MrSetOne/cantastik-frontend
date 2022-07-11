@@ -20,7 +20,7 @@ const CommentsDetail = ({ comments, postId }) => {
 
   const printComments = comments.map((element) => {
     return (
-      <div key={element._id}>
+      <div key={element._id} style={{ display: "flex", gap: "1rem" }}>
         <Link to={`/profile/${element.author._id}`}>
           {element.author.img ? (
             <Avatar
@@ -30,20 +30,37 @@ const CommentsDetail = ({ comments, postId }) => {
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}
         </Link>
-        <Link to={`/profile/${element.author._id}`}>
-          <h3>{element.author.username}</h3>
-        </Link>
-        <p>{element.comment}</p>
+
+        <p style={{ marginTop: ".5rem" }}>
+          <Link
+            style={{ color: "black", fontWeight: 700 }}
+            to={`/profile/${element.author._id}`}
+          >
+            {element.author.username}
+          </Link>{" "}
+          {element.comment}
+        </p>
       </div>
     );
   });
 
   return (
-    <div className="CommentsDetail">
+    <div className="CommentsDetail" style={{ width: "100%" }}>
       {comments.length !== 0 ? (
-        <div className="Comments__Container">{printComments}</div>
+        <div
+          className="Comments__Container"
+          style={{
+            overflow: "auto",
+            height: "calc(100vh - 30rem)",
+            marginBottom: "1rem",
+            paddingRight: "1rem",
+          }}
+        >
+          {printComments}
+        </div>
       ) : (
         <Empty
+          style={{ height: "calc(100vh - 30rem)" }}
           description={
             <span>
               Nadie ha comentado aun en este post,

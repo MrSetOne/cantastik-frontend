@@ -59,7 +59,6 @@ const PostFormImg = ({ setImage, image, imageUrl, setImageUrl }) => {
       beforeUpload={beforeUpload}
       onChange={handleChange}
       multiple={false}
-      onRemove={() => console.log("holi")}
     >
       {imageUrl ? (
         <img

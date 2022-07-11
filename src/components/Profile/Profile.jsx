@@ -29,7 +29,6 @@ const Profile = () => {
       await dispatch(getById(id));
       await dispatch(getPostsByAuthor(id));
       setTarget(userDisplayed);
-      console.log(target);
       setLoad(true);
     }
   };
@@ -45,7 +44,6 @@ const Profile = () => {
 
   if (load) {
     if (!target.username) {
-      console.log(target.username);
       setTimeout(() => {
         navigate("/");
       }, 10000);

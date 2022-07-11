@@ -8,7 +8,16 @@ const PostInteractions = ({ likes, comments, postId }) => {
   const [show, setShow] = useState("comments");
 
   return (
-    <div className="PostInteractions">
+    <div
+      className="PostInteractions"
+      style={{
+        width: "35rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "1rem",
+      }}
+    >
       <Segmented
         options={[
           { value: "comments", icon: <MessageOutlined /> },
@@ -16,73 +25,13 @@ const PostInteractions = ({ likes, comments, postId }) => {
         ]}
         value={show}
         onChange={setShow}
+        style={{ marginTop: "1rem" }}
       />
       {show === "comments" ? (
         <CommentsDetail comments={comments} postId={postId} />
       ) : (
         <LikesDetail likes={likes} postId={postId} />
       )}
-      {/* <div className="Post__ModalItem--comments">
-           {item.comments.length !== 0 ? (
-            <div className="Comments__Container">{comments}</div>
-          ) : (
-            <Empty
-              description={
-                <span>
-                  Nadie ha comentado aun en este post,
-                  <br />
-                  <b>¡Se el primero en hacerlo!</b>
-                </span>
-              }
-            />
-          )}
-          <form style={{ display: "flex" }} onSubmit={(e) => sendComment(e)}>
-            <Input
-              placeholder="Escribe tu comentario"
-              bordered={false}
-              name="comment"
-              value={commentValue}
-              onChange={(e) => setCommentValue(e.target.value)}
-              prefix={<MessageOutlined />}
-            />
-            <Button type="primary" icon={<SendOutlined />} htmlType="submit" />
-          </form>
-        </div>
-      ) : (
-        <div className="Post__ModalItem--likes">
-          {item.likes.length !== 0 ? (
-            <div className="Likes__Container">{likes}</div>
-          ) : (
-            <Empty
-              description={
-                <span>
-                  Nadie ha dado me gusta aun en este post, <br></br>{" "}
-                  <b>¡Se el primero en hacerlo!</b>
-                </span>
-              }
-            />
-          )}
-          {user.likedPosts.includes(item._id) ? (
-            <Button
-              style={{ position: "absolute", bottom: 0, right: 0 }}
-              type="primary"
-              icon={<HeartFilled />}
-              onClick={() => doAnUnlike()}
-            >
-              Quitar like
-            </Button>
-          ) : (
-            <Button
-              style={{ position: "absolute", bottom: 0, right: 0 }}
-              type="primary"
-              icon={<HeartFilled />}
-              onClick={() => doALike()}
-            >
-              Dar Like
-            </Button>
-          )}
-        </div>
-      )} */}
     </div>
   );
 };

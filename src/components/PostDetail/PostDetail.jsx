@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { getById } from "../../features/users/usersSlice";
 import { getPostsByAuthor, getPostById } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Result } from "antd";
+import { Avatar, Button, Result } from "antd";
 import PostWithImage from "./PostWithImage/PostWithImage";
 import PostJustText from "./PostJustText/PostJustText";
 import PostInteractions from "./PostInteractions/PostInteractions";
@@ -57,31 +57,68 @@ const Profile = () => {
       );
     }
     return (
-      <section className="Profile">
-        {edit ? (
-          <EditPostDetail
-            title={post.title}
-            body={post.body}
-            _id={post._id}
-            setEdit={setEdit}
-          />
-        ) : post.userId._id === user._id ? (
-          <Button type="primary" size="small" onClick={() => setEdit(true)}>
-            Editar
-          </Button>
-        ) : (
-          <Button type="primary" size="small">
-            Follow(NW)
-          </Button>
-        )}
-        {edit ? null : post.img ? <PostWithImage /> : <PostJustText />}
-        {edit ? null : (
-          <PostInteractions
-            likes={post.likes}
-            comments={post.comments}
-            postId={post._id}
-          />
-        )}
+      <section
+        style={{
+          minHeight: "calc(100vh - 7rem)",
+        }}
+      >
+        <div className="Profile" style={{ width: "min( 95vw, 150rem )" }}>
+          <div
+            style={{
+              display: "flex",
+              borderBottom: "1px solid gray",
+              paddingBottom: "1rem",
+            }}
+          >
+            <Link
+              to={`/profile/${post.userId._id}`}
+              style={{ display: "flex", flex: 1, gap: "1rem" }}
+            >
+              {post.userId.img ? (
+                <Avatar
+                  src={`http://localhost:8080/porfile/${post.userId.img}`}
+                />
+              ) : (
+                <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
+              )}
+              <h2>{post.userId.username}</h2>
+            </Link>
+            {post.userId._id === user._id ? (
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => setEdit(!edit)}
+              >
+                {edit ? "Volver" : "Editar"}
+              </Button>
+            ) : (
+              <Button type="primary" size="small">
+                Follow(NW)
+              </Button>
+            )}
+          </div>
+          <div style={{ display: "flex", gap: "2rem" }}>
+            {edit ? (
+              <EditPostDetail
+                title={post.title}
+                body={post.body}
+                _id={post._id}
+                setEdit={setEdit}
+              />
+            ) : post.img ? (
+              <PostWithImage />
+            ) : (
+              <PostJustText />
+            )}
+            {edit ? null : (
+              <PostInteractions
+                likes={post.likes}
+                comments={post.comments}
+                postId={post._id}
+              />
+            )}
+          </div>
+        </div>
       </section>
     );
   } else {

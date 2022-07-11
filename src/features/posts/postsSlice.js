@@ -105,32 +105,32 @@ export const postsSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(getPosts.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.posts = [...state.posts, ...action.payload.allPosts]
                 state.countTotalPosts = action.payload.count
                 state.currentPage = state.currentPage + 1
                 state.isLoading = false;
             })
             .addCase(like.fulfilled, (state, action) => {
-                if (action.meta.arg.i !== "") {
-                    state.posts[action.meta.arg.i].likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
-                } else {
+                if (!action.meta.arg.i && action.meta.arg.i !== 0) {
                     state.post.likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
+
+                } else {
+                    state.posts[action.meta.arg.i].likes.push({ _id: action.payload.user._id, username: action.payload.user.username, img: action.payload.user.img })
                 }
             })
             .addCase(unlike.fulfilled, (state, action) => {
-                if (action.meta.arg.i !== "") {
-                    state.posts[action.meta.arg.i].likes = state.posts[action.meta.arg.i].likes.filter(item => item._id !== action.payload.user)
-                } else {
+                if (!action.meta.arg.i && action.meta.arg.i !== 0) {
                     state.post.likes = state.post.likes.filter(item => item._id !== action.payload.user)
+                } else {
+                    state.posts[action.meta.arg.i].likes = state.posts[action.meta.arg.i].likes.filter(item => item._id !== action.payload.user)
                 }
             })
             .addCase(addComment.fulfilled, (state, action) => {
                 action.payload.newComment.author = action.payload.author
-                if (action.meta.arg.i !== "") {
-                    state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
-                } else {
+                if (!action.meta.arg.i) {
                     state.post.comments.push(action.payload.newComment)
+                } else {
+                    state.posts[action.meta.arg.i].comments.push(action.payload.newComment)
                 }
             })
             .addCase(getPostsByAuthor.fulfilled, (state, action) => {

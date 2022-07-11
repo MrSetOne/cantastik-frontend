@@ -11,8 +11,6 @@ const Home = () => {
   const { isLoading, posts } = useSelector((state) => state.posts);
   const { user } = useSelector((state) => state.auth);
 
-  console.log(user);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

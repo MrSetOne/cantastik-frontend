@@ -37,6 +37,7 @@ const EditPostDetail = ({ title, body, _id, setEdit }) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        style={{ marginTop: "2.5rem" }}
       >
         <Form.Item label="Titulo" name="title" initialValue={title}>
           <Input />

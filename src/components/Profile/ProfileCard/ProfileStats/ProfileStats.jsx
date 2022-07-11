@@ -9,7 +9,6 @@ const ProfileStats = ({ stats }) => {
 
   const showModal = async (content) => {
     await setShowable(content);
-    console.log(`mostramos ${showable}`);
     setIsModalVisible(true);
   };
 
