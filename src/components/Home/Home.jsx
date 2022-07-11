@@ -5,9 +5,13 @@ import Posts from "./Posts/Posts";
 import "./Home.scss";
 import { BackTop, Button } from "antd";
 import { UpCircleOutlined } from "@ant-design/icons";
+import Wellcomer from "./Wellcomer/Wellcomer";
 
 const Home = () => {
   const { isLoading, posts } = useSelector((state) => state.posts);
+  const { user } = useSelector((state) => state.auth);
+
+  console.log(user);
 
   const dispatch = useDispatch();
 
@@ -29,7 +33,7 @@ const Home = () => {
           <div></div>
         </div>
       </div>
-      {posts ? <Posts /> : null}
+      {user.firstVisit ? <Wellcomer /> : posts ? <Posts /> : null}
       <BackTop>
         <Button
           type="primary"

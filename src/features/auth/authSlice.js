@@ -80,6 +80,14 @@ export const verify = createAsyncThunk('auth/verify', async(token, thunkAPI) => 
     }
 })
 
+export const wellcomeEnd = createAsyncThunk('auth/wellcomeEnd', async(thunkAPI) => {
+    try {
+        return await authService.wellcomeEnd()
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -133,7 +141,9 @@ export const authSlice = createSlice({
             .addCase(verify.fulfilled, (state) => {
                 state.isConfirmed = true
             })
-
+            .addCase(wellcomeEnd.fulfilled, (state, action) => {
+                state.user = action.payload.updatedUser
+            })
     },
 });
 export const { addLike, removeLike } = authSlice.actions;

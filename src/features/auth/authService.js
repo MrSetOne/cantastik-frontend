@@ -80,6 +80,16 @@ const verify = async(token) => {
     return res.data
 }
 
+const wellcomeEnd = async() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const res = await axios.put(`${API_URL}/users/firsttime`, {}, {
+        headers: {
+            authorization: token ? token : null
+        },
+    });
+    return res.data
+}
+
 const authService = {
     login,
     newInfo,
@@ -88,7 +98,8 @@ const authService = {
     updateUser,
     doAFollow,
     doAnUnfollow,
-    verify
+    verify,
+    wellcomeEnd
 }
 
 export default authService
