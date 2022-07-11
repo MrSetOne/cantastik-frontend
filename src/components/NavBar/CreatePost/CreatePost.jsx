@@ -1,26 +1,25 @@
-import { Modal , Button} from "antd"
+import { Modal, Button } from "antd";
 import CreatePostForm from "./CreatePostForm/CreatePostForm";
 
-const CreatePost = ({visible, setCreatePostVisible}) => {
+const CreatePost = ({ visible, setCreatePostVisible }) => {
+  const handleCancel = () => {
+    setCreatePostVisible(false);
+  };
 
-    const handleCancel = () => {
-        setCreatePostVisible(false);
-      };
-    
   return (
     <Modal
-    visible={visible}
-    title="Title"
-    onCancel={handleCancel}
-    footer={[
-      <Button key="back" onClick={handleCancel}>
-        Volver
-      </Button>
-    ]}
-  >
-    <CreatePostForm/>
-  </Modal>
-  )
-}
+      visible={visible}
+      title="Title"
+      onCancel={handleCancel}
+      footer={[
+        <Button key="back" onClick={handleCancel}>
+          Volver
+        </Button>,
+      ]}
+    >
+      <CreatePostForm setCreatePostVisible={setCreatePostVisible} />
+    </Modal>
+  );
+};
 
-export default CreatePost
+export default CreatePost;
