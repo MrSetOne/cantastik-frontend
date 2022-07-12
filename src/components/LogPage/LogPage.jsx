@@ -17,14 +17,14 @@ const LogPage = () => {
           transition={{ repeat: Infinity, repeatDelay: 3 }}
           animate={{
             filter: [
-              "drop-shadow(5px 5px 0px #FFFFFF)",
-              "drop-shadow(5px 5px 5px #FFFFFF)",
-              "drop-shadow(5px 5px 0px #FFFFFF)",
-              "drop-shadow(5px 5px 5px #FFFFFF)",
-              "drop-shadow(5px 5px 0px #FFFFFF)",
-              "drop-shadow(5px 5px 5px #FFFFFF)",
-              "drop-shadow(5px 5px 0px #FFFFFF)",
-              "drop-shadow(5px 5px 5px #FFFFFF)",
+              "drop-shadow(5px 0px 0px #FFFFFF)",
+              "drop-shadow(-1px 0px 5px #FFFFFF)",
+              "drop-shadow(5px -1px 0px #FFFFFF)",
+              "drop-shadow(-3px 2px 5px #FFFFFF)",
+              "drop-shadow(5px 1px 0px #FFFFFF)",
+              "drop-shadow(-5px 0px 5px #FFFFFF)",
+              "drop-shadow(0px 3px 0px #FFFFFF)",
+              "drop-shadow(2px 1px 5px #FFFFFF)",
               "drop-shadow(5px 5px 5px #000000)",
             ],
           }}
