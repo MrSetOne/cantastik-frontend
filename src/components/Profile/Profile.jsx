@@ -60,12 +60,11 @@ const Profile = () => {
       );
     }
     return (
-      <section
-        className="Profile"
-        style={{ minHeight: "calc(100vh - 5rem - 2rem - 2.2rem )" }}
-      >
-        <ProfileCard target={target} />
-        <ProfilePosts posts={authorPosts} />
+      <section style={{ minHeight: "calc(100vh - 5rem - 2rem - 2.2rem )" }}>
+        <div className="Profile">
+          <ProfileCard target={target} />
+          <ProfilePosts posts={authorPosts} />
+        </div>
       </section>
     );
   } else {
