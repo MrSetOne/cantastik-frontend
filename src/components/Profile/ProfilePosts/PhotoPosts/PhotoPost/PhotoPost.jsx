@@ -50,12 +50,12 @@ const PhotoPost = ({ post }) => {
   };
 
   const doALike = async () => {
-    await dispatch(like({ postId: post._id, i: post.i }));
+    await dispatch(like({ postId: post._id, i: post.i, authorPost: true }));
     await dispatch(addLike(post._id));
   };
 
   const doAnUnlike = async () => {
-    await dispatch(unlike({ postId: post._id, i: post.i }));
+    await dispatch(unlike({ postId: post._id, i: post.i, authorPost: true }));
     await dispatch(removeLike(post._id));
   };
 
@@ -63,7 +63,14 @@ const PhotoPost = ({ post }) => {
     await e.preventDefault();
     const comment = commentValue;
     await setCommentValue("");
-    await dispatch(addComment({ i: post.i, postId: post._id, value: comment }));
+    await dispatch(
+      addComment({
+        i: post.i,
+        postId: post._id,
+        value: comment,
+        authorPost: true,
+      })
+    );
   };
 
   const [value, setValue] = useState("comments");

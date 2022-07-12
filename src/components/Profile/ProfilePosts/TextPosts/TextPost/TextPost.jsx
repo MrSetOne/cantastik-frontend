@@ -56,16 +56,23 @@ const TextPost = ({ post }) => {
     await e.preventDefault();
     const comment = commentValue;
     await setCommentValue("");
-    await dispatch(addComment({ i: post.i, postId: post._id, value: comment }));
+    await dispatch(
+      addComment({
+        i: post.i,
+        postId: post._id,
+        value: comment,
+        authorPost: true,
+      })
+    );
   };
 
   const doALike = async () => {
-    await dispatch(like({ postId: post._id, i: post.i }));
+    await dispatch(like({ postId: post._id, i: post.i, authorPost: true }));
     await dispatch(addLike(post._id));
   };
 
   const doAnUnlike = async () => {
-    await dispatch(unlike({ postId: post._id, i: post.i }));
+    await dispatch(unlike({ postId: post._id, i: post.i, authorPost: true }));
     await dispatch(removeLike(post._id));
   };
 
@@ -87,30 +94,51 @@ const TextPost = ({ post }) => {
 
   const { user } = useSelector((state) => state.auth);
   return (
-    <article className="TextPost" style={{ border: "1px solid gray" }}>
+    <article
+      className="TextPost"
+      style={{ borderTop: "1px solid gray", width: "100%", padding: "2rem" }}
+    >
       <div>
-        {post.userId.img ? (
-          <Avatar size={45} src={`${API_URL}/porfile/${post.userId.img}`} />
-        ) : (
-          <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
-        )}
-        <h2>{post.userId.username}</h2>
-        <h3>{post.title}</h3>
+        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+          {post.userId.img ? (
+            <Avatar size={45} src={`${API_URL}/porfile/${post.userId.img}`} />
+          ) : (
+            <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
+          )}
+          <h2 style={{ fontSize: "3rem" }}>{post.userId.username}</h2>
+        </div>
+        <h3 style={{ fontSize: "2rem" }}>{post.title}</h3>
         <p>{post.body}</p>
       </div>
       <div style={{ display: "flex" }}>
-        <div>
+        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
           {user.likedPosts.includes(post._id) ? (
-            <HeartFilled onClick={() => doAnUnlike()} />
+            <HeartFilled
+              style={{ fontSize: "1.5rem", margin: 0 }}
+              onClick={() => doAnUnlike()}
+            />
           ) : (
-            <HeartOutlined onClick={() => doALike()} />
-          )}{" "}
-          {/* AQUÍ TIENES QUE PONER LA OPCION DE DAR LIKE SIN MÁS */}
-          <p onClick={() => setModal(true)}>{post.likes.length}</p>
-        </div>
-        <div>
-          <MessageOutlined onClick={() => setModal(true)} />
-          <p onClick={() => setModal(true)}>{post.comments.length}</p>
+            <HeartOutlined
+              style={{ fontSize: "1.5rem", margin: 0 }}
+              onClick={() => doALike()}
+            />
+          )}
+          <MessageOutlined
+            style={{ fontSize: "1.5rem", margin: 0 }}
+            onClick={() => setModal(true)}
+          />
+          <p
+            style={{ fontSize: "1.5rem", margin: 0, cursor: "pointer" }}
+            onClick={() => setModal(true)}
+          >
+            {post.likes.length} likes
+          </p>
+          <p
+            style={{ fontSize: "1.5rem", margin: 0, cursor: "pointer" }}
+            onClick={() => setModal(true)}
+          >
+            {post.comments.length} comentarios
+          </p>
         </div>
       </div>
       <Modal
