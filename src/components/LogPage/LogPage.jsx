@@ -36,10 +36,28 @@ const LogPage = () => {
             <motion.div
               style={{ position: "absolute", width: "70%" }}
               key={"signUp"}
-              initial={{ x: 0, zIndex: 9 }}
-              animate={{ zIndex: 10, transition: { delay: 0.5 } }}
-              transition={{ duration: 1 }}
-              exit={{ x: [0, -370, 0], zIndex: 10 }}
+              initial={{
+                x: 0,
+                zIndex: 9,
+                boxShadow: "none",
+              }}
+              animate={{
+                zIndex: 10,
+                transition: { delay: 0.6 },
+              }}
+              transition={{ duration: 1.2 }}
+              exit={{
+                x: [0, -370, 0],
+                boxShadow: [
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                  "19px 19px 15px 0px rgba(0,0,0,0.45)",
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                ],
+                scale: [1, 1.13, 1, 1],
+                zIndex: 10,
+              }}
             >
               <SignUp />
             </motion.div>
@@ -48,10 +66,29 @@ const LogPage = () => {
             <motion.div
               style={{ position: "absolute", width: "70%" }}
               key={"logIn"}
-              initial={{ x: 0, zIndex: 9 }}
-              animate={{ zIndex: 10, transition: { delay: 0.5 } }}
-              transition={{ type: "spring", bounce: 1, duration: 1 }}
-              exit={{ x: [0, -370, 0], zIndex: 10 }}
+              initial={{
+                x: 0,
+                zIndex: 9,
+                boxShadow: "none",
+              }}
+              animate={{
+                zIndex: 10,
+                transition: { delay: 0.6 },
+              }}
+              transition={{ type: "spring", bounce: 1, duration: 1.2 }}
+              exit={{
+                x: [0, -370, 0],
+                boxShadow: [
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                  "19px 19px 15px 0px rgba(0,0,0,0.45)",
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                  "0px 0px 0px 0px rgba(0,0,0,0)",
+                ],
+                scale: [1, 1.13, 1, 1],
+
+                zIndex: 10,
+              }}
             >
               <Login />
             </motion.div>
