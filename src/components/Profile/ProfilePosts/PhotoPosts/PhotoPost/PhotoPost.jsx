@@ -24,6 +24,7 @@ import {
 import { addLike, removeLike } from "../../../../../features/auth/authSlice";
 import "./PhotoPost.scss";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const PhotoPost = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
@@ -105,7 +106,7 @@ const PhotoPost = ({ post }) => {
   });
 
   return (
-    <div>
+    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <div
         onClick={() => showModal()}
         className="PhotoPost"
@@ -256,7 +257,7 @@ const PhotoPost = ({ post }) => {
           </div>
         </div>
       </Modal>
-    </div>
+    </motion.div>
   );
 };
 
