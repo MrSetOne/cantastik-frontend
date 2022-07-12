@@ -10,6 +10,8 @@ import {
   doAnUnfollow,
 } from "../../../../features/auth/authSlice";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const LikesDetail = ({ likes, postId }) => {
   const { user } = useSelector((state) => state.auth);
 
@@ -39,7 +41,7 @@ const LikesDetail = ({ likes, postId }) => {
       >
         <Link to={`/profile/${like._id}`}>
           {like.img ? (
-            <Avatar src={`http://localhost:8080/porfile/${like.img}`} />
+            <Avatar src={`${API_URL}/porfile/${like.img}`} />
           ) : (
             <Avatar>{like.username.substring(0, 1)}</Avatar>
           )}

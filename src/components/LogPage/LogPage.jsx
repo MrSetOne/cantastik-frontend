@@ -4,7 +4,6 @@ import SignUp from "./SignUp/SignUp";
 import "./LogPage.scss";
 import cantastikGraff from "../../assets/Cantastikgraff.png";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
 
 const LogPage = () => {
   const { needSignUp } = useSelector((state) => state.interfaces);

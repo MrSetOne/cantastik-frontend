@@ -26,6 +26,8 @@ import "./PhotoPost.scss";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const PhotoPost = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
 
@@ -74,9 +76,7 @@ const PhotoPost = ({ post }) => {
           author={comment.author.username}
           avatar={
             comment.author.img ? (
-              <Avatar
-                src={`http://localhost:8080/porfile/${comment.author.img}`}
-              />
+              <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
             ) : (
               <Avatar>{comment.author.username.substring(0, 1)}</Avatar>
             )
@@ -94,7 +94,7 @@ const PhotoPost = ({ post }) => {
       <>
         <div style={{ display: "flex" }}>
           {like.img ? (
-            <Avatar src={`http://localhost:8080/porfile/${like.img}`} />
+            <Avatar src={`${API_URL}/porfile/${like.img}`} />
           ) : (
             <Avatar>{like.username.substring(0, 1)}</Avatar>
           )}
@@ -112,7 +112,7 @@ const PhotoPost = ({ post }) => {
         className="PhotoPost"
         key={post._id}
         style={{
-          backgroundImage: `url("http://localhost:8080/postsImgs/${post.img}")`,
+          backgroundImage: `url("${API_URL}/postsImgs/${post.img}")`,
         }}
       >
         <div className="PhotoPost__info">
@@ -136,9 +136,7 @@ const PhotoPost = ({ post }) => {
         title={
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             {post.userId.img ? (
-              <Avatar
-                src={`http://localhost:8080/porfile/${post.userId.img}`}
-              />
+              <Avatar src={`${API_URL}/porfile/${post.userId.img}`} />
             ) : (
               <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
             )}
@@ -151,10 +149,7 @@ const PhotoPost = ({ post }) => {
       >
         <div className="ModalPost__Container">
           <div className="ModalPost__Content" style={{ flex: 1 }}>
-            <img
-              src={`http://localhost:8080/postsImgs/${post.img}`}
-              alt={post.title}
-            />
+            <img src={`${API_URL}/postsImgs/${post.img}`} alt={post.title} />
             <h2>{post.title}</h2>
             <p>{post.body}</p>
             <Button

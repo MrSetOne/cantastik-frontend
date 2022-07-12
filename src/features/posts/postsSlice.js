@@ -16,6 +16,7 @@ export const getPosts = createAsyncThunk("post/GetPosts", async(page, thunkAPI) 
         }
         return await postsService.getPosts(page)
     } catch (error) {
+        console.log(error)
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });

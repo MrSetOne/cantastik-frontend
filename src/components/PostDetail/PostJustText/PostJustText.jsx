@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Avatar } from "antd";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const PostJustText = () => {
   const { post } = useSelector((state) => state.posts);
 
@@ -26,10 +28,7 @@ const PostJustText = () => {
           }}
         >
           {post.userId.img ? (
-            <Avatar
-              size={200}
-              src={`http://localhost:8080/porfile/${post.userId.img}`}
-            />
+            <Avatar size={200} src={`${API_URL}/porfile/${post.userId.img}`} />
           ) : (
             <Avatar size={200}>{post.userId.username.substring(0, 1)}</Avatar>
           )}

@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addComment } from "../../../../features/posts/postsSlice";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const CommentsDetail = ({ comments, postId }) => {
   const dispatch = useDispatch();
 
@@ -23,9 +25,7 @@ const CommentsDetail = ({ comments, postId }) => {
       <div key={element._id} style={{ display: "flex", gap: "1rem" }}>
         <Link to={`/profile/${element.author._id}`}>
           {element.author.img ? (
-            <Avatar
-              src={`http://localhost:8080/porfile/${element.author.img}`}
-            />
+            <Avatar src={`${API_URL}/porfile/${element.author.img}`} />
           ) : (
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}

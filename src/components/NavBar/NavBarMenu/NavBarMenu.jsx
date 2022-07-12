@@ -9,6 +9,8 @@ import {
 import { logout } from "../../../features/auth/authSlice";
 import { Link } from "react-router-dom";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const NavBarMenu = () => {
   const { user } = useSelector((state) => state.auth);
 
@@ -41,7 +43,7 @@ const NavBarMenu = () => {
         <a onClick={(e) => e.preventDefault()}>
           <Space>
             {user.img ? (
-              <Avatar src={`http://localhost:8080/porfile/${user.img}`} />
+              <Avatar src={`${API_URL}/porfile/${user.img}`} />
             ) : (
               <Avatar>{user.username.substring(0, 1)}</Avatar>
             )}

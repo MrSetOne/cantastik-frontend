@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const API_URL = "http://localhost:8080"
+const API_URL = process.env.REACT_APP_API_URL
 
-const token = JSON.parse(localStorage.getItem("token"));
 
 const getPosts = async(page) => {
+    const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.get(`${API_URL}/posts/?page=${page}`, {
         headers: {
             authorization: token ? token : null
@@ -14,6 +14,8 @@ const getPosts = async(page) => {
 }
 
 const doALike = async({ postId }) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     const res = await axios.put(`${API_URL}/posts/like/id/${postId}`, {}, {
         headers: {
             authorization: token ? token : null
@@ -23,6 +25,8 @@ const doALike = async({ postId }) => {
 }
 
 const doAnUnlike = async({ postId }) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+
     const res = await axios.put(`${API_URL}/posts/unlike/id/${postId}`, {}, {
         headers: {
             authorization: token ? token : null

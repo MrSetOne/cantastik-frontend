@@ -9,6 +9,8 @@ import PostInteractions from "./PostInteractions/PostInteractions";
 import EditPostDetail from "./EditPostDetail/EditPostDetail";
 import { doAFollow, doAnUnfollow } from "../../features/auth/authSlice";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Profile = () => {
   const { id } = useParams();
 
@@ -75,9 +77,7 @@ const Profile = () => {
               style={{ display: "flex", flex: 1, gap: "1rem" }}
             >
               {post.userId.img ? (
-                <Avatar
-                  src={`http://localhost:8080/porfile/${post.userId.img}`}
-                />
+                <Avatar src={`${API_URL}/porfile/${post.userId.img}`} />
               ) : (
                 <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
               )}

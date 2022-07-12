@@ -2,6 +2,7 @@ import { Avatar, Button, Empty, Modal } from "antd";
 import { useState } from "react";
 
 import "./ProfileStats.scss";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const ProfileStats = ({ stats }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,7 +24,7 @@ const ProfileStats = ({ stats }) => {
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         {element.img ? (
-          <Avatar src={`http://localhost:8080/porfile/${element.img}`} />
+          <Avatar src={`${API_URL}/porfile/${element.img}`} />
         ) : (
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}
@@ -37,7 +38,7 @@ const ProfileStats = ({ stats }) => {
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         {element.img ? (
-          <Avatar src={`http://localhost:8080/porfile/${element.img}`} />
+          <Avatar src={`${API_URL}/porfile/${element.img}`} />
         ) : (
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}

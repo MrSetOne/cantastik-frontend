@@ -23,6 +23,8 @@ import "./Post.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Post = ({ item }) => {
   const { user } = useSelector((state) => state.auth);
   // const { posts} = useSelector((state)=>state.posts) //Esto lo puedo utilizar mas adelante para indicar que no hay ningun post (Ofrecer seguir a alguien)
@@ -64,9 +66,7 @@ const Post = ({ item }) => {
       <div key={element._id}>
         <Link to={`/profile/${element.author._id}`}>
           {element.author.img ? (
-            <Avatar
-              src={`http://localhost:8080/porfile/${element.author.img}`}
-            />
+            <Avatar src={`${API_URL}/porfile/${element.author.img}`} />
           ) : (
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}
@@ -91,7 +91,7 @@ const Post = ({ item }) => {
         <div className="Likes__item--info">
           <Link to={`/profile/${element._id}`}>
             {element.img ? (
-              <Avatar src={`http://localhost:8080/porfile/${element.img}`} />
+              <Avatar src={`${API_URL}/porfile/${element.img}`} />
             ) : (
               <Avatar>{element.username.substring(0, 1)}</Avatar>
             )}
@@ -140,7 +140,7 @@ const Post = ({ item }) => {
           className="Post__Author--links"
         >
           {item.userId.img ? (
-            <Avatar src={`http://localhost:8080/porfile/${item.userId.img}`} />
+            <Avatar src={`${API_URL}/porfile/${item.userId.img}`} />
           ) : (
             <Avatar>{item.userId.username.substring(0, 1)}</Avatar>
           )}
@@ -177,10 +177,7 @@ const Post = ({ item }) => {
       </div>
       <Link to={`/post/${item._id}`} style={{ color: "black" }}>
         {item.img ? (
-          <img
-            src={`http://localhost:8080/postsImgs/${item.img}`}
-            className="Post__Img"
-          />
+          <img src={`${API_URL}/postsImgs/${item.img}`} className="Post__Img" />
         ) : null}
         <div className="Post__Text">
           <h3>{item.title}</h3>

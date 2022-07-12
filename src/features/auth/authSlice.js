@@ -8,10 +8,10 @@ const initialState = {
     user: user ? user : null,
     token: token ? token : null,
     isLoading: false,
-    isConfirmed: false
-        //   isError: false,
-        //   isSuccess: false,
-        //   message: "",
+    isConfirmed: false,
+    isError: false,
+    isSuccess: false,
+    message: "",
 };
 
 
@@ -36,7 +36,6 @@ export const signup = createAsyncThunk("auth/register", async(user, thunkAPI) =>
     try {
         return await authService.signup(user);
     } catch (error) {
-        // const message = error.response.data;
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -97,10 +96,24 @@ export const authSlice = createSlice({
         },
         removeLike: (state, action) => {
             state.user.likedPosts = state.user.likedPosts.filter(post => post !== action.payload)
+        },
+        resetNotif: (state) => {
+            state.isError = false;
+            state.isSuccess = false;
+            state.message = ""
         }
     },
     extraReducers: (builder) => {
         builder
+            .addCase(signup.fulfilled, (state, action) => {
+                state.isSuccess = true;
+                state.message = `${action.payload.newUser.username}, solo te queda verificar tu correo: ${action.payload.newUser.email}, `
+            })
+            .addCase(signup.rejected, (state, action) => {
+                console.log(action)
+                state.isError = true;
+                state.message = action.payload.message;
+            })
             .addCase(login.pending, (state, action) => {
                 state.isLoading = true
             })
@@ -108,13 +121,11 @@ export const authSlice = createSlice({
                 state.user = action.payload.loggedUser;
                 state.token = action.payload.token
                 state.isLoading = false;
-                // state.isSuccess = true;
-                // state.message = action.payload.message;
+
             })
             .addCase(login.rejected, (state) => {
                 state.isLoading = false;
-                // state.isError = true;
-                // state.message = action.payload;
+
             })
             .addCase(logout.pending, (state) => {
                 state.isLoading = true
@@ -146,6 +157,6 @@ export const authSlice = createSlice({
             })
     },
 });
-export const { addLike, removeLike } = authSlice.actions;
+export const { addLike, removeLike, resetNotif } = authSlice.actions;
 
 export default authSlice.reducer;

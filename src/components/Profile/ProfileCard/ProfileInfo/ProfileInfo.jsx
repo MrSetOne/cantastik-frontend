@@ -2,6 +2,8 @@ import { Avatar, Button } from "antd";
 import { useSelector } from "react-redux";
 import "./ProfileInfo.scss";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const ProfileInfo = ({ info, setEdit }) => {
   const { user } = useSelector((state) => state.auth);
 
@@ -9,10 +11,7 @@ const ProfileInfo = ({ info, setEdit }) => {
     <section className="ProfileInfo">
       <div className="ProfileInfo__Top">
         {info.img ? (
-          <Avatar
-            size={100}
-            src={`http://localhost:8080/porfile/${info.img}`}
-          />
+          <Avatar size={100} src={`${API_URL}/porfile/${info.img}`} />
         ) : (
           <Avatar size={100}>{info.username.substring(0, 1)}</Avatar>
         )}

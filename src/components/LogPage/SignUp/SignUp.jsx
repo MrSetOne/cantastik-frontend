@@ -1,11 +1,14 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, notification } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
-import { signup } from "../../../features/auth/authSlice";
+import { signup, resetNotif } from "../../../features/auth/authSlice";
 import "./SignUp.scss";
+import { useEffect } from "react";
 
 const SignUp = () => {
+  const { isError, isSuccess, message } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const onFinish = (values) => {
@@ -15,6 +18,25 @@ const SignUp = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  useEffect(() => {
+    if (isError) {
+      notification.error({ message: "Error", description: message });
+      setTimeout(() => {
+        dispatch(resetNotif());
+      }, 2000);
+    }
+    if (isSuccess) {
+      notification.success({
+        message: "¡Ya casi estamos!",
+        description: message,
+      });
+      dispatch(changeNeedSignUp());
+      setTimeout(() => {
+        dispatch(resetNotif());
+      }, 2000);
+    }
+  }, [isError, isSuccess, message]);
 
   return (
     <article className="SignUp">
