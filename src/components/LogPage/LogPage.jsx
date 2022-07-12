@@ -11,7 +11,24 @@ const LogPage = () => {
   return (
     <section className="LogPage">
       <div className="LogPage__Image">
-        <img src={cantastikGraff} alt="Cantastik" />
+        <motion.img
+          src={cantastikGraff}
+          alt="Cantastik"
+          transition={{ repeat: Infinity, repeatDelay: 3 }}
+          animate={{
+            filter: [
+              "drop-shadow(5px 5px 0px #FFFFFF)",
+              "drop-shadow(5px 5px 5px #FFFFFF)",
+              "drop-shadow(5px 5px 0px #FFFFFF)",
+              "drop-shadow(5px 5px 5px #FFFFFF)",
+              "drop-shadow(5px 5px 0px #FFFFFF)",
+              "drop-shadow(5px 5px 5px #FFFFFF)",
+              "drop-shadow(5px 5px 0px #FFFFFF)",
+              "drop-shadow(5px 5px 5px #FFFFFF)",
+              "drop-shadow(5px 5px 5px #000000)",
+            ],
+          }}
+        />
       </div>
       <div className="LogPage__Forms" style={{ position: "relative" }}>
         <AnimatePresence>
