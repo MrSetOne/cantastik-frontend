@@ -21,14 +21,21 @@ import {
   like,
   unlike,
 } from "../../../../../features/posts/postsSlice";
-import { addLike, removeLike } from "../../../../../features/auth/authSlice";
+import {
+  addLike,
+  removeLike,
+  doAFollow,
+  doAnUnfollow,
+} from "../../../../../features/auth/authSlice";
 import "./PhotoPost.scss";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 const PhotoPost = ({ post }) => {
+  console.log(post);
+
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -83,9 +90,13 @@ const PhotoPost = ({ post }) => {
           author={comment.author.username}
           avatar={
             comment.author.img ? (
-              <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
+              <Link to={`/profile/${comment.author._id}`}>
+                <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
+              </Link>
             ) : (
-              <Avatar>{comment.author.username.substring(0, 1)}</Avatar>
+              <Link to={`/profile/${comment.author._id}`}>
+                <Avatar>{comment.author.username.substring(0, 1)}</Avatar>
+              </Link>
             )
           }
           content={comment.comment}
@@ -99,13 +110,51 @@ const PhotoPost = ({ post }) => {
   const allLikes = post.likes.map((like) => {
     return (
       <>
-        <div style={{ display: "flex" }}>
-          {like.img ? (
-            <Avatar src={`${API_URL}/porfile/${like.img}`} />
+        <div
+          style={{
+            display: "flex",
+            margin: "1rem 0",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Link
+            to={`/profile/${like._id}`}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            {like.img ? (
+              <Avatar src={`${API_URL}/porfile/${like.img}`} />
+            ) : (
+              <Avatar>{like.username.substring(0, 1)}</Avatar>
+            )}
+            <h4 style={{ flex: 1 }}>{like.username}</h4>
+          </Link>
+          {like._id === user._id ? null : user.following.some(
+              (objetive) => objetive._id === like._id
+            ) ? (
+            <Button
+              style={{ width: "min-content" }}
+              size="small"
+              onClick={() => dispatch(doAnUnfollow(like._id))}
+            >
+              Dejar se seguir
+            </Button>
           ) : (
-            <Avatar>{like.username.substring(0, 1)}</Avatar>
+            <Button
+              style={{ width: "min-content" }}
+              type="primary"
+              size="small"
+              onClick={() => {
+                dispatch(doAFollow(like._id));
+              }}
+            >
+              Seguir
+            </Button>
           )}
-          <h4>{like.username}</h4>
         </div>
         <Divider style={{ margin: "0" }} />
       </>
@@ -147,25 +196,55 @@ const PhotoPost = ({ post }) => {
             ) : (
               <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
             )}
-            <h2 style={{ marginBottom: 0 }}>{post.userId.username}</h2>
+            <h2 style={{ marginBottom: 0, flex: 1 }}>{post.userId.username}</h2>
+            {user._id === post.userId._id ? (
+              <Button
+                type="primary"
+                onClick={() => navigate(`/post/${post._id}`)}
+                style={{ width: "min-content", marginRight: "4rem" }}
+              >
+                Editar
+              </Button>
+            ) : user.following.some(
+                (objetive) => objetive._id === post.userId._id
+              ) ? (
+              <Button
+                style={{ width: "min-content", marginRight: "4rem" }}
+                size="small"
+                onClick={() => dispatch(doAnUnfollow(post.userId._id))}
+              >
+                Dejar se seguir
+              </Button>
+            ) : (
+              <Button
+                style={{ width: "min-content", marginRight: "4rem" }}
+                type="primary"
+                size="small"
+                onClick={() => {
+                  dispatch(doAFollow(post.userId._id));
+                }}
+              >
+                Seguir
+              </Button>
+            )}
           </div>
         }
         visible={isModalVisibleUser}
         onOk={() => handleOk()}
         onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Volver
+          </Button>,
+        ]}
       >
         <div className="ModalPost__Container">
           <div className="ModalPost__Content" style={{ flex: 1 }}>
-            <img src={`${API_URL}/postsImgs/${post.img}`} alt={post.title} />
+            <Link to={`/post/${post._id}`}>
+              <img src={`${API_URL}/postsImgs/${post.img}`} alt={post.title} />
+            </Link>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
-            <Button
-              type="primary"
-              onClick={() => navigate(`/post/${post._id}`)}
-              style={{ width: "min-content" }}
-            >
-              Editar
-            </Button>
           </div>
           <div className="ModalPost__Interactions">
             <Segmented

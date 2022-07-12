@@ -4,15 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
 import { signup, resetNotif } from "../../../features/auth/authSlice";
 import "./SignUp.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SignUp = () => {
   const { isError, isSuccess, message } = useSelector((state) => state.auth);
 
+  const [sending, setSending] = useState(false);
+
   const dispatch = useDispatch();
 
-  const onFinish = (values) => {
-    dispatch(signup(values));
+  const onFinish = async (values) => {
+    setSending(true);
+    await dispatch(signup(values));
+    setSending(false);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -154,6 +158,7 @@ const SignUp = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            loading={sending}
           >
             Crear cuenta
           </Button>

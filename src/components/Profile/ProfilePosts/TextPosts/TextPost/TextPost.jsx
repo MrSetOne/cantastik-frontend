@@ -22,6 +22,8 @@ import {
   unlike,
 } from "../../../../../features/posts/postsSlice";
 import { addLike, removeLike } from "../../../../../features/auth/authSlice";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -94,21 +96,33 @@ const TextPost = ({ post }) => {
 
   const { user } = useSelector((state) => state.auth);
   return (
-    <article
+    <motion.article
+      whileHover={{
+        scale: 1.12,
+        boxShadow: "0px 10px 28px 0px rgba(0,0,0,0.31)",
+      }}
       className="TextPost"
-      style={{ borderTop: "1px solid gray", width: "100%", padding: "2rem" }}
+      style={{
+        borderTop: "1px solid gray",
+        borderBottom: "1px solid gray",
+        width: "100%",
+        padding: "2rem",
+        backgroundColor: "white",
+      }}
     >
       <div>
-        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          {post.userId.img ? (
-            <Avatar size={45} src={`${API_URL}/porfile/${post.userId.img}`} />
-          ) : (
-            <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
-          )}
-          <h2 style={{ fontSize: "3rem" }}>{post.userId.username}</h2>
-        </div>
-        <h3 style={{ fontSize: "2rem" }}>{post.title}</h3>
-        <p>{post.body}</p>
+        <Link to={`/post/${post._id}`}>
+          <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+            {post.userId.img ? (
+              <Avatar size={45} src={`${API_URL}/porfile/${post.userId.img}`} />
+            ) : (
+              <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
+            )}
+            <h2 style={{ fontSize: "3rem" }}>{post.userId.username}</h2>
+          </div>
+          <h3 style={{ fontSize: "2rem" }}>{post.title}</h3>
+          <p style={{ color: "black" }}>{post.body}</p>
+        </Link>
       </div>
       <div style={{ display: "flex" }}>
         <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
@@ -247,7 +261,7 @@ const TextPost = ({ post }) => {
           )}
         </div>
       </Modal>
-    </article>
+    </motion.article>
   );
 };
 

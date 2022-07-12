@@ -1,10 +1,11 @@
-import { UploadOutlined } from "@ant-design/icons";
+import { DoubleRightOutlined, UploadOutlined } from "@ant-design/icons";
 import { Form, Button } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser, wellcomeEnd } from "../../../../features/auth/authSlice";
 import PostFormImg from "../../../NavBar/CreatePost/CreatePostForm/PostFormImg/PostFormImg";
+import { motion } from "framer-motion";
 
 const InitialConfig = () => {
   const [image, setImage] = useState([]);
@@ -31,10 +32,21 @@ const InitialConfig = () => {
   };
 
   return (
-    <div
+    <motion.div
+      style={{
+        backgroundColor: "white",
+        width: "min(70rem,95vw)",
+        padding: "4rem",
+        borderRadius: ".5rem",
+      }}
       className="InitialConfig"
-      style={{ backgroundColor: "white", width: "min(70rem,95vw)" }}
+      initial={{ opacity: 0, y: 30 }}
+      transition={{ duration: 0.5 }}
+      animate={{ opacity: 1, y: 0 }}
     >
+      <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>
+        -INTRODUCE TUS DATOS-
+      </h2>
       <Form
         name="basic"
         labelCol={{ span: 3 }}
@@ -76,13 +88,17 @@ const InitialConfig = () => {
               width: "100%",
             }}
           >
-            <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
-              Submit
+            <Button
+              type="primary"
+              htmlType="submit"
+              icon={<DoubleRightOutlined />}
+            >
+              Enviar
             </Button>
           </div>
         </Form.Item>
       </Form>
-    </div>
+    </motion.div>
   );
 };
 

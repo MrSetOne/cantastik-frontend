@@ -1,5 +1,12 @@
 import { Avatar, Button, Empty, Modal } from "antd";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addLike,
+  removeLike,
+  doAFollow,
+  doAnUnfollow,
+} from "../../../../features/auth/authSlice";
 
 import "./ProfileStats.scss";
 const API_URL = process.env.REACT_APP_API_URL;
@@ -7,6 +14,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 const ProfileStats = ({ stats }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showable, setShowable] = useState("followers");
+
+  console.log(stats);
+
+  const { user } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
 
   const showModal = async (content) => {
     await setShowable(content);
@@ -29,10 +42,33 @@ const ProfileStats = ({ stats }) => {
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}
         <h1 style={{ flex: 1 }}>{element.username}</h1>
-        <Button type="primary">FollowSys</Button>
+        {element._id === user._id ? null : user.following.some(
+            (objetive) => objetive._id === element._id
+          ) ? (
+          <Button
+            style={{ width: "min-content", marginRight: "4rem" }}
+            size="small"
+            onClick={() => dispatch(doAnUnfollow(element._id))}
+          >
+            Dejar se seguir
+          </Button>
+        ) : (
+          <Button
+            style={{ width: "min-content", marginRight: "4rem" }}
+            type="primary"
+            size="small"
+            onClick={() => {
+              dispatch(doAFollow(element._id));
+            }}
+          >
+            Seguir
+          </Button>
+        )}
       </div>
     );
   });
+
+  // ! EL state.FROM ES EL DUEÑO DEL PERFIL!
 
   const allFollowing = stats.following.map((element) => {
     return (

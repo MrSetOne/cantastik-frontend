@@ -27,6 +27,7 @@ const ProfileCard = ({ target }) => {
           followers: target.followers,
           following: target.following,
           posts: target.postIds,
+          from: target._id,
         }}
       />
     </article>
