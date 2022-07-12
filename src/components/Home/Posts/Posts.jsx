@@ -7,7 +7,7 @@ import "./Posts.scss";
 
 const Posts = () => {
   const { posts, countTotalPosts } = useSelector((state) => state.posts);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -33,10 +33,10 @@ const Posts = () => {
         dataLength={posts?.length}
         next={nextPage}
         hasMore={page * 10 <= countTotalPosts}
-        loader={<h4>Loading...</h4>}
+        loader={<h4>Cargando...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
+            <b>Ya no hay mas posts... ¿Porque no crea uno ahora?</b>
           </p>
         }
       >

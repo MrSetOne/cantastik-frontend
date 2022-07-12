@@ -14,6 +14,7 @@ export const getPosts = createAsyncThunk("post/GetPosts", async(page, thunkAPI) 
         if (!page) {
             page = 1
         }
+        console.log(`Solicitamos la pagina ${page}`)
         return await postsService.getPosts(page)
     } catch (error) {
         console.log(error)
