@@ -28,34 +28,39 @@ const EditPostDetail = ({ title, body, _id, setEdit }) => {
   };
 
   return (
-    <div className="EditPostDetail">
-      <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        style={{ marginTop: "2.5rem" }}
-      >
-        <Form.Item label="Titulo" name="title" initialValue={title}>
-          <Input />
-        </Form.Item>
-        <Form.Item label="Cuerpo" name="body" initialValue={body}>
-          <TextArea autoSize={{ minRows: 3, maxRows: 6 }} />
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Space>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-            <Button type="danger" onClick={() => deleteThisPost()}>
-              Eliminar Post
-            </Button>
-          </Space>
-        </Form.Item>
-      </Form>
+    <div
+      className="EditPostDetail"
+      style={{ flex: 1, display: "flex", justifyContent: "center" }}
+    >
+      <div style={{ width: "50%" }}>
+        <Form
+          name="basic"
+          labelCol={{ span: 5 }}
+          wrapperCol={{ span: 24 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+          style={{ marginTop: "2.5rem" }}
+        >
+          <Form.Item label="Titulo" name="title" initialValue={title}>
+            <Input />
+          </Form.Item>
+          <Form.Item label="Cuerpo" name="body" initialValue={body}>
+            <TextArea autoSize={{ minRows: 3, maxRows: 6 }} />
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Space>
+              <Button type="primary" htmlType="submit">
+                Modificar
+              </Button>
+              <Button type="danger" onClick={() => deleteThisPost()}>
+                Eliminar Post
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };

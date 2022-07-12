@@ -57,15 +57,7 @@ const CreatePostForm = ({ setCreatePostVisible }) => {
         rules={[{ required: true, message: "Introduce un titulo" }]}
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <Input
-          prefix={
-            <MailOutlined
-              className="site-form-item-icon"
-              style={{ color: "gray" }}
-            />
-          }
-          placeholder="Introduce un titulo"
-        />
+        <Input placeholder="Introduce un titulo" />
       </Form.Item>
       <Form.Item
         name="body"

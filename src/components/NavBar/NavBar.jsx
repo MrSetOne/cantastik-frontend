@@ -37,7 +37,7 @@ const NavBar = () => {
         style={{ width: user ? "min(95vw, 130rem)" : "95vw" }}
       >
         {user ? (
-          <Link to={"/"}>
+          <Link to={"/"} onClick={() => dispatch(getPosts())}>
             <img
               src={Cantastik}
               alt="Cantastik"

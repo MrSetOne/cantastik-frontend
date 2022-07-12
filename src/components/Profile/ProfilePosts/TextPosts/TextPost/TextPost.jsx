@@ -21,7 +21,12 @@ import {
   like,
   unlike,
 } from "../../../../../features/posts/postsSlice";
-import { addLike, removeLike } from "../../../../../features/auth/authSlice";
+import {
+  addLike,
+  removeLike,
+  doAFollow,
+  doAnUnfollow,
+} from "../../../../../features/auth/authSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -29,6 +34,8 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const TextPost = ({ post }) => {
   const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.auth);
 
   const [modal, setModal] = useState(false);
   const [show, setShow] = useState("comments");
@@ -41,9 +48,13 @@ const TextPost = ({ post }) => {
           author={comment.author.username}
           avatar={
             comment.author.img ? (
-              <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
+              <Link to={`/profile/${comment.author._id}`}>
+                <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
+              </Link>
             ) : (
-              <Avatar>{comment.author.username.substring(0, 1)}</Avatar>
+              <Link to={`/profile/${comment.author._id}`}>
+                <Avatar>{comment.author.username.substring(0, 1)}</Avatar>
+              </Link>
             )
           }
           content={comment.comment}
@@ -81,20 +92,52 @@ const TextPost = ({ post }) => {
   const allLikes = post.likes.map((like) => {
     return (
       <>
-        <div style={{ display: "flex" }}>
-          {like.img ? (
-            <Avatar src={`${API_URL}/porfile/${like.img}`} />
-          ) : (
-            <Avatar>{like.username.substring(0, 1)}</Avatar>
-          )}
-          <h4>{like.username}</h4>
+        <div style={{ display: "flex", margin: "1rem 0" }}>
+          <Link
+            to={`/profile/${like._id}`}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "1rem",
+              width: "100%",
+            }}
+          >
+            {like.img ? (
+              <Avatar src={`${API_URL}/porfile/${like.img}`} />
+            ) : (
+              <Avatar>{like.username.substring(0, 1)}</Avatar>
+            )}
+            <h4 style={{ flex: 1 }}>{like.username}</h4>
+            {like._id === user._id ? null : user.following.some(
+                (objetive) => objetive._id === like._id
+              ) ? (
+              <Button
+                style={{ width: "min-content" }}
+                size="small"
+                onClick={() => dispatch(doAnUnfollow(like._id))}
+              >
+                Dejar se seguir
+              </Button>
+            ) : (
+              <Button
+                style={{ width: "min-content" }}
+                type="primary"
+                size="small"
+                onClick={() => {
+                  dispatch(doAFollow(like._id));
+                }}
+              >
+                Seguir
+              </Button>
+            )}
+          </Link>
         </div>
         <Divider style={{ margin: "0" }} />
       </>
     );
   });
 
-  const { user } = useSelector((state) => state.auth);
   return (
     <motion.article
       whileHover={{

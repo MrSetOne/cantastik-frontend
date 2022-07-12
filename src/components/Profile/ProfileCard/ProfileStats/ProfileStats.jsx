@@ -1,3 +1,4 @@
+import { DoubleLeftOutlined } from "@ant-design/icons";
 import { Avatar, Button, Empty, Modal } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +47,7 @@ const ProfileStats = ({ stats }) => {
             (objetive) => objetive._id === element._id
           ) ? (
           <Button
-            style={{ width: "min-content", marginRight: "4rem" }}
+            style={{ width: "min-content" }}
             size="small"
             onClick={() => dispatch(doAnUnfollow(element._id))}
           >
@@ -54,7 +55,7 @@ const ProfileStats = ({ stats }) => {
           </Button>
         ) : (
           <Button
-            style={{ width: "min-content", marginRight: "4rem" }}
+            style={{ width: "min-content" }}
             type="primary"
             size="small"
             onClick={() => {
@@ -68,8 +69,6 @@ const ProfileStats = ({ stats }) => {
     );
   });
 
-  // ! EL state.FROM ES EL DUEÑO DEL PERFIL!
-
   const allFollowing = stats.following.map((element) => {
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -79,7 +78,28 @@ const ProfileStats = ({ stats }) => {
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}
         <h1 style={{ flex: 1 }}>{element.username}</h1>
-        <Button type="primary">FollowSys</Button>
+        {element._id === user._id ? null : user.following.some(
+            (objetive) => objetive._id === element._id
+          ) ? (
+          <Button
+            style={{ width: "min-content" }}
+            size="small"
+            onClick={() => dispatch(doAnUnfollow(element._id))}
+          >
+            Dejar se seguir
+          </Button>
+        ) : (
+          <Button
+            style={{ width: "min-content" }}
+            type="primary"
+            size="small"
+            onClick={() => {
+              dispatch(doAFollow(element._id));
+            }}
+          >
+            Seguir
+          </Button>
+        )}
       </div>
     );
   });
@@ -100,13 +120,18 @@ const ProfileStats = ({ stats }) => {
         </div>
       </section>
       <Modal
-        title="Basic Modal"
+        title={showable}
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <Button key="back" type="primary" onClick={handleCancel}>
-            Return
+          <Button
+            key="back"
+            type="primary"
+            onClick={handleCancel}
+            icon={<DoubleLeftOutlined />}
+          >
+            Volver
           </Button>,
         ]}
       >

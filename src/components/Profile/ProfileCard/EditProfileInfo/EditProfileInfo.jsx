@@ -91,10 +91,10 @@ const EditProfileInfo = ({ setEdit }) => {
             onClick={() => setEdit(false)}
             icon={<DoubleLeftOutlined />}
           >
-            Back
+            Cancelar
           </Button>
           <Button type="primary" htmlType="submit" icon={<UploadOutlined />}>
-            Submit
+            Cambiar
           </Button>
         </Form.Item>
       </Form>

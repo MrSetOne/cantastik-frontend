@@ -1,3 +1,4 @@
+import { DoubleLeftOutlined } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 import CreatePostForm from "./CreatePostForm/CreatePostForm";
 
@@ -9,10 +10,10 @@ const CreatePost = ({ visible, setCreatePostVisible }) => {
   return (
     <Modal
       visible={visible}
-      title="Title"
+      title="Nuevo Post"
       onCancel={handleCancel}
       footer={[
-        <Button key="back" onClick={handleCancel}>
+        <Button key="back" onClick={handleCancel} icon={<DoubleLeftOutlined />}>
           Volver
         </Button>,
       ]}

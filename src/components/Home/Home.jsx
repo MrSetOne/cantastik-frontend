@@ -21,7 +21,6 @@ const Home = () => {
 
   useEffect(() => {
     setLoad(true);
-    console.log(load);
   }, [posts]);
 
   return (

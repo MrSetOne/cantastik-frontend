@@ -108,7 +108,12 @@ export const postsSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(getPosts.fulfilled, (state, action) => {
-                state.posts = [...state.posts, ...action.payload.allPosts]
+                if (!action.meta.arg) {
+                    state.posts = action.payload.allPosts
+                }
+                if (action.meta.arg) {
+                    state.posts = [...state.posts, ...action.payload.allPosts]
+                }
                 state.countTotalPosts = action.payload.count
                 state.currentPage = state.currentPage + 1
                 state.isLoading = false;
