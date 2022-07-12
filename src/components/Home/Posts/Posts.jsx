@@ -29,6 +29,7 @@ const Posts = () => {
   return (
     <section className="Posts" style={{ marginBottom: "10rem" }}>
       <InfiniteScroll
+        style={{ overflow: "hidden" }}
         dataLength={posts?.length}
         next={nextPage}
         hasMore={page * 10 <= countTotalPosts}

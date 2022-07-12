@@ -21,6 +21,7 @@ import {
 import { Avatar, Modal, Button, Input, Empty, Segmented } from "antd";
 import "./Post.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Post = ({ item }) => {
   const { user } = useSelector((state) => state.auth);
@@ -124,7 +125,15 @@ const Post = ({ item }) => {
   });
 
   return (
-    <article className="Post" key={item._id} style={{ marginBottom: "2rem" }}>
+    <motion.article
+      className="Post"
+      key={item._id}
+      style={{ marginBottom: "2rem", overflow: "hidden" }}
+      initial={{ y: 100 }}
+      whileInView={{ y: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
       <div className="Post__Author">
         <Link
           to={`/profile/${item.userId._id}`}
@@ -293,7 +302,7 @@ const Post = ({ item }) => {
           )}
         </div>
       </Modal>
-    </article>
+    </motion.article>
   );
 };
 
