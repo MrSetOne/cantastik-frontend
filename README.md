@@ -122,5 +122,5 @@ En primer lugar agradecer a mis profesores [Sofía](https://github.com/SofiaPini
 
 En segundo lugar y no por ello menos importante agradecer tambien a mis compañeros de clase, que siempre puedo contar con ellos para lo que sea y siempre están dispuestos a echar una mano, dar alguna opinion, invitarme a copiar su codigo o simplemente pasar un buen rato de risas y olvidadando toda preocupación. [Xavi](https://github.com/xavi-mat), [Gabri](https://github.com/Gabo-Tech), [Rebeca](https://github.com/RebecaASuesta), [Ger](https://github.com/Molerog), [Shan](https://github.com/tianfanshan), [Yorch](https://github.com/Yorch82), [Vince](https://github.com/Vincecoorp21), [Vane](https://github.com/vaneebg), [Imanol](https://github.com/Imi21), [Alex](https://github.com/alextebbitt), [Fran](https://github.com/franpd8), [David](https://github.com/Dubesor22) y [Santi](https://github.com/Santiremix), sois los mejores y que nadie os haga dudar de ello, por vosotros repetia esta experiencia mil veces más. :green_heart:
 
-<h1 align=center > :rocket: [Michael Lara Sánchez](https://github.com/MrSetOne) :rocket: </h1> 
+<h1 align=center > :rocket: <a href='https://github.com/MrSetOne'>Michael Lara Sánchez</a> :rocket: </h1> 
 
