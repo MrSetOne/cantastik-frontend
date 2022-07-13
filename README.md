@@ -37,9 +37,9 @@
             "Dotenv",
         ]
     },
-    backEnd:{
-        main:["JavaScript","MongoDB","NodeJS","Express","Mongoose"],
-        modules:[
+    "backEnd":{
+        "main":["JavaScript","MongoDB","NodeJS","Express","Mongoose"],
+        "modules":[
             "Json-Web-Token",
             "BcryptJs",
             "Multer",
