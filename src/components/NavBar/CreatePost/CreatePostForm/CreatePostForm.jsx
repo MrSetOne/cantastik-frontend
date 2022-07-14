@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import PostFormImg from "./PostFormImg/PostFormImg";
-import { createPost } from "../../../../features/posts/postsSlice";
+import { createPost, getPosts } from "../../../../features/posts/postsSlice";
 
 const CreatePostForm = ({ setCreatePostVisible }) => {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ const CreatePostForm = ({ setCreatePostVisible }) => {
     await setImage([]);
     setImageUrl("");
     await form.resetFields();
+    await dispatch(getPosts());
     setCreatePostVisible(false);
   };
 

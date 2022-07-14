@@ -11,6 +11,7 @@ const PostInteractions = ({ likes, comments, postId }) => {
     <div
       className="PostInteractions"
       style={{
+        height: "100%",
         width: "35rem",
         display: "flex",
         flexDirection: "column",

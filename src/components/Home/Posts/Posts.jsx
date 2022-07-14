@@ -32,7 +32,7 @@ const Posts = () => {
         style={{ overflow: "hidden" }}
         dataLength={posts?.length}
         next={nextPage}
-        hasMore={page * 10 <= countTotalPosts}
+        hasMore={(page - 1) * 10 <= countTotalPosts}
         loader={<h4>Cargando...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>

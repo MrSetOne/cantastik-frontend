@@ -20,7 +20,7 @@ const PostWithImage = () => {
       <img
         src={`${API_URL}/postsImgs/${post.img}`}
         className="Post__Img"
-        style={{ width: "100%" }}
+        style={{ width: "100%", aspectRatio: 1.6 / 1, objectFit: "cover" }}
       />
       <h2 style={{ fontSize: "3.5rem" }}>{post.title}</h2>
       <p style={{ fontSize: "2rem" }}>{post.body}</p>
