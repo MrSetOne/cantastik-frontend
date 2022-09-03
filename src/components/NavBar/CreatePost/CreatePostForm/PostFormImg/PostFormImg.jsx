@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ImgCrop from "antd-img-crop";
 import { message, Upload } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -22,16 +23,19 @@ const PostFormImg = ({ setImage, image, imageUrl, setImageUrl }) => {
       message.error("Image must smaller than 2MB!");
     }
     if (isJpgOrPng && isLt2M) {
+      // ! AQUI ES DONDE SE ESTABLECE LA IMAGEN QUE SE VA A MANDAR
       setImage([file]);
     }
     return false;
   };
 
-  const handleChange = (info) => {
-    getBase64(info.file, (url) => {
-      setImageUrl(url);
-    });
-  };
+  useEffect(() => {
+    if (image[0]) {
+      getBase64(image[0], (url) => {
+        setImageUrl(url);
+      });
+    }
+  }, [image]);
 
   const uploadButton = (
     <div>
@@ -47,31 +51,32 @@ const PostFormImg = ({ setImage, image, imageUrl, setImageUrl }) => {
   );
 
   return (
-    <Upload
-      style={{ width: "min-content" }}
-      maxCount={1}
-      fileList={image}
-      name="avatar"
-      defaultFileList={[]}
-      listType="picture-card"
-      className="avatar-uploader"
-      showUploadList={false}
-      beforeUpload={beforeUpload}
-      onChange={handleChange}
-      multiple={false}
-    >
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt="avatar"
-          style={{
-            width: "100%",
-          }}
-        />
-      ) : (
-        uploadButton
-      )}
-    </Upload>
+    <ImgCrop>
+      <Upload
+        style={{ width: "min-content" }}
+        maxCount={1}
+        fileList={image}
+        name="avatar"
+        defaultFileList={[]}
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        beforeUpload={beforeUpload}
+        multiple={false}
+      >
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt="avatar"
+            style={{
+              width: "100%",
+            }}
+          />
+        ) : (
+          uploadButton
+        )}
+      </Upload>
+    </ImgCrop>
   );
 };
 
