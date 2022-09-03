@@ -49,7 +49,7 @@ const TextPost = ({ post }) => {
           avatar={
             comment.author.img ? (
               <Link to={`/profile/${comment.author._id}`}>
-                <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
+                <Avatar src={comment.author.img} />
               </Link>
             ) : (
               <Link to={`/profile/${comment.author._id}`}>
@@ -104,7 +104,7 @@ const TextPost = ({ post }) => {
             }}
           >
             {like.img ? (
-              <Avatar src={`${API_URL}/porfile/${like.img}`} />
+              <Avatar src={like.img} />
             ) : (
               <Avatar>{like.username.substring(0, 1)}</Avatar>
             )}
@@ -157,7 +157,7 @@ const TextPost = ({ post }) => {
         <Link to={`/post/${post._id}`}>
           <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
             {post.userId.img ? (
-              <Avatar size={45} src={`${API_URL}/porfile/${post.userId.img}`} />
+              <Avatar size={45} src={post.userId.img} />
             ) : (
               <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
             )}

@@ -43,7 +43,7 @@ const NavBarMenu = () => {
         <a onClick={(e) => e.preventDefault()}>
           <Space>
             {user.img ? (
-              <Avatar src={`${API_URL}/porfile/${user.img}`} />
+              <Avatar src={user.img} />
             ) : (
               <Avatar>{user.username.substring(0, 1)}</Avatar>
             )}

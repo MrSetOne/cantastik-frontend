@@ -91,7 +91,7 @@ const PhotoPost = ({ post }) => {
           avatar={
             comment.author.img ? (
               <Link to={`/profile/${comment.author._id}`}>
-                <Avatar src={`${API_URL}/porfile/${comment.author.img}`} />
+                <Avatar src={comment.author.img} />
               </Link>
             ) : (
               <Link to={`/profile/${comment.author._id}`}>
@@ -127,7 +127,7 @@ const PhotoPost = ({ post }) => {
             }}
           >
             {like.img ? (
-              <Avatar src={`${API_URL}/porfile/${like.img}`} />
+              <Avatar src={like.img} />
             ) : (
               <Avatar>{like.username.substring(0, 1)}</Avatar>
             )}
@@ -168,7 +168,7 @@ const PhotoPost = ({ post }) => {
         className="PhotoPost"
         key={post._id}
         style={{
-          backgroundImage: `url("${API_URL}/postsImgs/${post.img}")`,
+          backgroundImage: `url("${post.img}")`,
         }}
       >
         <div className="PhotoPost__info">
@@ -192,7 +192,7 @@ const PhotoPost = ({ post }) => {
         title={
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             {post.userId.img ? (
-              <Avatar src={`${API_URL}/porfile/${post.userId.img}`} />
+              <Avatar src={post.userId.img} />
             ) : (
               <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
             )}
@@ -241,7 +241,7 @@ const PhotoPost = ({ post }) => {
         <div className="ModalPost__Container">
           <div className="ModalPost__Content" style={{ flex: 1 }}>
             <Link to={`/post/${post._id}`}>
-              <img src={`${API_URL}/postsImgs/${post.img}`} alt={post.title} />
+              <img src={post.img} alt={post.title} />
             </Link>
             <h2>{post.title}</h2>
             <p>{post.body}</p>

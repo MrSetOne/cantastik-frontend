@@ -25,7 +25,7 @@ const CommentsDetail = ({ comments, postId }) => {
       <div key={element._id} style={{ display: "flex", gap: "1rem" }}>
         <Link to={`/profile/${element.author._id}`}>
           {element.author.img ? (
-            <Avatar src={`${API_URL}/porfile/${element.author.img}`} />
+            <Avatar src={element.author.img} />
           ) : (
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}

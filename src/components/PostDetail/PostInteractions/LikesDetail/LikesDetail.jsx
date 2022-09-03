@@ -41,7 +41,7 @@ const LikesDetail = ({ likes, postId }) => {
       >
         <Link to={`/profile/${like._id}`}>
           {like.img ? (
-            <Avatar src={`${API_URL}/porfile/${like.img}`} />
+            <Avatar src={like.img} />
           ) : (
             <Avatar>{like.username.substring(0, 1)}</Avatar>
           )}

@@ -66,7 +66,7 @@ const Post = ({ item }) => {
       <div key={element._id}>
         <Link to={`/profile/${element.author._id}`}>
           {element.author.img ? (
-            <Avatar src={`${API_URL}/porfile/${element.author.img}`} />
+            <Avatar src={element.author.img} />
           ) : (
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}
@@ -91,7 +91,7 @@ const Post = ({ item }) => {
         <div className="Likes__item--info">
           <Link to={`/profile/${element._id}`}>
             {element.img ? (
-              <Avatar src={`${API_URL}/porfile/${element.img}`} />
+              <Avatar src={element.img} />
             ) : (
               <Avatar>{element.username.substring(0, 1)}</Avatar>
             )}
@@ -140,7 +140,7 @@ const Post = ({ item }) => {
           className="Post__Author--links"
         >
           {item.userId.img ? (
-            <Avatar src={`${API_URL}/porfile/${item.userId.img}`} />
+            <Avatar src={item.userId.img} />
           ) : (
             <Avatar>{item.userId.username.substring(0, 1)}</Avatar>
           )}
@@ -176,9 +176,7 @@ const Post = ({ item }) => {
         )}
       </div>
       <Link to={`/post/${item._id}`} style={{ color: "black" }}>
-        {item.img ? (
-          <img src={`${API_URL}/postsImgs/${item.img}`} className="Post__Img" />
-        ) : null}
+        {item.img ? <img src={item.img} className="Post__Img" /> : null}
         <div className="Post__Text">
           <h3>{item.title}</h3>
           <p>{item.body}</p>

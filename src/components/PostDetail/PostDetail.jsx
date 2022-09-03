@@ -77,7 +77,7 @@ const Profile = () => {
               style={{ display: "flex", flex: 1, gap: "1rem" }}
             >
               {post.userId.img ? (
-                <Avatar src={`${API_URL}/porfile/${post.userId.img}`} />
+                <Avatar src={post.userId.img} />
               ) : (
                 <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
               )}

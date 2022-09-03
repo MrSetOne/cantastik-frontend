@@ -38,7 +38,7 @@ const ProfileStats = ({ stats }) => {
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         {element.img ? (
-          <Avatar src={`${API_URL}/porfile/${element.img}`} />
+          <Avatar src={element.img} />
         ) : (
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}
@@ -73,7 +73,7 @@ const ProfileStats = ({ stats }) => {
     return (
       <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         {element.img ? (
-          <Avatar src={`${API_URL}/porfile/${element.img}`} />
+          <Avatar src={element.img} />
         ) : (
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}

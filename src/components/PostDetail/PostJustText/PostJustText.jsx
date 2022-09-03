@@ -28,7 +28,7 @@ const PostJustText = () => {
           }}
         >
           {post.userId.img ? (
-            <Avatar size={200} src={`${API_URL}/porfile/${post.userId.img}`} />
+            <Avatar size={200} src={post.userId.img} />
           ) : (
             <Avatar size={200}>{post.userId.username.substring(0, 1)}</Avatar>
           )}

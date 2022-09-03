@@ -13,7 +13,7 @@ const ProfileInfo = ({ info, setEdit }) => {
     <section className="ProfileInfo">
       <div className="ProfileInfo__Top">
         {info.img ? (
-          <Avatar size={100} src={`${API_URL}/porfile/${info.img}`} />
+          <Avatar size={100} src={info.img} />
         ) : (
           <Avatar size={100} style={{ fontSize: "4rem" }}>
             {info.username.substring(0, 1)}
