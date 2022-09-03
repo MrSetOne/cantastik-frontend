@@ -12,6 +12,9 @@ const initialState = {
     isError: false,
     isSuccess: false,
     message: "",
+    loads: {
+        follow: false
+    }
 };
 
 
@@ -143,11 +146,19 @@ export const authSlice = createSlice({
                 state.user.img = action.payload.updatedUser.img;
                 state.user.bio = action.payload.updatedUser.bio;
             })
+            .addCase(doAFollow.pending, (state, action) => {
+                state.loads.follow = true
+            })
             .addCase(doAFollow.fulfilled, (state, action) => {
                 state.user.following = action.payload.follower.following
+                state.loads.follow = false
+            })
+            .addCase(doAnUnfollow.pending, (state, action) => {
+                state.loads.follow = true
             })
             .addCase(doAnUnfollow.fulfilled, (state, action) => {
                 state.user.following = action.payload.unfollower.following
+                state.loads.follow = false
             })
             .addCase(verify.fulfilled, (state) => {
                 state.isConfirmed = true

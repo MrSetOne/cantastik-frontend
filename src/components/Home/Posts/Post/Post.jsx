@@ -22,6 +22,7 @@ import { Avatar, Modal, Button, Input, Empty, Segmented } from "antd";
 import "./Post.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -100,26 +101,8 @@ const Post = ({ item }) => {
             <h3>{element.username}</h3>
           </Link>
         </div>
-        {user._id === element._id ? null : user.following.some(
-            (objetive) => objetive._id === element._id
-          ) ? (
-          <Button
-            size="small"
-            onClick={() => dispatch(doAnUnfollow(element._id))}
-          >
-            Dejar se seguir
-          </Button>
-        ) : (
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(doAFollow(element._id));
-            }}
-          >
-            Seguir
-          </Button>
-        )}
+        {/* element._id */}
+        <FollowBtn dest={element._id} />
       </div>
     );
   });
@@ -154,25 +137,8 @@ const Post = ({ item }) => {
           >
             Editar
           </Button>
-        ) : user.following.some(
-            (element) => element._id === item.userId._id
-          ) ? (
-          <Button
-            size="small"
-            onClick={() => dispatch(doAnUnfollow(item.userId._id))}
-          >
-            Dejar se seguir
-          </Button>
         ) : (
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(doAFollow(item.userId._id));
-            }}
-          >
-            Seguir
-          </Button>
+          <FollowBtn dest={item.userId._id} />
         )}
       </div>
       <Link to={`/post/${item._id}`} style={{ color: "black" }}>

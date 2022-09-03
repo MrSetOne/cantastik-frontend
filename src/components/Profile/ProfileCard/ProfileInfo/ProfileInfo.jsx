@@ -2,6 +2,7 @@ import { Avatar, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import "./ProfileInfo.scss";
 import { doAFollow, doAnUnfollow } from "../../../../features/auth/authSlice";
+import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -24,20 +25,8 @@ const ProfileInfo = ({ info, setEdit }) => {
           <Button type="primary" onClick={() => setEdit(true)}>
             Editar perfil
           </Button>
-        ) : user.following.some((objetive) => objetive._id === info._id) ? (
-          <Button size="small" onClick={() => dispatch(doAnUnfollow(info._id))}>
-            Dejar se seguir
-          </Button>
         ) : (
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(doAFollow(info._id));
-            }}
-          >
-            Seguir
-          </Button>
+          <FollowBtn dest={info._id} />
         )}
       </div>
       <p>{info.bio}</p>

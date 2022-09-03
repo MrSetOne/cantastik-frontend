@@ -29,6 +29,7 @@ import {
 } from "../../../../../features/auth/authSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import FollowBtn from "../../../../Sys/FollowBtn/FollowBtn";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -109,28 +110,7 @@ const TextPost = ({ post }) => {
               <Avatar>{like.username.substring(0, 1)}</Avatar>
             )}
             <h4 style={{ flex: 1 }}>{like.username}</h4>
-            {like._id === user._id ? null : user.following.some(
-                (objetive) => objetive._id === like._id
-              ) ? (
-              <Button
-                style={{ width: "min-content" }}
-                size="small"
-                onClick={() => dispatch(doAnUnfollow(like._id))}
-              >
-                Dejar se seguir
-              </Button>
-            ) : (
-              <Button
-                style={{ width: "min-content" }}
-                type="primary"
-                size="small"
-                onClick={() => {
-                  dispatch(doAFollow(like._id));
-                }}
-              >
-                Seguir
-              </Button>
-            )}
+            {like._id === user._id ? null : <FollowBtn dest={like._id} />}
           </Link>
         </div>
         <Divider style={{ margin: "0" }} />

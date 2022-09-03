@@ -1,5 +1,6 @@
 import { HeartFilled } from "@ant-design/icons";
 import { Avatar, Button, Empty } from "antd";
+import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { like, unlike } from "../../../../features/posts/postsSlice";
 import { Link } from "react-router-dom";
@@ -49,23 +50,7 @@ const LikesDetail = ({ likes, postId }) => {
         <Link to={`/profile/${like._id}`} style={{ flex: 1 }}>
           <h3>{like.username}</h3>
         </Link>
-        {user._id === like._id ? null : user.following.some(
-            (objetive) => objetive._id === like._id
-          ) ? (
-          <Button size="small" onClick={() => dispatch(doAnUnfollow(like._id))}>
-            Dejar se seguir
-          </Button>
-        ) : (
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(doAFollow(like._id));
-            }}
-          >
-            Seguir
-          </Button>
-        )}
+        {user._id === like._id ? null : <FollowBtn dest={like._id} />}
       </div>
     );
   });

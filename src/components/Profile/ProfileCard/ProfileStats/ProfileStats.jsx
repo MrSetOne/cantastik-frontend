@@ -8,6 +8,7 @@ import {
   doAFollow,
   doAnUnfollow,
 } from "../../../../features/auth/authSlice";
+import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
 
 import "./ProfileStats.scss";
 const API_URL = process.env.REACT_APP_API_URL;
@@ -43,28 +44,7 @@ const ProfileStats = ({ stats }) => {
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}
         <h1 style={{ flex: 1 }}>{element.username}</h1>
-        {element._id === user._id ? null : user.following.some(
-            (objetive) => objetive._id === element._id
-          ) ? (
-          <Button
-            style={{ width: "min-content" }}
-            size="small"
-            onClick={() => dispatch(doAnUnfollow(element._id))}
-          >
-            Dejar se seguir
-          </Button>
-        ) : (
-          <Button
-            style={{ width: "min-content" }}
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(doAFollow(element._id));
-            }}
-          >
-            Seguir
-          </Button>
-        )}
+        {element._id === user._id ? null : <FollowBtn dest={element._id} />}
       </div>
     );
   });
@@ -78,28 +58,7 @@ const ProfileStats = ({ stats }) => {
           <Avatar>{element.username.substring(0, 1)}</Avatar>
         )}
         <h1 style={{ flex: 1 }}>{element.username}</h1>
-        {element._id === user._id ? null : user.following.some(
-            (objetive) => objetive._id === element._id
-          ) ? (
-          <Button
-            style={{ width: "min-content" }}
-            size="small"
-            onClick={() => dispatch(doAnUnfollow(element._id))}
-          >
-            Dejar se seguir
-          </Button>
-        ) : (
-          <Button
-            style={{ width: "min-content" }}
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(doAFollow(element._id));
-            }}
-          >
-            Seguir
-          </Button>
-        )}
+        {element._id === user._id ? null : <FollowBtn dest={element._id} />}
       </div>
     );
   });

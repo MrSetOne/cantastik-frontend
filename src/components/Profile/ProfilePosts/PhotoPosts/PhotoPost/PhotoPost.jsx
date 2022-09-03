@@ -30,6 +30,7 @@ import {
 import "./PhotoPost.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import FollowBtn from "../../../../Sys/FollowBtn/FollowBtn";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -133,28 +134,7 @@ const PhotoPost = ({ post }) => {
             )}
             <h4 style={{ flex: 1 }}>{like.username}</h4>
           </Link>
-          {like._id === user._id ? null : user.following.some(
-              (objetive) => objetive._id === like._id
-            ) ? (
-            <Button
-              style={{ width: "min-content" }}
-              size="small"
-              onClick={() => dispatch(doAnUnfollow(like._id))}
-            >
-              Dejar se seguir
-            </Button>
-          ) : (
-            <Button
-              style={{ width: "min-content" }}
-              type="primary"
-              size="small"
-              onClick={() => {
-                dispatch(doAFollow(like._id));
-              }}
-            >
-              Seguir
-            </Button>
-          )}
+          {like._id === user._id ? null : <FollowBtn dest={like._id} />}
         </div>
         <Divider style={{ margin: "0" }} />
       </>
@@ -205,27 +185,8 @@ const PhotoPost = ({ post }) => {
               >
                 Editar
               </Button>
-            ) : user.following.some(
-                (objetive) => objetive._id === post.userId._id
-              ) ? (
-              <Button
-                style={{ width: "min-content", marginRight: "4rem" }}
-                size="small"
-                onClick={() => dispatch(doAnUnfollow(post.userId._id))}
-              >
-                Dejar se seguir
-              </Button>
             ) : (
-              <Button
-                style={{ width: "min-content", marginRight: "4rem" }}
-                type="primary"
-                size="small"
-                onClick={() => {
-                  dispatch(doAFollow(post.userId._id));
-                }}
-              >
-                Seguir
-              </Button>
+              <FollowBtn dest={post.userId._id} />
             )}
           </div>
         }

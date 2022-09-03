@@ -8,6 +8,7 @@ import PostJustText from "./PostJustText/PostJustText";
 import PostInteractions from "./PostInteractions/PostInteractions";
 import EditPostDetail from "./EditPostDetail/EditPostDetail";
 import { doAFollow, doAnUnfollow } from "../../features/auth/authSlice";
+import FollowBtn from "../Sys/FollowBtn/FollowBtn";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -91,25 +92,8 @@ const Profile = () => {
               >
                 {edit ? "Volver" : "Editar"}
               </Button>
-            ) : user.following.some(
-                (objetive) => objetive._id === post.userId._id
-              ) ? (
-              <Button
-                size="small"
-                onClick={() => dispatch(doAnUnfollow(post.userId._id))}
-              >
-                Dejar se seguir
-              </Button>
             ) : (
-              <Button
-                type="primary"
-                size="small"
-                onClick={() => {
-                  dispatch(doAFollow(post.userId._id));
-                }}
-              >
-                Seguir
-              </Button>
+              <FollowBtn dest={post.userId._id} />
             )}
           </div>
           <div style={{ display: "flex", gap: "2rem" }}>
