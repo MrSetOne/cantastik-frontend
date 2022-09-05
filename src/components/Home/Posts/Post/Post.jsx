@@ -1,19 +1,8 @@
 import React, { useState } from "react";
-import {
-  like,
-  unlike,
-  addComment,
-} from "../../../../features/posts/postsSlice";
-import {
-  addLike,
-  removeLike,
-  doAFollow,
-  doAnUnfollow,
-} from "../../../../features/auth/authSlice";
+import { addComment } from "../../../../features/posts/postsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {
   HeartOutlined,
-  HeartFilled,
   MessageOutlined,
   DoubleLeftOutlined,
   SendOutlined,
@@ -23,8 +12,7 @@ import "./Post.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import LikeBtn from "../../../Sys/LikeBtn/LikeBtn";
 
 const Post = ({ item }) => {
   const { user } = useSelector((state) => state.auth);
@@ -42,16 +30,6 @@ const Post = ({ item }) => {
 
   const handleClose = () => {
     setIsModalVisible(false);
-  };
-
-  const doALike = async () => {
-    await dispatch(like({ postId: item._id, i: item.i }));
-    await dispatch(addLike(item._id));
-  };
-
-  const doAnUnlike = async () => {
-    await dispatch(unlike({ postId: item._id, i: item.i }));
-    await dispatch(removeLike(item._id));
   };
 
   const sendComment = async (e) => {
@@ -149,12 +127,14 @@ const Post = ({ item }) => {
       </Link>
       <div className="Post__Interactions">
         <div className="Post__Interactions--Icons">
-          {user.likedPosts.includes(item._id) ? (
-            <HeartFilled onClick={() => doAnUnlike()} />
-          ) : (
-            <HeartOutlined onClick={() => doALike()} />
-          )}
-          <MessageOutlined onClick={() => showModal()} />
+          <LikeBtn post={item._id} iteration={item.i} btn={false} />
+          <Button
+            type="text"
+            icon={<MessageOutlined />}
+            size="large"
+            shape="circle"
+            onClick={() => showModal()}
+          ></Button>
         </div>
         <div className="Post__Interactions--Info">
           <p onClick={() => showModal()} style={{ cursor: "pointer" }}>
@@ -239,25 +219,7 @@ const Post = ({ item }) => {
                   }
                 />
               )}
-              {user.likedPosts.includes(item._id) ? (
-                <Button
-                  style={{ position: "absolute", bottom: 0, right: 0 }}
-                  type="primary"
-                  icon={<HeartFilled />}
-                  onClick={() => doAnUnlike()}
-                >
-                  Quitar like
-                </Button>
-              ) : (
-                <Button
-                  style={{ position: "absolute", bottom: 0, right: 0 }}
-                  type="primary"
-                  icon={<HeartFilled />}
-                  onClick={() => doALike()}
-                >
-                  Dar Like
-                </Button>
-              )}
+              <LikeBtn post={item._id} iteration={item.i} />
             </div>
           )}
         </div>

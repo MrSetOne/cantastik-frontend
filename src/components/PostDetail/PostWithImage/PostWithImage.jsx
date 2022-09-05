@@ -1,8 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { Avatar } from "antd";
-const API_URL = process.env.REACT_APP_API_URL;
 
 const PostWithImage = () => {
   const { post } = useSelector((state) => state.posts);
@@ -18,7 +15,7 @@ const PostWithImage = () => {
       }}
     >
       <img
-        src={`${API_URL}/postsImgs/${post.img}`}
+        src={post.img}
         className="Post__Img"
         style={{ width: "100%", aspectRatio: 1.6 / 1, objectFit: "cover" }}
       />

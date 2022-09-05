@@ -1,0 +1,19 @@
+.LikesDetail {
+    overflow: auto;
+    height: calc(100vh - 27rem);
+    margin-bottom: 1rem;
+    position: relative;
+    width: 100%;
+    .LikeBtn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+    .Likes__item {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        grid-area: 1rem;
+        margin-bottom: 1rem;
+    }
+}

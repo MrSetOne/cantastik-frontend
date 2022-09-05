@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   HeartOutlined,
   HeartFilled,
@@ -16,23 +16,12 @@ import {
   Button,
   Empty,
 } from "antd";
-import {
-  addComment,
-  like,
-  unlike,
-} from "../../../../../features/posts/postsSlice";
-import {
-  addLike,
-  removeLike,
-  doAFollow,
-  doAnUnfollow,
-} from "../../../../../features/auth/authSlice";
+import { addComment } from "../../../../../features/posts/postsSlice";
 import "./PhotoPost.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import FollowBtn from "../../../../Sys/FollowBtn/FollowBtn";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import LikeBtn from "../../../../Sys/LikeBtn/LikeBtn";
 
 const PhotoPost = ({ post }) => {
   console.log(post);
@@ -55,16 +44,6 @@ const PhotoPost = ({ post }) => {
 
   const handleCancel = () => {
     setIsModalVisibleUser(false);
-  };
-
-  const doALike = async () => {
-    await dispatch(like({ postId: post._id, i: post.i, authorPost: true }));
-    await dispatch(addLike(post._id));
-  };
-
-  const doAnUnlike = async () => {
-    await dispatch(unlike({ postId: post._id, i: post.i, authorPost: true }));
-    await dispatch(removeLike(post._id));
   };
 
   const sendComment = async (e) => {
@@ -276,24 +255,8 @@ const PhotoPost = ({ post }) => {
                     htmlType="submit"
                   />
                 </form>
-              ) : user.likedPosts.includes(post._id) ? (
-                <Button
-                  style={{ position: "absolute", bottom: 0, right: 0 }}
-                  type="primary"
-                  icon={<HeartFilled />}
-                  onClick={() => doAnUnlike()}
-                >
-                  Quitar like
-                </Button>
               ) : (
-                <Button
-                  style={{ position: "absolute", bottom: 0, right: 0 }}
-                  type="primary"
-                  icon={<HeartFilled />}
-                  onClick={() => doALike()}
-                >
-                  Dar Like
-                </Button>
+                <LikeBtn post={post._id} iteration={post.i} authorPost={true} />
               )}
             </div>
           </div>

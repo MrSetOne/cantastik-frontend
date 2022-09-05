@@ -1,45 +1,13 @@
-import { HeartFilled } from "@ant-design/icons";
-import { Avatar, Button, Empty } from "antd";
+import { Avatar, Empty } from "antd";
 import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
-import { useDispatch, useSelector } from "react-redux";
-import { like, unlike } from "../../../../features/posts/postsSlice";
 import { Link } from "react-router-dom";
-import {
-  addLike,
-  removeLike,
-  doAFollow,
-  doAnUnfollow,
-} from "../../../../features/auth/authSlice";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import LikeBtn from "../../../Sys/LikeBtn/LikeBtn";
+import "./LikesDetail.scss";
 
 const LikesDetail = ({ likes, postId }) => {
-  const { user } = useSelector((state) => state.auth);
-
-  const dispatch = useDispatch();
-
-  const doALike = async () => {
-    await dispatch(like({ postId, user }));
-    await dispatch(addLike(postId));
-  };
-
-  const doAnUnlike = async () => {
-    await dispatch(unlike({ postId, user }));
-    await dispatch(removeLike(postId));
-  };
-
   const printLikes = likes.map((like) => {
     return (
-      <div
-        className="Likes__item"
-        style={{
-          display: "flex",
-          width: "100%",
-          alignItems: "center",
-          gap: "1rem",
-          marginBottom: "1rem",
-        }}
-      >
+      <div className="Likes__item">
         <Link to={`/profile/${like._id}`}>
           {like.img ? (
             <Avatar src={like.img} />
@@ -50,23 +18,13 @@ const LikesDetail = ({ likes, postId }) => {
         <Link to={`/profile/${like._id}`} style={{ flex: 1 }}>
           <h3>{like.username}</h3>
         </Link>
-        {user._id === like._id ? null : <FollowBtn dest={like._id} />}
+        <FollowBtn dest={like._id} />
       </div>
     );
   });
 
   return (
-    <div
-      className="LikesDetail"
-      style={{
-        overflow: "auto",
-        height: "calc(100vh - 27rem)",
-        marginBottom: "1rem",
-        paddingRight: "1rem",
-        position: "relative",
-        width: "100%",
-      }}
-    >
+    <div className="LikesDetail">
       {likes.length !== 0 ? (
         <div className="Likes__Container">{printLikes}</div>
       ) : (
@@ -79,25 +37,7 @@ const LikesDetail = ({ likes, postId }) => {
           }
         />
       )}
-      {user.likedPosts.includes(postId) ? (
-        <Button
-          style={{ position: "absolute", bottom: 0, right: 0 }}
-          type="primary"
-          icon={<HeartFilled />}
-          onClick={() => doAnUnlike()}
-        >
-          Quitar like
-        </Button>
-      ) : (
-        <Button
-          style={{ position: "absolute", bottom: 0, right: 0 }}
-          type="primary"
-          icon={<HeartFilled />}
-          onClick={() => doALike()}
-        >
-          Dar Like
-        </Button>
-      )}
+      <LikeBtn post={postId} />
     </div>
   );
 };

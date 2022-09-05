@@ -31,13 +31,10 @@
         display: flex;
         gap: 2rem;
         align-items: center;
-        padding: 2rem;
+        padding: 1rem;
         .Post__Interactions--Icons {
             display: flex;
-            gap: 2rem;
-            * {
-                font-size: 2.5rem;
-            }
+            gap: .5rem;
         }
         .Post__Interactions--Info {
             display: flex;
@@ -102,6 +99,11 @@
                     gap: 1rem;
                 }
             }
+        }
+        .LikeBtn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
         }
     }
 }

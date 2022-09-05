@@ -9,29 +9,18 @@ import {
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  HeartFilled,
   HeartOutlined,
   MessageOutlined,
   DoubleLeftOutlined,
   SendOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import {
-  addComment,
-  like,
-  unlike,
-} from "../../../../../features/posts/postsSlice";
-import {
-  addLike,
-  removeLike,
-  doAFollow,
-  doAnUnfollow,
-} from "../../../../../features/auth/authSlice";
+import { addComment } from "../../../../../features/posts/postsSlice";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import FollowBtn from "../../../../Sys/FollowBtn/FollowBtn";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import LikeBtn from "../../../../Sys/LikeBtn/LikeBtn";
+import "./TextPosts.scss";
 
 const TextPost = ({ post }) => {
   const dispatch = useDispatch();
@@ -80,16 +69,6 @@ const TextPost = ({ post }) => {
     );
   };
 
-  const doALike = async () => {
-    await dispatch(like({ postId: post._id, i: post.i, authorPost: true }));
-    await dispatch(addLike(post._id));
-  };
-
-  const doAnUnlike = async () => {
-    await dispatch(unlike({ postId: post._id, i: post.i, authorPost: true }));
-    await dispatch(removeLike(post._id));
-  };
-
   const allLikes = post.likes.map((like) => {
     return (
       <>
@@ -120,65 +99,53 @@ const TextPost = ({ post }) => {
 
   return (
     <motion.article
+      className="TextPost"
       whileHover={{
         scale: 1.12,
         boxShadow: "0px 10px 28px 0px rgba(0,0,0,0.31)",
       }}
-      className="TextPost"
-      style={{
-        borderTop: "1px solid gray",
-        borderBottom: "1px solid gray",
-        width: "100%",
-        padding: "2rem",
-        backgroundColor: "white",
-      }}
     >
-      <div>
+      <div className="TextPost__body">
         <Link to={`/post/${post._id}`}>
-          <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+          <div>
             {post.userId.img ? (
               <Avatar size={45} src={post.userId.img} />
             ) : (
               <Avatar>{post.userId.username.substring(0, 1)}</Avatar>
             )}
-            <h2 style={{ fontSize: "3rem" }}>{post.userId.username}</h2>
+            <h2>{post.userId.username}</h2>
           </div>
-          <h3 style={{ fontSize: "2rem" }}>{post.title}</h3>
-          <p style={{ color: "black" }}>{post.body}</p>
+          <h3>{post.title}</h3>
+          <p>{post.body}</p>
         </Link>
       </div>
-      <div style={{ display: "flex" }}>
-        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          {user.likedPosts.includes(post._id) ? (
-            <HeartFilled
-              style={{ fontSize: "1.5rem", margin: 0 }}
-              onClick={() => doAnUnlike()}
+      <div className="TextPost__interactions">
+        <div>
+          <div className="TextPost__interactions--btns">
+            <LikeBtn
+              post={post._id}
+              iteration={post.i}
+              authorPost={true}
+              btn={false}
             />
-          ) : (
-            <HeartOutlined
-              style={{ fontSize: "1.5rem", margin: 0 }}
-              onClick={() => doALike()}
+            <Button
+              onClick={() => setModal(true)}
+              shape={"circle"}
+              size={"large"}
+              icon={<MessageOutlined />}
+              type={"text"}
             />
-          )}
-          <MessageOutlined
-            style={{ fontSize: "1.5rem", margin: 0 }}
-            onClick={() => setModal(true)}
-          />
-          <p
-            style={{ fontSize: "1.5rem", margin: 0, cursor: "pointer" }}
-            onClick={() => setModal(true)}
-          >
-            {post.likes.length} likes
-          </p>
-          <p
-            style={{ fontSize: "1.5rem", margin: 0, cursor: "pointer" }}
-            onClick={() => setModal(true)}
-          >
-            {post.comments.length} comentarios
-          </p>
+          </div>
+          <div className="TextPost__interactions--info">
+            <p onClick={() => setModal(true)}>{post.likes.length} likes</p>
+            <p onClick={() => setModal(true)}>
+              {post.comments.length} comentarios
+            </p>
+          </div>
         </div>
       </div>
       <Modal
+        className="TextPost__modal"
         visible={modal}
         title={post.userId.username}
         onCancel={() => setModal(false)}
@@ -193,17 +160,7 @@ const TextPost = ({ post }) => {
           </Button>,
         ]}
       >
-        <div
-          style={{
-            padding: "10px",
-            position: "relative",
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <div className="TextPost__modal--content">
           <Segmented
             options={[
               { value: "comments", icon: <MessageOutlined /> },
@@ -213,26 +170,9 @@ const TextPost = ({ post }) => {
             onChange={setShow}
           />
           {show === "comments" ? (
-            <>
-              <div
-                style={{
-                  maxHeight: "500px",
-                  overflow: "auto",
-                  marginBottom: "30px",
-                  width: "100%",
-                }}
-              >
-                {allComments}
-              </div>
-              <form
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  width: "100%",
-                  bottom: 0,
-                }}
-                onSubmit={(e) => sendComment(e)}
-              >
+            <div className="TextPost__modal--comments">
+              <div>{allComments}</div>
+              <form onSubmit={(e) => sendComment(e)}>
                 <Input
                   style={{ flex: 1 }}
                   placeholder="Escribe tu comentario"
@@ -248,39 +188,12 @@ const TextPost = ({ post }) => {
                   htmlType="submit"
                 />
               </form>
-            </>
+            </div>
           ) : (
-            <>
-              <div
-                style={{
-                  maxHeight: "500px",
-                  overflow: "auto",
-                  marginBottom: "30px",
-                  width: "100%",
-                }}
-              >
-                {allLikes}
-              </div>
-              {user.likedPosts.includes(post._id) ? (
-                <Button
-                  style={{ position: "absolute", bottom: 0, right: 0 }}
-                  type="primary"
-                  icon={<HeartFilled />}
-                  onClick={() => doAnUnlike()}
-                >
-                  Quitar like
-                </Button>
-              ) : (
-                <Button
-                  style={{ position: "absolute", bottom: 0, right: 0 }}
-                  type="primary"
-                  icon={<HeartFilled />}
-                  onClick={() => doALike()}
-                >
-                  Dar Like
-                </Button>
-              )}
-            </>
+            <div className="TextPost__modal--likes">
+              <div>{allLikes}</div>
+              <LikeBtn post={post._id} iteration={post.i} authorPost={true} />
+            </div>
           )}
         </div>
       </Modal>
