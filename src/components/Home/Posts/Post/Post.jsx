@@ -101,7 +101,6 @@ const Post = ({ item }) => {
             <h3>{element.username}</h3>
           </Link>
         </div>
-        {/* element._id */}
         <FollowBtn dest={element._id} />
       </div>
     );
