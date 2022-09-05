@@ -119,7 +119,13 @@ const Post = ({ item }) => {
         )}
       </div>
       <Link to={`/post/${item._id}`} style={{ color: "black" }}>
-        {item.img ? <img src={item.img} className="Post__Img" /> : null}
+        {item.img ? (
+          <img
+            src={item.img}
+            alt={`Imagen de ${item.userId.username}`}
+            className="Post__Img"
+          />
+        ) : null}
         <div className="Post__Text">
           <h3>{item.title}</h3>
           <p>{item.body}</p>

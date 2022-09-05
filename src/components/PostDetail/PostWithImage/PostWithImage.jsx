@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 const PostWithImage = () => {
   const { post } = useSelector((state) => state.posts);
 
+  console.log(post);
   return (
     <div
       className="PostWithImage"
@@ -16,6 +17,7 @@ const PostWithImage = () => {
     >
       <img
         src={post.img}
+        alt={`Imagen de ${post.userId.username}`}
         className="Post__Img"
         style={{ width: "100%", aspectRatio: 1.6 / 1, objectFit: "cover" }}
       />

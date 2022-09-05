@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import "antd/dist/antd.min.css";
 import LogPage from "./components/LogPage/LogPage";
@@ -22,7 +22,7 @@ function App() {
     if (localStorage.token) {
       dispatch(newInfo());
     }
-  }, []);
+  });
 
   return (
     <div className="App">
