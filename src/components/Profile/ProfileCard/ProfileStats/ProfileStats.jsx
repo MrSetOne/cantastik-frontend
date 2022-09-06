@@ -1,27 +1,16 @@
 import { DoubleLeftOutlined } from "@ant-design/icons";
 import { Avatar, Button, Empty, Modal } from "antd";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addLike,
-  removeLike,
-  doAFollow,
-  doAnUnfollow,
-} from "../../../../features/auth/authSlice";
+import { useSelector } from "react-redux";
 import FollowBtn from "../../../Sys/FollowBtn/FollowBtn";
 
 import "./ProfileStats.scss";
-const API_URL = process.env.REACT_APP_API_URL;
 
 const ProfileStats = ({ stats }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showable, setShowable] = useState("followers");
 
-  console.log(stats);
-
   const { user } = useSelector((state) => state.auth);
-
-  const dispatch = useDispatch();
 
   const showModal = async (content) => {
     await setShowable(content);
