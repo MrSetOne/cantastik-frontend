@@ -13,7 +13,8 @@ const initialState = {
     isSuccess: false,
     message: "",
     loads: {
-        follow: false
+        follow: false,
+        user: false,
     }
 };
 
@@ -22,7 +23,6 @@ export const login = createAsyncThunk("auth/login", async(user, thunkAPI) => {
     try {
         return await authService.login(user);
     } catch (error) {
-        // const message = error.response.data.message;
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -108,26 +108,32 @@ export const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(signup.pending, (state, action) => {
+                state.loads.user = true
+            })
             .addCase(signup.fulfilled, (state, action) => {
                 state.isSuccess = true;
                 state.message = `${action.payload.newUser.username}, solo te queda verificar tu correo: ${action.payload.newUser.email}, `
+                state.loads.user = false;
             })
             .addCase(signup.rejected, (state, action) => {
-                console.log(action)
                 state.isError = true;
                 state.message = action.payload.message;
+                state.loads.user = false;
             })
             .addCase(login.pending, (state, action) => {
-                state.isLoading = true
+                state.loads.user = true
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload.loggedUser;
                 state.token = action.payload.token
-                state.isLoading = false;
+                state.loads.user = false;
 
             })
-            .addCase(login.rejected, (state) => {
-                state.isLoading = false;
+            .addCase(login.rejected, (state, action) => {
+                state.isError = true
+                state.message = action.payload
+                state.loads.user = false;
 
             })
             .addCase(logout.pending, (state) => {

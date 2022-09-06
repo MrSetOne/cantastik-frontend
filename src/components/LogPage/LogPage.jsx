@@ -1,12 +1,37 @@
-import { useSelector } from "react-redux";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import "./LogPage.scss";
+import { notification } from "antd";
 import cantastikGraff from "../../assets/Cantastikgraff.png";
 import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetNotif } from "../../features/auth/authSlice";
 
 const LogPage = () => {
-  const { needSignUp } = useSelector((state) => state.interfaces);
+  const [needSignUp, setNeedSignUp] = useState(false);
+  const dispatch = useDispatch();
+
+  const { isError, isSuccess, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isError) {
+      notification.error({ message: "Error", description: message });
+      setTimeout(() => {
+        dispatch(resetNotif());
+      }, 2000);
+    }
+    if (isSuccess) {
+      notification.success({
+        message: "¡Ya casi estamos!",
+        description: message,
+      });
+      setNeedSignUp(false);
+      setTimeout(() => {
+        dispatch(resetNotif());
+      }, 2000);
+    }
+  }, [isError, isSuccess, message]);
 
   return (
     <section className="LogPage">
@@ -59,7 +84,7 @@ const LogPage = () => {
                 zIndex: 10,
               }}
             >
-              <SignUp />
+              <SignUp setNeedSignUp={setNeedSignUp} />
             </motion.div>
           )}
           {!needSignUp && (
@@ -90,7 +115,7 @@ const LogPage = () => {
                 zIndex: 10,
               }}
             >
-              <Login />
+              <Login setNeedSignUp={setNeedSignUp} />
             </motion.div>
           )}
         </AnimatePresence>

@@ -22,13 +22,14 @@ function App() {
     if (localStorage.token) {
       dispatch(newInfo());
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="App">
       <div
         className="spinner__container"
-        style={{ display: isLoading ? "flex" : "none" }}
+        style={{ display: isLoading ? "flex" : "none", zIndex: 100 }}
       >
         <div className="spinner">
           <div></div>

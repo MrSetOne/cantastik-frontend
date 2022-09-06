@@ -1,19 +1,16 @@
 import { Button, Form, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../features/auth/authSlice";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import { changeNeedSignUp } from "../../../features/interface/interfacesSlice";
 import "./Login.scss";
 
-const Login = () => {
+const Login = ({ setNeedSignUp }) => {
   const dispatch = useDispatch();
+
+  const { loads } = useSelector((state) => state.auth);
 
   const onFinish = (values) => {
     dispatch(login(values));
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -31,7 +28,6 @@ const Login = () => {
         name="login"
         className="login-form"
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
@@ -72,6 +68,7 @@ const Login = () => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            loading={loads.user}
           >
             Iniciar sesión
           </Button>
@@ -81,7 +78,7 @@ const Login = () => {
             style={{ width: "100%", marginBottom: 0 }}
             type="default"
             className="login-form-button"
-            onClick={() => dispatch(changeNeedSignUp())}
+            onClick={() => setNeedSignUp(true)}
           >
             Crear cuenta
           </Button>
