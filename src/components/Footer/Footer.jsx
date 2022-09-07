@@ -8,7 +8,7 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <footer className="Footer">
-      <div>
+      <div className="Footer__me">
         <p>Created by Michael L. Sánchez</p>
         <a
           href="https://github.com/MrSetOne"
@@ -32,8 +32,8 @@ const Footer = () => {
           <TwitterCircleFilled />
         </a>
       </div>
-      <p>Play Hard</p>
-      <p>ver.1.0.0 released on 13/07/2022</p>
+      <p className="Footer__slogan">Play Hard</p>
+      <p className="Footer__version">ver.1.0.0 released on 13/07/2022</p>
     </footer>
   );
 };

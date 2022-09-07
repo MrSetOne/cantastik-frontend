@@ -22,3 +22,18 @@
         gap: .5rem;
     }
 }
+
+@media (max-width: 650px) {
+    .Footer__slogan {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .Footer {
+        justify-content: center;
+        .Footer__version {
+            display: none;
+        }
+    }
+}
