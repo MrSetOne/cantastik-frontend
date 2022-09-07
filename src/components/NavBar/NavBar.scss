@@ -29,3 +29,9 @@
         }
     }
 }
+
+@media (max-width: 550px) {
+    .NavBar__Search {
+        display: none;
+    }
+}

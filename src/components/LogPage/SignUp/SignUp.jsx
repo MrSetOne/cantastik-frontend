@@ -2,7 +2,6 @@ import { Button, Form, Input } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../../features/auth/authSlice";
-import cantastikGraff from "../../../assets/Cantastikgraff.png";
 import "./SignUp.scss";
 
 const SignUp = ({ setNeedSignUp }) => {

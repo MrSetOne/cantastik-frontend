@@ -46,6 +46,7 @@ const NavBar = () => {
         {user ? (
           <>
             <Search
+              className="NavBar__Search"
               placeholder="Buscar"
               onSearch={onSearch}
               value={searchValue}
