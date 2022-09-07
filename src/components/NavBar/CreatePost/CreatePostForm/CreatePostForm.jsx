@@ -6,13 +6,15 @@ import {
   LoadingOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PostFormImg from "./PostFormImg/PostFormImg";
 import { createPost, getPosts } from "../../../../features/posts/postsSlice";
 
 const CreatePostForm = ({ setCreatePostVisible }) => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+
+  const { loads } = useSelector((state) => state.posts);
 
   const [image, setImage] = useState([]);
   const [imageUrl, setImageUrl] = useState();
@@ -32,17 +34,12 @@ const CreatePostForm = ({ setCreatePostVisible }) => {
     setCreatePostVisible(false);
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <Form
       form={form}
       name="createPost"
       className="createPost-form"
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Form.Item>
@@ -85,7 +82,7 @@ const CreatePostForm = ({ setCreatePostVisible }) => {
             style={{ width: "50%" }}
             type="primary"
             htmlType="submit"
-            className="login-form-button"
+            loading={loads.createPost}
           >
             Publicar
           </Button>

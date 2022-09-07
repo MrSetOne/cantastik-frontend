@@ -9,7 +9,8 @@ const initialState = {
     countTotalPosts: 0,
     loads: {
         home: true,
-        postDetail: true
+        postDetail: true,
+        createPost: false
     }
 };
 
@@ -151,8 +152,12 @@ export const postsSlice = createSlice({
             .addCase(getPostsByAuthor.fulfilled, (state, action) => {
                 state.authorPosts = action.payload
             })
+            .addCase(createPost.pending, (state, action) => {
+                state.loads.createPost = true
+            })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.posts = [action.payload.newPost, ...state.posts]
+                state.loads.createPost = false
             })
             .addCase(getPostById.pending, (state) => {
                 state.loads.postDetail = true
@@ -161,7 +166,7 @@ export const postsSlice = createSlice({
                 state.post = action.payload
                 state.loads.postDetail = false
             })
-            .addCase(getPostById.rejected, (state, action) => {
+            .addCase(getPostById.rejected, (state) => {
                 state.loads.postDetail = false
             })
             .addCase(findByTitle.fulfilled, (state, action) => {

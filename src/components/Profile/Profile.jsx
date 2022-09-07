@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getById } from "../../features/users/usersSlice";
-import { getPosts, getPostsByAuthor } from "../../features/posts/postsSlice";
+import { getPostsByAuthor } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard/ProfileCard";
 import ProfilePosts from "./ProfilePosts/ProfilePosts";
@@ -13,16 +13,13 @@ const Profile = () => {
 
   const { userDisplayed, isLoading } = useSelector((state) => state.users);
   const { authorPosts } = useSelector((state) => state.posts);
-  const [load, setLoad] = useState(false);
   const [target, setTarget] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loadInfo = async () => {
-    setLoad(false);
     await dispatch(getById(id));
     await dispatch(getPostsByAuthor(id));
-    setLoad(true);
   };
 
   useEffect(() => {
@@ -30,7 +27,6 @@ const Profile = () => {
   }, [userDisplayed]);
 
   useEffect(() => {
-    setLoad(false);
     loadInfo();
   }, [id]);
 
