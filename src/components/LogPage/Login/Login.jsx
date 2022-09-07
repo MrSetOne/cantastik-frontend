@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../features/auth/authSlice";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import cantastikGraff from "../../../assets/Cantastikgraff.png";
 import "./Login.scss";
 
 const Login = ({ setNeedSignUp }) => {
@@ -15,6 +16,7 @@ const Login = ({ setNeedSignUp }) => {
 
   return (
     <div className="Login">
+      <img src={cantastikGraff} alt="logo" />
       <h2>Iniciar sesión</h2>
       <Form
         name="login"
