@@ -24,3 +24,10 @@
         align-items: center;
     }
 }
+
+@media (max-width: 925px) {
+    .LikesDetail,
+    .LikesDetail .LikesDetail__empty {
+        height: 50vh;
+    }
+}

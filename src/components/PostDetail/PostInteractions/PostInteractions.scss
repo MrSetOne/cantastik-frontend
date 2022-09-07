@@ -8,3 +8,9 @@
     position: sticky;
     top: 5rem;
 }
+
+@media (max-width: 925px) {
+    .PostInteractions {
+        width: 100%;
+    }
+}

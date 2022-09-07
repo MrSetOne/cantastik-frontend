@@ -22,3 +22,13 @@
         }
     }
 }
+
+@media (max-width: 925px) {
+    .PostDetail {
+        .PostDetail__Post {
+            .PostDetail__Body {
+                flex-direction: column;
+            }
+        }
+    }
+}
