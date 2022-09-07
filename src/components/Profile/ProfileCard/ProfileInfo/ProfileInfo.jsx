@@ -9,14 +9,16 @@ const ProfileInfo = ({ info, setEdit }) => {
   return (
     <section className="ProfileInfo">
       <div className="ProfileInfo__Top">
-        {info.img ? (
-          <Avatar size={100} src={info.img} />
-        ) : (
-          <Avatar size={100} style={{ fontSize: "4rem" }}>
-            {info.username.substring(0, 1)}
-          </Avatar>
-        )}
-        <h2>{info.username}</h2>
+        <div className="ProfileInfo__Top--user">
+          {info.img ? (
+            <Avatar size={100} src={info.img} />
+          ) : (
+            <Avatar size={100} style={{ fontSize: "4rem" }}>
+              {info.username.substring(0, 1)}
+            </Avatar>
+          )}
+          <h2>{info.username}</h2>
+        </div>
         {info._id === user._id ? (
           <Button type="primary" onClick={() => setEdit(true)}>
             Editar perfil

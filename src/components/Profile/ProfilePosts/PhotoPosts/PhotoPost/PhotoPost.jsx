@@ -123,7 +123,8 @@ const PhotoPost = ({ post }) => {
   return (
     <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <div
-        onClick={() => showModal()}
+        // onClick={() => showModal()}
+        onClick={() => navigate(`/post/${post._id}`)}
         className="PhotoPost"
         key={post._id}
         style={{

@@ -33,7 +33,7 @@ const Footer = () => {
         </a>
       </div>
       <p className="Footer__slogan">Play Hard</p>
-      <p className="Footer__version">ver.1.0.0 released on 13/07/2022</p>
+      <p className="Footer__version">ver.1.1.0 released on 08/09/2022</p>
     </footer>
   );
 };
