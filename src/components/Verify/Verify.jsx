@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { verify } from "../../features/auth/authSlice";
+import Spinner from "../Sys/Spinner/Spinner";
 
 const Verify = () => {
   const { token } = useParams();
@@ -56,18 +57,7 @@ const Verify = () => {
           />
         )
       ) : (
-        <div
-          className="spinner__container"
-          style={{ display: loads.user ? "flex" : "none" }}
-        >
-          <div className="spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
+        <Spinner visible={loads.user} />
       )}
     </div>
   );

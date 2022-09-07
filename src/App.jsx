@@ -12,6 +12,7 @@ import Profile from "./components/Profile/Profile";
 import NotFound from "./components/NotFound/NotFound";
 import Footer from "./components/Footer/Footer";
 import Verify from "./components/Verify/Verify";
+import Spinner from "./components/Sys/Spinner/Spinner";
 
 function App() {
   const { user, isLoading } = useSelector((state) => state.auth);
@@ -27,18 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <div
-        className="spinner__container"
-        style={{ display: isLoading ? "flex" : "none", zIndex: 100 }}
-      >
-        <div className="spinner">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
+      <Spinner visible={isLoading} />
       {user ? (
         <>
           <NavBar />
