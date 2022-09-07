@@ -12,19 +12,16 @@ import FollowBtn from "../Sys/FollowBtn/FollowBtn";
 const Profile = () => {
   const { id } = useParams();
 
-  const { post } = useSelector((state) => state.posts);
+  const { post, loads } = useSelector((state) => state.posts);
   const { user } = useSelector((state) => state.auth);
 
-  const [load, setLoad] = useState(false);
   const [edit, setEdit] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const loadInfo = async () => {
-    setLoad(false);
     await dispatch(getPostById(id));
-    await setLoad(true);
   };
 
   useEffect(() => {
@@ -32,7 +29,7 @@ const Profile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (load) {
+  if (!loads.postDetail) {
     if (!post._id) {
       setTimeout(() => {
         navigate("/");

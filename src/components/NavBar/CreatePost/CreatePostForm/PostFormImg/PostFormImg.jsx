@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ImgCrop from "antd-img-crop";
 import { message, Upload } from "antd";
 import { PlusOutlined } from "@ant-design/icons";

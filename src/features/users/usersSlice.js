@@ -3,7 +3,7 @@ import userService from './usersService'
 
 const initialState = {
     userDisplayed: {},
-    isLoading: false,
+    isLoading: true,
     loadingFailed: false
 }
 
@@ -29,7 +29,7 @@ export const usersSlice = createSlice({
                 state.isLoading = false
             })
             .addCase(getById.rejected, (state, action) => {
-                state.loadingFailed = true
+                state.isLoading = false
             })
     },
 })

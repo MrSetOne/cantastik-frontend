@@ -11,7 +11,7 @@ import "./Profile.scss";
 const Profile = () => {
   const { id } = useParams();
 
-  const { userDisplayed } = useSelector((state) => state.users);
+  const { userDisplayed, isLoading } = useSelector((state) => state.users);
   const { authorPosts } = useSelector((state) => state.posts);
   const [load, setLoad] = useState(false);
   const [target, setTarget] = useState({});
@@ -34,42 +34,34 @@ const Profile = () => {
     loadInfo();
   }, [id]);
 
-  if (load) {
-    if (!target.username) {
-      setTimeout(() => {
-        navigate("/");
-      }, 10000);
-      return (
-        <Result
-          status="404"
-          title="404"
-          subTitle={
-            <>
-              <p>
-                Lo sentimos, la pagina que trata de visitar no existe :({" "}
-                <br></br> Te devolveremos al home en 10 segundos{" "}
-              </p>
-            </>
-          }
-          extra={
-            <Button type="primary" onClick={() => navigate("/")}>
-              Home
-            </Button>
-          }
-        />
-      );
-    }
-    return (
-      <section style={{ minHeight: "calc(100vh - 5rem - 2rem - 2.2rem )" }}>
-        <div className="Profile">
-          <ProfileCard target={target} />
-          <ProfilePosts posts={authorPosts} />
-        </div>
-      </section>
-    );
-  } else {
-    return <h1>cargando...</h1>;
-  }
+  return isLoading ? (
+    <h1>cargando...</h1>
+  ) : !target.username ? (
+    <Result
+      status="404"
+      title="404"
+      subTitle={
+        <>
+          <p>
+            Lo sentimos, la pagina que trata de visitar no existe :( <br></br>
+            Puedes volver al inicio haciendo click aquí bajo.
+          </p>
+        </>
+      }
+      extra={
+        <Button type="primary" onClick={() => navigate("/")}>
+          Inicio
+        </Button>
+      }
+    />
+  ) : (
+    <section style={{ minHeight: "calc(100vh - 5rem - 2rem - 2.2rem )" }}>
+      <div className="Profile">
+        <ProfileCard target={target} />
+        <ProfilePosts posts={authorPosts} />
+      </div>
+    </section>
+  );
 };
 
 export default Profile;

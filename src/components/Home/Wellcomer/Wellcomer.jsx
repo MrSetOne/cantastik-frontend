@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import InitialConfig from "./InitialConfig/InitialConfig";
-import { updateUser, wellcomeEnd } from "../../../features/auth/authSlice";
+import { wellcomeEnd } from "../../../features/auth/authSlice";
 import { motion } from "framer-motion";
 
 const Wellcomer = () => {

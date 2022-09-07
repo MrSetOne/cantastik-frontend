@@ -8,7 +8,6 @@ import "./Posts.scss";
 const Posts = () => {
   const { posts, countTotalPosts, loads } = useSelector((state) => state.posts);
   const [page, setPage] = useState(2);
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
