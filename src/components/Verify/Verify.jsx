@@ -7,17 +7,14 @@ import { verify } from "../../features/auth/authSlice";
 const Verify = () => {
   const { token } = useParams();
 
-  const { isConfirmed } = useSelector((state) => state.auth);
+  const { isConfirmed, loads } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
-  const [loaded, setLoaded] = useState(false);
 
   const navigate = useNavigate();
 
   const sendVerify = async () => {
     await dispatch(verify(token));
-    setLoaded(true);
   };
 
   useEffect(() => {
@@ -34,7 +31,7 @@ const Verify = () => {
         justifyContent: "center",
       }}
     >
-      {loaded ? (
+      {!loads.user ? (
         isConfirmed ? (
           <Result
             status="success"
@@ -61,7 +58,7 @@ const Verify = () => {
       ) : (
         <div
           className="spinner__container"
-          style={{ display: !loaded ? "flex" : "none" }}
+          style={{ display: loads.user ? "flex" : "none" }}
         >
           <div className="spinner">
             <div></div>

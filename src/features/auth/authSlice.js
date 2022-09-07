@@ -166,8 +166,16 @@ export const authSlice = createSlice({
                 state.user.following = action.payload.unfollower.following
                 state.loads.follow = false
             })
-            .addCase(verify.fulfilled, (state) => {
+            .addCase(verify.pending, (state) => {
+                state.loads.user = true
+            })
+            .addCase(verify.fulfilled, (state, action) => {
+                console.log(action)
                 state.isConfirmed = true
+                state.loads.user = false
+            })
+            .addCase(verify.rejected, (state, action) => {
+                state.loads.user = false
             })
             .addCase(wellcomeEnd.fulfilled, (state, action) => {
                 state.user = action.payload.updatedUser

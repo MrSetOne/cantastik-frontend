@@ -7,6 +7,9 @@ const initialState = {
     isLoading: false,
     post: {},
     countTotalPosts: 0,
+    loads: {
+        home: true
+    }
 };
 
 export const getPosts = createAsyncThunk("post/GetPosts", async(page, thunkAPI) => {
@@ -105,7 +108,7 @@ export const postsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getPosts.pending, (state) => {
-                state.isLoading = true
+                state.loads.home = true
             })
             .addCase(getPosts.fulfilled, (state, action) => {
                 if (!action.meta.arg) {
@@ -116,7 +119,7 @@ export const postsSlice = createSlice({
                 }
                 state.countTotalPosts = action.payload.count
                 state.currentPage = state.currentPage + 1
-                state.isLoading = false;
+                state.loads.home = false;
             })
             .addCase(like.fulfilled, (state, action) => {
                 if (action.meta.arg.authorPost) {

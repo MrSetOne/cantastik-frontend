@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { getPosts } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Posts from "./Posts/Posts";
@@ -8,26 +8,20 @@ import { UpCircleOutlined } from "@ant-design/icons";
 import Wellcomer from "./Wellcomer/Wellcomer";
 
 const Home = () => {
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, loads } = useSelector((state) => state.posts);
   const { user } = useSelector((state) => state.auth);
-  const [load, setLoad] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoad(false);
     dispatch(getPosts());
   }, []);
-
-  useEffect(() => {
-    setLoad(true);
-  }, [posts]);
 
   return (
     <div className="home">
       <div
         className="spinner__container"
-        style={{ display: !load ? "flex" : "none" }}
+        style={{ display: loads.home ? "flex" : "none" }}
       >
         <div className="spinner">
           <div></div>
