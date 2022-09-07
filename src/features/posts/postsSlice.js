@@ -100,11 +100,7 @@ export const deletePost = createAsyncThunk('post/deletePost', async(_id, thunkAP
 export const postsSlice = createSlice({
     name: "posts",
     initialState,
-    reducers: {
-        // reset: (state) => {
-        //   state.isError = false;
-        // },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getPosts.pending, (state) => {

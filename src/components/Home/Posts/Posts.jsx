@@ -6,7 +6,7 @@ import Post from "./Post/Post";
 import "./Posts.scss";
 
 const Posts = () => {
-  const { posts, countTotalPosts } = useSelector((state) => state.posts);
+  const { posts, countTotalPosts, loads } = useSelector((state) => state.posts);
   const [page, setPage] = useState(2);
   const [loading, setLoading] = useState(false);
 
@@ -17,13 +17,11 @@ const Posts = () => {
   ));
 
   const nextPage = async () => {
-    if (loading) {
+    if (loads.home) {
       return;
     }
-    setLoading(true);
     await setPage(page + 1);
     await dispatch(getPosts(page));
-    setLoading(false);
   };
 
   return (
@@ -36,7 +34,11 @@ const Posts = () => {
         loader={<h4>Cargando...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>Ya no hay mas posts... ¿Porque no crea uno ahora?</b>
+            <b>
+              {posts.length === 0
+                ? "Cargando..."
+                : "Ya no hay mas posts... ¿Porque no crea uno ahora?"}
+            </b>
           </p>
         }
       >
