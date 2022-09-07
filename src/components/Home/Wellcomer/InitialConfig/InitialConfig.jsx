@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateUser, wellcomeEnd } from "../../../../features/auth/authSlice";
 import PostFormImg from "../../../NavBar/CreatePost/CreatePostForm/PostFormImg/PostFormImg";
 import { motion } from "framer-motion";
+import "./InitialConfig.scss";
 
 const InitialConfig = () => {
   const [image, setImage] = useState([]);
@@ -27,26 +28,14 @@ const InitialConfig = () => {
     await form.resetFields();
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <motion.div
-      style={{
-        backgroundColor: "white",
-        width: "min(70rem,95vw)",
-        padding: "4rem",
-        borderRadius: ".5rem",
-      }}
       className="InitialConfig"
       initial={{ opacity: 0, y: 30 }}
       transition={{ duration: 0.5 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>
-        -INTRODUCE TUS DATOS-
-      </h2>
+      <h2>-INTRODUCE TUS DATOS-</h2>
       <Form
         name="basic"
         labelCol={{ span: 3 }}
@@ -55,16 +44,10 @@ const InitialConfig = () => {
         initialValues={{ remember: true }}
         requiredMark={false}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         form={form}
       >
-        <Form.Item
-          label="Imagen de perfil"
-          labelAlign="left"
-          style={{ alignItems: "center" }}
-          labelCol={{ span: 10 }}
-        >
+        <Form.Item style={{ alignItems: "center" }} labelCol={{ span: 10 }}>
           <PostFormImg
             setImage={setImage}
             image={image}
@@ -81,13 +64,7 @@ const InitialConfig = () => {
           />
         </Form.Item>
         <Form.Item noStyle={true}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              width: "100%",
-            }}
-          >
+          <div className="InitialConfig__submit">
             <Button
               type="primary"
               htmlType="submit"

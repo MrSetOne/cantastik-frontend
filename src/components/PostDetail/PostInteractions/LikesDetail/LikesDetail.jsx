@@ -29,6 +29,7 @@ const LikesDetail = ({ likes, postId }) => {
         <div className="Likes__Container">{printLikes}</div>
       ) : (
         <Empty
+          className="LikesDetail__empty"
           description={
             <span>
               Nadie ha dado me gusta aun en este post, <br></br>{" "}

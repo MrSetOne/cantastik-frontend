@@ -3,13 +3,27 @@
     background-color: white;
     border-radius: .5rem;
     padding: 3rem 2rem;
+    height: 58.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     h2 {
         margin-bottom: 2rem;
     }
-    .login-form {
+    .login__form {
         width: 100%;
+        .login__formItem {
+            display: flex;
+            justify-content: center;
+            svg {
+                color: gray;
+            }
+        }
         .login-form--lastItem {
             margin-bottom: 0;
+        }
+        .login-form-button {
+            width: 100%;
         }
     }
 }

@@ -28,5 +28,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
+        .LogPage__Forms--item {
+            position: absolute;
+            width: 70%;
+        }
     }
 }

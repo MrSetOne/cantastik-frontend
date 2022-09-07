@@ -38,18 +38,10 @@ const NavBar = () => {
       >
         {user ? (
           <Link to={"/"} onClick={() => dispatch(getPosts())}>
-            <img
-              src={Cantastik}
-              alt="Cantastik"
-              style={{ height: "4rem", width: "9rem" }}
-            />
+            <img className="NavBar__icon" src={Cantastik} alt="Cantastik" />
           </Link>
         ) : (
-          <img
-            src={Cantastik}
-            alt="Cantastik"
-            style={{ height: "4rem", width: "9rem" }}
-          />
+          <img src={Cantastik} alt="Cantastik" />
         )}
         {user ? (
           <>

@@ -1,24 +1,38 @@
-.Profile {
-    width: min(700px, 95vw);
-    margin: 2rem auto;
-    background-color: white;
-    border-radius: .5rem;
-    padding: 3rem;
-    .EditProfileInfo--image {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    .EditProfileInfo--Btns {
-        >div {
+.Profile__Container {
+    min-height: calc(100vh - 5rem - 2rem - 2.2rem);
+    .Profile {
+        width: min(700px, 95vw);
+        margin: 2rem auto;
+        background-color: white;
+        border-radius: .5rem;
+        padding: 3rem;
+        .EditProfileInfo--image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .EditProfileInfo--Btns {
             >div {
                 >div {
-                    width: 100%;
-                    display: flex;
-                    justify-content: flex-end;
-                    gap: 1rem;
+                    >div {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+                        gap: 1rem;
+                    }
                 }
             }
         }
+    }
+}
+
+.Profile__Empty {
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    div:first-child {
+        margin: 0;
     }
 }

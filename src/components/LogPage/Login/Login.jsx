@@ -14,57 +14,37 @@ const Login = ({ setNeedSignUp }) => {
   };
 
   return (
-    <div
-      className="Login"
-      style={{
-        height: 585,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
+    <div className="Login">
       <h2>Iniciar sesión</h2>
       <Form
         name="login"
-        className="login-form"
+        className="login__form"
         onFinish={onFinish}
         autoComplete="off"
       >
         <Form.Item
+          className="login__formItem"
           name="email"
           rules={[{ required: true, message: "Please input your username!" }]}
-          style={{ display: "flex", justifyContent: "center" }}
         >
           <Input
-            prefix={
-              <MailOutlined
-                className="site-form-item-icon"
-                style={{ color: "gray" }}
-              />
-            }
+            prefix={<MailOutlined className="site-form-item-icon" />}
             placeholder="Tu email"
           />
         </Form.Item>
 
         <Form.Item
+          className="login__formItem"
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
-          style={{ display: "flex", justifyContent: "center" }}
         >
           <Input.Password
-            prefix={
-              <LockOutlined
-                className="site-form-item-icon"
-                style={{ color: "gray" }}
-              />
-            }
+            prefix={<LockOutlined className="site-form-item-icon" />}
             placeholder="Tu contraseña"
           />
         </Form.Item>
-
         <Form.Item>
           <Button
-            style={{ width: "100%" }}
             type="primary"
             htmlType="submit"
             className="login-form-button"
@@ -75,7 +55,6 @@ const Login = ({ setNeedSignUp }) => {
         </Form.Item>
         <Form.Item className="login-form--lastItem">
           <Button
-            style={{ width: "100%", marginBottom: 0 }}
             type="default"
             className="login-form-button"
             onClick={() => setNeedSignUp(true)}

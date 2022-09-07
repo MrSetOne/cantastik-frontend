@@ -27,6 +27,7 @@ const SignUp = ({ setNeedSignUp }) => {
         requiredMark={false}
       >
         <Form.Item
+          className="SignUp__item"
           label="Username"
           name="username"
           rules={[
@@ -38,15 +39,11 @@ const SignUp = ({ setNeedSignUp }) => {
         >
           <Input
             placeholder="Tu nombre de usuario"
-            prefix={
-              <UserOutlined
-                className="site-form-item-icon"
-                style={{ color: "gray" }}
-              />
-            }
+            prefix={<UserOutlined className="site-form-item-icon" />}
           />
         </Form.Item>
         <Form.Item
+          className="SignUp__item"
           label="Email"
           name="email"
           rules={[
@@ -59,16 +56,12 @@ const SignUp = ({ setNeedSignUp }) => {
         >
           <Input
             placeholder="Tu correo"
-            prefix={
-              <MailOutlined
-                className="site-form-item-icon"
-                style={{ color: "gray" }}
-              />
-            }
+            prefix={<MailOutlined className="site-form-item-icon" />}
           ></Input>
         </Form.Item>
 
         <Form.Item
+          className="SignUp__item"
           name="password"
           label="Constraseña"
           rules={[
@@ -80,16 +73,12 @@ const SignUp = ({ setNeedSignUp }) => {
           hasFeedback
         >
           <Input.Password
-            prefix={
-              <LockOutlined
-                className="site-form-item-icon"
-                style={{ color: "gray" }}
-              />
-            }
+            prefix={<LockOutlined className="site-form-item-icon" />}
             placeholder="Tu contraseña"
           />
         </Form.Item>
         <Form.Item
+          className="SignUp__item"
           name="confirm"
           label="Repite contraseña"
           dependencies={["password"]}
@@ -112,21 +101,15 @@ const SignUp = ({ setNeedSignUp }) => {
           ]}
         >
           <Input.Password
-            prefix={
-              <LockOutlined
-                className="site-form-item-icon"
-                style={{ color: "gray" }}
-              />
-            }
+            prefix={<LockOutlined className="site-form-item-icon" />}
             placeholder="Confirma tu contraseña"
           />
         </Form.Item>
         <Form.Item>
           <Button
-            style={{ width: "100%" }}
             type="primary"
             htmlType="submit"
-            className="login-form-button"
+            className="SignUp-form-button"
             loading={loads.user}
           >
             Crear cuenta
@@ -134,9 +117,8 @@ const SignUp = ({ setNeedSignUp }) => {
         </Form.Item>
         <Form.Item className="signup-form--lastItem">
           <Button
-            style={{ width: "100%" }}
             type="default"
-            className="login-form-button"
+            className="SignUp-form-button"
             onClick={() => setNeedSignUp(false)}
           >
             Iniciar sesion

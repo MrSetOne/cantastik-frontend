@@ -55,11 +55,11 @@ const LogPage = () => {
           }}
         />
       </div>
-      <div className="LogPage__Forms" style={{ position: "relative" }}>
+      <div className="LogPage__Forms">
         <AnimatePresence>
           {needSignUp && (
             <motion.div
-              style={{ position: "absolute", width: "70%" }}
+              className="LogPage__Forms--item"
               key={"signUp"}
               initial={{
                 x: 0,
@@ -89,7 +89,7 @@ const LogPage = () => {
           )}
           {!needSignUp && (
             <motion.div
-              style={{ position: "absolute", width: "70%" }}
+              className="LogPage__Forms--item"
               key={"logIn"}
               initial={{
                 x: 0,

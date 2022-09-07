@@ -9,6 +9,7 @@ const CreatePost = ({ visible, setCreatePostVisible }) => {
 
   return (
     <Modal
+      centered={true}
       visible={visible}
       title="Nuevo Post"
       onCancel={handleCancel}

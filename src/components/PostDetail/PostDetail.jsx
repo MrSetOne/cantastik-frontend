@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getPostById } from "../../features/posts/postsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import PostJustText from "./PostJustText/PostJustText";
 import PostInteractions from "./PostInteractions/PostInteractions";
 import EditPostDetail from "./EditPostDetail/EditPostDetail";
 import FollowBtn from "../Sys/FollowBtn/FollowBtn";
+import Spinner from "../Sys/Spinner/Spinner";
+import "./PostDetail.scss";
 
 const Profile = () => {
   const { id } = useParams();
@@ -55,23 +57,10 @@ const Profile = () => {
       );
     }
     return (
-      <section
-        style={{
-          minHeight: "calc(100vh - 7rem)",
-        }}
-      >
-        <div className="Profile" style={{ width: "min( 95vw, 150rem )" }}>
-          <div
-            style={{
-              display: "flex",
-              borderBottom: "1px solid gray",
-              paddingBottom: "1rem",
-            }}
-          >
-            <Link
-              to={`/profile/${post.userId._id}`}
-              style={{ display: "flex", flex: 1, gap: "1rem" }}
-            >
+      <section className="PostDetail">
+        <div className="PostDetail__Post">
+          <div className="PostDetail__Header">
+            <Link to={`/profile/${post.userId._id}`}>
               {post.userId.img ? (
                 <Avatar src={post.userId.img} />
               ) : (
@@ -91,7 +80,7 @@ const Profile = () => {
               <FollowBtn dest={post.userId._id} />
             )}
           </div>
-          <div style={{ display: "flex", gap: "2rem" }}>
+          <div className="PostDetail__Body">
             {edit ? (
               <EditPostDetail
                 title={post.title}
@@ -116,7 +105,7 @@ const Profile = () => {
       </section>
     );
   } else {
-    return <h1>cargando...</h1>;
+    return <Spinner visible={true} />;
   }
 };
 

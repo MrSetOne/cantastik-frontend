@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InitialConfig from "./InitialConfig/InitialConfig";
 import { wellcomeEnd } from "../../../features/auth/authSlice";
 import { motion } from "framer-motion";
+import "./Wellcomer.scss";
 
 const Wellcomer = () => {
   const [configuring, setConfiguring] = useState(false);
@@ -11,70 +12,46 @@ const Wellcomer = () => {
   const dispatch = useDispatch();
 
   return (
-    <div
-      className="Wellcomer"
-      style={{
-        minHeight: "calc(100vh - 5rem)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className="Wellcomer">
       {!configuring ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <div className="Wellcomer__Container">
           <motion.h1
-            initial={{
-              opacity: 0,
-              y: 30,
-              marginBottom: "4rem",
-              fontSize: "7rem",
-            }}
+            initial={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.5 }}
             animate={{ opacity: 1, y: 0 }}
           >
             ¡Bienvenido {user.username}!
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30, marginBottom: 0, fontSize: "4rem" }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            Sabemos que tienes muchas ganas de empezar, pero antes de ello...
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 30, fontSize: "4rem" }}
-            transition={{ duration: 0.5, delay: 1 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            ¿Deseas terminar de configurar tu perfil?
-          </motion.p>
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              Sabemos que tienes muchas ganas de empezar, pero antes de ello...
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, delay: 1 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              ¿Deseas terminar de configurar tu perfil?
+            </motion.p>
+          </div>
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 30,
-              fontSize: "4rem",
-            }}
-            style={{ display: "flex", gap: "10rem" }}
+            className="wellcomer__btns"
+            initial={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.5, delay: 1.5 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <Button
-              style={{ width: "15rem", height: "10rem", fontSize: "5rem" }}
               type="primary"
               onClick={() => setConfiguring(true)}
+              size="large"
             >
               Si
             </Button>
-            <Button
-              style={{ width: "15rem", height: "10rem", fontSize: "5rem" }}
-              onClick={() => dispatch(wellcomeEnd())}
-            >
+            <Button onClick={() => dispatch(wellcomeEnd())} size="large">
               No
             </Button>
           </motion.div>

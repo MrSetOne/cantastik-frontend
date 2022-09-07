@@ -1,0 +1,27 @@
+.CommentsDetail {
+    width: 100%;
+    .Comments__Container {
+        overflow: auto;
+        height: calc(100vh - 30rem);
+        margin-bottom: 1rem;
+        padding-right: 1rem;
+    }
+    .CommentsDetail__input {
+        display: flex;
+    }
+    .Comments__item {
+        display: flex;
+        gap: 1rem;
+        a {
+            color: black;
+            font-weight: 700;
+        }
+    }
+    .CommentsDetail__Empty {
+        height: calc(100vh - 30rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

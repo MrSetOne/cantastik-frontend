@@ -1,8 +1,8 @@
 import { Button, Form, Input, Space } from "antd";
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updatePost, deletePost } from "../../../features/posts/postsSlice";
+import "./EditPostDetail.scss";
 
 const EditPostDetail = ({ title, body, _id, setEdit }) => {
   const dispatch = useDispatch();
@@ -11,15 +11,10 @@ const EditPostDetail = ({ title, body, _id, setEdit }) => {
   const { user } = useSelector((state) => state.auth);
 
   const { TextArea } = Input;
-  const [value, setValue] = useState("");
 
   const onFinish = async (data) => {
     await dispatch(updatePost({ data, _id }));
     setEdit(false);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   const deleteThisPost = async () => {
@@ -28,18 +23,14 @@ const EditPostDetail = ({ title, body, _id, setEdit }) => {
   };
 
   return (
-    <div
-      className="EditPostDetail"
-      style={{ flex: 1, display: "flex", justifyContent: "center" }}
-    >
-      <div style={{ width: "50%" }}>
+    <div className="EditPostDetail">
+      <div>
         <Form
           name="basic"
           labelCol={{ span: 5 }}
           wrapperCol={{ span: 24 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
           style={{ marginTop: "2.5rem" }}
         >

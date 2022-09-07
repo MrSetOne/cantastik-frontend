@@ -50,12 +50,8 @@ const Post = ({ item }) => {
             <Avatar>{element.author.username.substring(0, 1)}</Avatar>
           )}
         </Link>
-
         <p>
-          <Link
-            style={{ color: "black", fontWeight: 700 }}
-            to={`/profile/${element.author._id}`}
-          >
+          <Link to={`/profile/${element.author._id}`}>
             {element.author.username}
           </Link>{" "}
           {element.comment}
@@ -66,7 +62,7 @@ const Post = ({ item }) => {
 
   const likes = item.likes.map((element) => {
     return (
-      <div className="Likes__item" style={{ marginBottom: "1rem" }}>
+      <div className="Likes__item">
         <div className="Likes__item--info">
           <Link to={`/profile/${element._id}`}>
             {element.img ? (
@@ -88,7 +84,6 @@ const Post = ({ item }) => {
     <motion.article
       className="Post"
       key={item._id}
-      style={{ marginBottom: "2rem", overflow: "hidden" }}
       initial={{ y: 100 }}
       whileInView={{ y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
@@ -118,7 +113,7 @@ const Post = ({ item }) => {
           <FollowBtn dest={item.userId._id} />
         )}
       </div>
-      <Link to={`/post/${item._id}`} style={{ color: "black" }}>
+      <Link to={`/post/${item._id}`} className={"post__content"}>
         {item.img ? (
           <img
             src={item.img}
@@ -143,20 +138,16 @@ const Post = ({ item }) => {
           ></Button>
         </div>
         <div className="Post__Interactions--Info">
-          <p onClick={() => showModal()} style={{ cursor: "pointer" }}>
-            {item.likes.length} Me gusta
-          </p>
-          <p onClick={() => showModal()} style={{ cursor: "pointer" }}>
-            {item.comments.length} comentarios
-          </p>
+          <p onClick={() => showModal()}>{item.likes.length} Me gusta</p>
+          <p onClick={() => showModal()}>{item.comments.length} comentarios</p>
         </div>
       </div>
       <Modal
-        title="Basic Modal"
+        title={`Post de ${item.userId.username}`}
         visible={isModalVisible}
         onCancel={() => handleClose()}
         className="Post__Modal"
-        style={{ top: 20 }}
+        centered={true}
         footer={[
           <Button
             key="back"
@@ -192,10 +183,7 @@ const Post = ({ item }) => {
                   }
                 />
               )}
-              <form
-                style={{ display: "flex" }}
-                onSubmit={(e) => sendComment(e)}
-              >
+              <form onSubmit={(e) => sendComment(e)}>
                 <Input
                   placeholder="Escribe tu comentario"
                   bordered={false}

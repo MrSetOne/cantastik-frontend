@@ -34,6 +34,7 @@ const Profile = () => {
     <h1>cargando...</h1>
   ) : !target.username ? (
     <Result
+      className="Profile__Empty"
       status="404"
       title="404"
       subTitle={
@@ -51,7 +52,7 @@ const Profile = () => {
       }
     />
   ) : (
-    <section style={{ minHeight: "calc(100vh - 5rem - 2rem - 2.2rem )" }}>
+    <section className="Profile__Container">
       <div className="Profile">
         <ProfileCard target={target} />
         <ProfilePosts posts={authorPosts} />

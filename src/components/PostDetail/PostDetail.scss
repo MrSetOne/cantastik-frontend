@@ -1,0 +1,24 @@
+.PostDetail {
+    min-height: calc(100vh - 7rem);
+    .PostDetail__Post {
+        width: min(95vw, 100rem);
+        margin: 2rem auto;
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 3rem;
+        .PostDetail__Header {
+            display: flex;
+            border-bottom: 1px solid gray;
+            padding-bottom: 1rem;
+            a {
+                display: flex;
+                flex: 1;
+                gap: 1rem;
+            }
+        }
+        .PostDetail__Body {
+            display: flex;
+            gap: 2rem;
+        }
+    }
+}

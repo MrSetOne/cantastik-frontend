@@ -24,7 +24,7 @@ const Posts = () => {
   };
 
   return (
-    <section className="Posts" style={{ marginBottom: "10rem" }}>
+    <section className="Posts">
       <InfiniteScroll
         style={{ overflow: "hidden" }}
         dataLength={posts?.length}
@@ -32,7 +32,7 @@ const Posts = () => {
         hasMore={(page - 1) * 10 <= countTotalPosts}
         loader={<h4>Cargando...</h4>}
         endMessage={
-          <p style={{ textAlign: "center" }}>
+          <p>
             <b>
               {posts.length === 0
                 ? "Cargando..."
