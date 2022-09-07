@@ -41,7 +41,7 @@ const NavBar = () => {
             <img className="NavBar__icon" src={Cantastik} alt="Cantastik" />
           </Link>
         ) : (
-          <img src={Cantastik} alt="Cantastik" />
+          <img src={Cantastik} alt="Cantastik" className="NavBar__icon" />
         )}
         {user ? (
           <>
