@@ -27,7 +27,7 @@ const Login = ({ setNeedSignUp }) => {
         <Form.Item
           className="login__formItem"
           name="email"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[{ required: true, message: "Introduce tu correo" }]}
         >
           <Input
             prefix={<MailOutlined className="site-form-item-icon" />}
@@ -38,7 +38,7 @@ const Login = ({ setNeedSignUp }) => {
         <Form.Item
           className="login__formItem"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[{ required: true, message: "Introduce tu contraseña" }]}
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
