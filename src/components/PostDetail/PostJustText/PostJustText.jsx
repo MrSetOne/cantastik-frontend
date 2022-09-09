@@ -12,9 +12,11 @@ const PostJustText = () => {
       <Link to={`/profile/${post.userId._id}`}>
         <div className="PostJustText__Link">
           {post.userId.img ? (
-            <Avatar size={200} src={post.userId.img} />
+            <Avatar className="PostJustText__Link--img" src={post.userId.img} />
           ) : (
-            <Avatar size={200}>{post.userId.username.substring(0, 1)}</Avatar>
+            <Avatar className="PostJustText__Link--img">
+              {post.userId.username.substring(0, 1)}
+            </Avatar>
           )}
           <h2>{post.userId.username}</h2>
         </div>

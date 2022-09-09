@@ -4,12 +4,17 @@
     flex-direction: column;
     justify-content: center;
     border-right: 1px solid gray;
+    padding-top: 2rem;
     .PostJustText__Link {
+        .PostJustText__Link--img {
+            width: clamp(8rem, 20rem, 15vw);
+            height: clamp(8rem, 20rem, 15vw);
+        }
         display: flex;
         align-items: center;
         gap: 3rem;
         h2 {
-            font-size: 4rem;
+            font-size: clamp(2rem, 4rem, 3vw);
         }
     }
     >h2 {
@@ -17,5 +22,15 @@
     }
     p {
         font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 925px) {
+    .PostJustText {
+        border-right: transparent;
+        border-bottom: 1px solid gray;
+        .PostJustText__Link {
+            display: none;
+        }
     }
 }
