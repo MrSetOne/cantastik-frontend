@@ -17,7 +17,9 @@ const InitialConfig = () => {
 
   const onFinish = async (values) => {
     let formData = new FormData();
-    formData.append("bio", values.bio);
+    if (values.bio) {
+      formData.append("bio", values.bio);
+    }
     if (image[0]) {
       formData.append("img", image[0]);
     }
